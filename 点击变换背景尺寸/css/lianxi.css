@@ -1,0 +1,158 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	margin: 0;
+}
+a {
+	text-decoration:none;
+}
+.clearFix:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+form {
+	margin: 0;
+	border: none;
+}
+input {
+	border: none;
+	padding: 0;
+	outline: none;
+}
+.fl {
+	float: left;
+}
+/*样式重置结束*/
+#box {
+	position: relative;
+	padding-left: 25px;
+	width: 710px;
+	height: 420px;
+	background: #efefef;
+	overflow: hidden;
+}
+#mask {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: .5;	
+}
+#setCss {
+	height: 80px;	
+}
+#setCss span{
+	float: left;
+	font: bold 24px/74px "宋体";
+	color: #000;
+}
+#setCss a {
+	margin-top: 20px;
+	padding: 0 23px;
+	font: bold 12px/40px "宋体";
+	color:#fff;
+	background: #ff0000;
+}
+#changeBox {
+	height: 100px;
+	width: 100px;
+	border: 4px solid #393129;
+}
+#cssBox {
+	position: absolute;
+	display: none;
+	right: 24px;
+	bottom: 32px;
+	width: 300px;
+	height: 200px;
+	border: 20px solid #9c949c;
+	background: #fff;
+	font-weight: "微软雅黑";
+}
+#boxColor {	
+	padding-top: 11px;
+}
+#boxColor ,
+#boxWidth ,
+#boxHeight {
+	height: 40px;
+	line-height: 40px;
+}
+#boxColor span {
+	padding-left:33px;
+	font: 16px/40px "微软雅黑";
+}
+#boxColor  a{
+	width: 36px;
+	height: 32px;
+	margin-top: 5px;
+	font: 12px/32px "微软雅黑";
+	color:#fff;
+	text-align: center;
+	margin-right: 5px;
+}
+#redColor {
+	background:#9cce00;
+	border:1px solid #9cce00;
+}
+#redColor:hover {
+	background:red;
+	border:1px solid #000;
+}
+#yellowColor {
+	background:#efbd00;
+	border:1px solid #efbd00;
+}
+#yellowColor:hover {
+	background:yellow;
+	border:1px solid #000;
+}
+#blueClor {
+	background:#5a94ef;
+	border:1px solid #5a94ef;
+}
+#blueClor:hover {
+	background:	blue;
+}
+#boxWidth span ,
+#boxHeight span {
+	padding-left:35px;	
+	font: 16px/40px "微软雅黑";
+}
+#boxWidth  a ,
+#boxHeight a {
+	width: 34px;
+	height: 30px;
+	margin-right: 5px;
+	margin-top: 5px;
+	text-align: center;
+	border: 1px solid #c0c0c0; 
+	font:12px/30px "微软雅黑";
+	color: #848c8c;
+}
+#boxWidth  a:hover ,
+#boxHeight a:hover {
+	background:#ef9400;
+	color:#000;
+	border-color: #000;
+}
+form {
+	padding-left: 87px;
+	margin-top: 19px;
+}
+form  input {
+	width: 60px;
+	height: 30px;
+	color: #fff;
+	font:14px/30px "宋体";
+	background:#002952;
+	margin-right: 4px;
+}
+form  input:hover {
+	box-shadow: 0 0 2px #635229;
+}
