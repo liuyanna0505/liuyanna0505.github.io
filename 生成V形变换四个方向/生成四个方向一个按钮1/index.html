@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+body{
+	margin:0;
+}
+#section{
+	width:400px;
+	margin:0 auto;
+	text-align: center;
+}
+#btn {
+	
+}
+#ullist { 
+	position: relative;
+	width:250px;
+	height:250px;
+	border:1px solid #000;
+	list-style:none;
+}
+#ullist li {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	background: #606;
+	color: red;
+	font:bold 20px/50px "微软雅黑";
+	text-align: center;
+}
+</style>
+<script>
+	window.onload = function(){
+		var btn = document.getElementById('btn');
+		var ullist = document.getElementById("ullist");	
+		var ul_li = ullist.getElementsByTagName('li');	
+		var a=0;	
+		var num=5;
+		var str = "";//清空生成的li 这样每次点击的时候 之前生成的V 会消失
+		    //先生成V形div		
+		for( var i = 0; i < num; i++ ){				
+			if( i < Math.floor(num/2)+1 ){					
+				str += "<li style='left:"+(i*50)+"px;top:"+(i*50)+"px;'>"+(i+1)+"</li>";
+			}else{					
+				str += "<li style='left:"+(num-1-i)*50+"px;top:"+(i*50)+"px;'>"+(i+1)+"</li>";
+			}			
+		}
+	  	 ullist.innerHTML = str;
+		 	//	设置默认向左 点击转向是 ---上1 右2 下3 左4		
+			// 每点击以此按钮 a值加1 当点击到 a为4的时候 此时方向向左 但是又把a设置成0了 再次点击的话 就是1向上
+		btn.onclick = function(){
+			a++;//点击一次 a值加1 以此来判断执行的四个方向			
+			if(a==1){  //向上
+				var str = "";//清空生成的li 这样每次点击的时候 之前生成的V 会消失
+				for( var i = 0; i < num; i++ ){				
+					if( i < Math.floor(num/2)+1 ){	
+					//中间值是分界点 	向下取整		num是5的时候 此时取值是3	
+						str += "<li style='left:"+(i*50)+"px;top:"+(i*50)+"px;'>"+(i+1)+"</li>";
+					}else{					
+						str += "<li style='left:"+(i*50)+"px;top:"+(num-1-i)*50+"px;'>"+(i+1)+"</li>";
+					}			
+				}
+				ullist.innerHTML = str;		
+			}else if(a==2){  //向右
+				var str = "";
+				for( var i = 0; i < num; i++ ){				
+					if( i < Math.floor(num/2)+1 ){					
+						str += "<li style='left:"+(num-1-i)*50+"px;top:"+(i*50)+"px;'>"+(i+1)+"</li>";
+					}else{					
+						str += "<li style='left:"+(i*50)+"px;top:"+(i*50)+"px;'>"+(i+1)+"</li>";
+					}			
+				}
+	        	ullist.innerHTML = str;	
+			}else if(a==3){  //向下
+				var str = "";
+				for( var i = 0; i < num; i++ ){				
+					if( i < Math.floor(num/2)+1 ){					
+						str += "<li style='left:"+(i*50)+"px;top:"+(num-1-i)*50+"px;'>"+(i+1)+"</li>";
+					}else{					
+						str += "<li style='left:"+(i*50)+"px;top:"+(i*50)+"px;'>"+(i+1)+"</li>";
+					}			
+				}
+				ullist.innerHTML = str;				
+			}else  {    //向左
+				var str = "";
+				for( var i = 0; i < num; i++ ){				
+					if( i < Math.floor(num/2)+1 ){					
+						str += "<li style='left:"+(i*50)+"px;top:"+(i*50)+"px;'>"+(i+1)+"</li>";
+					}else{					
+						str += "<li style='left:"+(num-1-i)*50+"px;top:"+(i*50)+"px;'>"+(i+1)+"</li>";
+					}			
+				}
+	  	 		ullist.innerHTML = str;	
+			a=0;	//a值初始0 回到第一次的状态 执行循环	
+			}	
+		}		
+	}
+</script>
+<body>
+	<section id = 'section'>
+	    <input type="button" id="btn" value="四个方向">
+	    <ul id="ullist">
+	        <!--<li></li>
+	        <li></li>
+	--> </ul>
+	</section>
+</body>
+</html>

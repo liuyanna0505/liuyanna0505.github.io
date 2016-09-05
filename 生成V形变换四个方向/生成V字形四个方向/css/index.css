@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+#section {
+	width: 800px;
+	margin: 10px auto 0;
+}
+body{
+	margin: 0;
+}
+ul {
+	position:relative;
+	width:250px;
+	height:250px; 
+	padding: 0;
+	list-style: none;
+	border: 1px solid #000;
+}
+#ullist li {
+	position:absolute;
+	width: 50px;
+	height: 50px;
+	font:20px/50px arial;
+	text-align:center;
+	background: red;
+	color:#fff;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#box {
+	position: relative;
+	width: 500px;
+	height:500px;
+	background:#ccc;
+}
+#box div{
+	position:absolute;
+	width:50px;
+	height:50px;	 
+	background:url(pic.jpg) no-repeat 0 0; 
+	opacity:0;
+	color:red;	
+}
+</style>
+<script>
+	window.onload = function(){
+		var box = document.getElementById("box");
+		var b_div = box.getElementsByTagName('div'); //getElementsByTagName 具有动态的特性
+		var str = "";
+		//先生成100个div  生成之后b_div 已经发生改变 	
+		for( var i = 0; i < 100; i++){	 
+			var l = i%10; //取余 每排取0-9
+			var t = Math.floor(i/10);  
+			//取整	第一排是0 第二排是1……			
+			str += '<div style="background:url(pic.jpg) no-repeat '+ (-l*50)+'px ' + (-t*50)+'px;left:'+ (l*50)+'px;top:'+ (t*50)+'px">'+i+'</div>';
+			 //将100个div先存储在str中 每次的div都和之前的不是同一个了 	
+		} 
+		box.innerHTML = str;   
+		for(var j=0; j<100;j++){ 
+			b_div[j].onmouseover=function(){ //给每一个div添加移入事件
+				this.style.opacity= 1;  
+			    //this指向触发这个事件的元素 页面加载的时候for循环已经结束 此时的j值是100
+		   }
+	  }		
+}
+</script>
+</head>
+
+<body>
+<div id="box">
+	<div></div>
+</div>
+</body>
+</html>
