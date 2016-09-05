@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>自动生成10个div</title>
+<style>
+#ullist li{
+	float:left;
+	width:50px;
+	height:50px;
+	border: 1px solid #000;
+	background:red;
+	text-align:center; 
+	list-style:none;
+	font:20px/50px "微软雅黑";
+	margin-left: 10px;
+}
+/*#ullist .red {
+	background: red;
+}
+#ullist .blue {
+	background: blue;
+}*/
+</style>
+<script>
+	window.onload= function(){
+		var btn = document.getElementById("btn");
+		var ullist = document.getElementById("ullist");
+		var ul_li = document.getElementsByTagName("li");		 
+		btn.onclick = function(){ 
+			this.style.color = "red";
+			ullist.innerHTML=""; 
+			for ( var i = 0 ; i <10 ; i++ ){	
+				if (i<5){
+					ullist.innerHTML = ullist.innerHTML +"<li style='background:red'>"+ i +"</li>";	
+					//也可以加Class设置	ullist.innerHTML = ullist.innerHTML +"<li class='red'>"+ i +"</li>";		
+					
+					/*ul_li[i].onmouseover = function(){
+						this.style.color = "yellow";						
+					}
+					ul_li[i].onmouseout = function(){
+						this.style.color = "yellow";						
+					}	
+					*/		
+				}else{
+					ullist.innerHTML = ullist.innerHTML +"<li style='background:blue'>"+ i +"</li>";
+				}		
+				
+			}
+		}
+		
+	}
+</script>
+</head>
+
+<body>
+    <input type="button" id="btn" value="自动生成10个div"/>
+    <ul id="ullist">
+    	<!--<li>1<li>
+        <li>2<li>
+        <li>3<li>-->
+    </ul>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+<style>
+.box{
+	position: relative;
+}
+.box div {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	left: 0;
+	top: 0;
+	/*初始的位置定好*/
+	background: red;
+}
+</style>
+<body>
+	<input type="button" id="btn" value="生产100个div">
+    <div class="box">
+    	<!--<div style="left:50px;top:50px"></div>
+        <div></div>-->
+    </div>
+    <script> 
+		var btn = document.getElementById('btn');
+		var box = document.getElementsByClassName('box')[0];
+		btn.onclick = function(){			 
+			var str = "";//清空之前生成的100个div
+			for( var i = 0; i < 100; i++){
+				var l = i%10;//取余 每行0-9  
+				var t = Math.floor(i/10);  
+				//向下取整 0-9 每一行的top值都一样
+				str += '<div style="left:'+ (l*55)+'px;top:'+ (t*55)+'px">'+i+'</div>';				
+			}
+			box.innerHTML += str;
+		}
+	</script>
+</body>
+</html>
