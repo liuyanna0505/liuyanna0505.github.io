@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>带缩略图的图片转换</title>
+<style>
+body {
+	margin: 0;
+}
+p {
+	margin: 0;
+}
+ul {
+	margin: 0;
+	padding:0;
+	list-style:none;
+}
+img {
+	border: none;
+	vertical-align:top;
+}
+.clearFix:after {
+	content:"";
+	display: block;
+	clear: both;
+}
+#picBox {
+	margin: 0 auto;
+	position: relative;
+	border: 10px solid #ccc;
+	width: 500px;
+	background:#CF9;
+	padding-bottom:40px;
+}
+#picBox p{
+	height:30px;
+	line-height:30px;
+	background:#FF6;
+}
+#imgBox {
+	position:relative;
+	width: 500px;
+	height: 500px;
+}
+#picBox img {
+	position:absolute;
+	width: 500px;
+	height: 500px;
+	left: 0 ;
+	top: 0 ;	
+}
+#picBox  span {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	bottom: 300px;
+}
+#picBox  span:nth-of-type(1){
+	left:0px;
+	background:url(img/pre.png) no-repeat;
+}
+#picBox  span:nth-of-type(2){
+	right:0px;
+	background:url(img/next.png) no-repeat;
+}
+#ullist {
+	position:relative;
+	text-align:center;
+	bottom:10px; 
+	left:50%;
+	margin-left:-50px;
+}
+#ullist li {
+	float: left;	 
+	width: 15px;
+	height:15px;
+	margin-right:10px;
+	background:url(img/ico.png) no-repeat;
+}
+#ullist .active{
+	background:url(img/ico1.png) no-repeat;
+}
+#ullist li img {
+	  display: none;
+      position: absolute;
+	  width: 100px;
+	  height: 100px;
+	  left: 10px;
+	  top: -110px;
+}
+</style>
+<script>
+window.onload = function(){
+	var picBox = document.getElementById("picBox");
+	var imgBox = document.getElementById("imgBox");
+	var imgs = imgBox.getElementsByClassName("imgs");
+	var pre = document.getElementsByClassName("pre")[0];
+	var next = document.getElementsByClassName("next")[0];
+	var ullist = document.getElementById("ullist");
+	var ul_li = ullist.getElementsByTagName("li");   
+	var n= 0;	
+	//需求：点击pre next 大图片循环播放，圆点（通过className）也相应的变化
+	/*
+		1,点击pre 图片向前循环播放  next 图片向后循环播放 
+		2，点击圆点按钮 圆点颜色（用的是背景图）发生变化
+		3， 点击pre next时 按钮也会对应发生变化  点击按钮时 图片也相应的发生变化  通过index联系起来
+   */ 
+	function  changeImg(){
+		for( var i=0 ; i < imgs.length; i++){
+			ul_li[i].className = "";
+			imgs[i].style.display = "none";
+		}
+		//清空之前的图片和圆点的样式  之前的大图片不显示 
+		ul_li[n].className = "active";    //当前圆点的样式
+		imgs[n].style.display = "block";  //当前图片显示
+	}
+	changeImg();	
+	//向前循环播放	
+	pre.onclick = function(){
+		n = n-1;
+		if( n < 0){
+			n = imgs.length-1;
+		}
+		changeImg();
+	}	
+	//向后循环播放
+	next.onclick=function(){		
+		n = n+1;
+		if(n > imgs.length-1){
+			n = 0;
+		}			
+		changeImg();
+	}
+	//点击圆点时候	圆点的样式发生相应的变化 图片也跟着相应的转换
+	 for(var j=0 ; j <ul_li.length; j++){
+		ul_li[j].index = j;     //圆点的下标值 用j存储起来 
+		ul_li[j].onclick =function(){   //点击圆点的时候
+			n = this.index;  // n为当前的索引值 链接图片和圆点 此时对应的图片在点击圆点的时候显示 位置不可以换 
+			changeImg();
+		}		
+	}	 
+}
+</script>
+</head>
+
+<body>
+<div id="picBox">
+    <p>带缩略图的图片转换</p>
+    <div id="imgBox">
+        <img src="img/1.png" class="imgs">
+        <img src="img/2.png" class="imgs">
+        <img src="img/3.png" class="imgs">
+        <img src="img/4.png" class="imgs">
+        <img src="img/5.png" class="imgs">
+    </div>    
+    <span class="pre"></span>
+    <span class="next"></span>
+    <ul id="ullist" class="clearFix">
+        <li class="active"><img src="img/1-1.png"></li>
+        <li><img src="img/2-2.png"></li>
+        <li><img src="img/3-3.png"></li>
+        <li><img src="img/4-4.png"></li>
+        <li><img src="img/5-5.png"></li>
+    </ul>
+</div>
+</body>
+</html>

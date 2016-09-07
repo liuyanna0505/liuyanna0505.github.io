@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box {
+            width: 520px;
+            height: 280px;
+            border: 5px solid rgb(198,198,198);
+            position: relative;
+        }
+        #img {
+            width: 520px;
+            height: 280px;
+            display: block;
+        }
+        .title {
+            width: 520px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, .6);
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: white;
+            line-height:30px;
+            text-align: center;
+        }
+        #title2 {
+            top: 250px;
+        }
+        .arrow {
+            position: absolute;
+            background-color: rgba(0, 0, 0, .8);
+            width: 30px;
+            height: 40px;
+            line-height:40px;
+            text-align: center;
+            top: 50%;
+            margin-top: -20px;
+            color: white;
+            cursor: pointer;
+        }
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, .5);
+        }
+        #arrowL {
+            left: 10px;
+        }
+        #arrowR {
+            right: 10px;
+        }
+    </style>
+<script> 
+    window.onload = function() {
+        var images = [ //图片链接
+            'images/34435.jpg',
+            'images/456fgf.jpg',
+            'images/sadsd.jpg',
+            'images/sdbg.jpg',
+            'images/sdfsdfcc.jpg',
+            'images/sdsa.jpg'
+        ];
+        var texts = [  //文字标题
+            '第一张图片',
+            '第二张图片',
+            '第三张图片',
+            '第四张图片',
+            '第五张图片',
+            '第六张图片'
+        ];
+        var allInput = document.getElementsByTagName("input");       
+        var arrowR = document.getElementById("arrowR");
+        var arrowL = document.getElementById("arrowL");
+        var imgs = document.getElementById("img");
+        var title1 = document.getElementById("title1");
+        var title2 = document.getElementById("title2");
+		//默认状态为循环
+        var state = "xunhuan";
+        //循环切换
+        allInput[0].onclick = function(){
+            state = "xunhuan";
+        }
+        //顺序切换
+        allInput[1].onclick = function (){
+            state = "shunxu";        
+		 };      
+        var num = 0;
+		function changeImg(){
+			imgs.src = images[num];//图片链接
+			title1.innerHTML = num+1+'/'+images.length; //页数
+			title2.innerHTML = texts[num];   //对应图片的标题
+        }
+        changeImg();//函数调用 页面加载完显示
+        //点击右侧按钮
+        arrowR.onclick = function (){ 
+            num++;
+            //到边界了再去看一下状态
+            if(num > images.length-1){
+                if(state == "xunhuan"){
+                    num = 0;
+                }else{
+                    num = images.length-1;
+                    alert("已经是最后一张了");
+                }
+            }
+            changeImg();
+        };
+        //点击左侧按钮
+        arrowL.onclick = function (){
+            //根据状态判断走不同的代码
+            console.log( state );
+            num--;
+            if( num < 0 ){
+                if( state == "xunhuan" ){
+                    num = images.length-1;
+                }else{
+                    num = 0;
+                    alert("已经是第一张了");
+                }
+            }
+            changeImg();
+        };
+        //当有相同的代码的时候，封装在一个函数中，可以重复的调用
+    }
+</script>
+</head>
+
+<body>
+    <input type="button" value="循环切换">
+    <input type="button" value="顺序切换">
+    <div id="box">
+        <img id="img" src="images/34435.jpg" alt="">
+        <div class="title" id="title1">1/4</div>
+        <div class="title" id="title2">title</div>
+        <span class="arrow" id="arrowL">&lt;</span>
+        <span class="arrow" id="arrowR">&gt;</span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>星星评分2</title>
+<style>
+body {
+	margin: 0;
+}
+ul {
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+p {
+	margin: 0;
+}
+.clearFix:after {
+	content:"";
+	display:block;
+	clear:both;
+}
+#score {
+	margin: 20px;
+}
+#score p ,
+#score span ,
+#ulList{
+	float: left;
+}
+#score span {
+	width:22px;
+	height: 24px;
+	margin-right: 10px;
+	background:url(img/xing.png) no-repeat;
+}
+#ulList {
+	position: relative;
+	color:red;
+}
+#ulList li {	
+	position:absolute; 
+	left:0;
+	top: 0;
+	width: 100px;	
+}
+.tip {
+	float: left;
+	background:url(img/1.png) no-repeat;
+	height: 40px;
+	width:240px;
+}
+</style>
+<script>
+	window.onload = function (){
+		var title= document.getElementById("title");
+		var spanImg = document.getElementsByTagName('span');
+		var ulList= document.getElementById("ulList");
+		var ul_li= ulList.getElementsByTagName('li');
+		var tip = document.getElementsByClassName("tip")[0];
+		var arrUl=['很差','较差','还行','推荐','力荐'];
+		/*
+		需求：	1，鼠标移入当前位置 当前位置及之前的星星变成另外一个同样样式的 
+				      鼠标移入第一个和第二个的时候 图片是灰色五角星
+					  鼠标移入第二个之后的时候 图片是黄色五角星
+			    2，鼠标移开当前所有五角星位置的时候 变为最初始的状态  
+				
+				3，鼠标移入当前位置 并点击 移开鼠标之后 停留在当前的位置 当鼠标再次移入的时候 跟1,2 的变化一样
+				
+				注：鼠标移入移出时 判断是否点击 没有被点击，移入移出按正常的移入移出操作； 点击了 移入鼠标也可以变 移出的时候保留点击的时候的位置				  
+				
+	  */		
+		for(var i = 0; i < spanImg.length ; i++){
+			spanImg[i].index = i;
+			var n=-1; // 保存点击的索引值    n值初始只有不是星星的下标值就可以
+			//鼠标移入的时候
+			spanImg[i].onmouseover = function(){		
+				for( var j = 0; j < spanImg.length; j++ ){ //j循环一遍
+					 if( j <=this.index ){  //在j值小于移入的星星的下标时
+						 if( this.index  < 2 ){//当前星星的下标是 0 1 时
+							 spanImg[j].style.background = "url(img/xing1.png) no-repeat";
+						 }else{
+							 spanImg[j].style.background = "url(img/xing2.png) no-repeat"; 
+						}
+					}else{						 
+						spanImg[j].style.background = "url(img/xing.png) no-repeat";
+					}
+				}
+				tip.style.display= "none";		//小提示隐藏
+				ulList.innerHTML = arrUl[this.index];	//评价内容跟着下标的索引值走				 
+			}
+			//鼠标移出星星的时候
+			spanImg[i].onmouseout = function(){						 
+				//移出的时候 如果之前没有点击 所有的星星都是白色的那个	
+				tip.style.display= "block";
+				ulList.innerHTML = '';			 			 			 
+				for( var j = 0; j < spanImg.length; j++ ){
+					spanImg[j].style.background = "url(img/xing.png) no-repeat";					 
+			    }	
+			    //如果移出的时候 触发了点击事件 n值
+				for(var i=0;i<=n;i++){ //n为 0 1的时候 是灰色的星星
+					 spanImg[i].style.background='url(img/xing1.png)';
+					 //这个for循环就是决定星星显示或者隐藏
+					if(n>1){
+					//这个条件成立 让现在鼠标在第二个星之后
+						spanImg[i].style.background='url(img/xing2.png)';
+					}
+					tip.style.display= "none"; 	//提示隐藏	
+				}
+				if(n<0){// 或者条件是n=-1;
+					ulList.innerHTML='';	
+					tip.style.display= "block";			
+				}else{
+					ulList.innerHTML=arrUl[n];	//				
+				}
+			}
+			//点击每个星星的时候
+			spanImg[i].onclick = function(){  //点击的时候 也执行了移入这个动作					 
+				n=this.index;	 //n存储索引值  记录点击的是在哪个星星上 以此来判断移出的时候的效果
+			}			  
+	 	 }
+	}
+</script>
+</head>
+
+<body>
+    <div id ="score" class="clearFix">
+    	<p id="title">总体评分：</p>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+         <ul id="ulList">
+         	<!--<li>很差</li>
+            <li>较差</li>
+            <li>还行</li>
+            <li>推荐</li>
+            <li>力荐</li>-->
+        </ul>  
+        <p class="tip"></p>      
+    </div>
+</body>
+</html>

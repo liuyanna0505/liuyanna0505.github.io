@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星星评分</title>
+    <style>
+        #box {
+            height: 24px;
+        }
+        strong, .tips {
+            display: inline-block;
+            height: 24px;
+            line-height: 20px;
+            vertical-align: 5px;
+        }
+        .star {
+            display: inline-block;
+            width: 22px;
+            height: 24px;
+            background: url('images/xing.png') no-repeat;
+            cursor: pointer;
+        }
+        .star1 {
+            display: inline-block;
+            width: 22px;
+            height: 24px;
+            background: url('images/xing1.png') no-repeat;
+            cursor: pointer;
+        }
+        .star2 {
+            display: inline-block;
+            width: 22px;
+            height: 24px;
+            background: url('images/xing2.png') no-repeat;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        var text = [
+                '很差',
+                '较差',
+                '一般',
+                '良好',
+                '优秀'
+            ]
+            /*
+                需求：
+                    鼠标移入到某个星星的时候，
+                        小于等于当前星星的，星星变为黄的
+                        大于当前的依然为白色
+                        前两个要变为灰色的
+
+                步骤：
+                    鼠标移入
+                        小于等于当前的星星 添加class为star2
+                        大于当前星星的 添加class为star
+                    鼠标移开
+                        所有的星星的class为star
+                    鼠标点击
+                        小于当前点击的这个星星，class为start2
+                            前两个 class为star1
+            */
+
+            window.onload = function(){
+                var allSpan = document.getElementsByTagName("span");
+                var tips = document.getElementById("tips");
+                var onOff = true;
+                var n = -1;  //记录一下点击的是哪一个星星，目的是在鼠标移开的时候，让小于等于点击的这个星星加上class
+                //给每一span添加事件处理
+                for( var i = 0; i < allSpan.length; i++ ){
+                    allSpan[i].index = i;
+                    allSpan[i].onmouseover = function (){  //鼠标移入的时候                     
+                       for( var i = 0; i < allSpan.length; i++ ){
+                           allSpan[i].className = "star";
+                       }
+                       //this.index 鼠标移入的位置 如果小于2 那么前面的都是灰色 
+                       for( var i = 0; i <=this.index; i++ ){
+                            if( this.index < 2 ){
+                                allSpan[i].className = "star1";
+                            }else{
+                                allSpan[i].className = "star2";
+                            }                           
+                       }
+                       tips.innerHTML = text[this.index];
+                    };
+                    allSpan[i].onmouseout = function (){
+                        //清空所的span的class
+                        for( var i = 0; i < allSpan.length; i++ ){
+                           allSpan[i].className = "star";
+                        } 
+                       //添加class
+                        for( var i = 0; i <=n; i++ ){
+                            if( n < 2 ){
+                                console.log( i );
+                                allSpan[i].className = "star1";
+                            }else{
+                                allSpan[i].className = "star2";
+                            }
+                        }
+                        if( n == -1 ){//提示
+                            tips.innerHTML = "您还没有评分！";  
+                        }else{
+                            tips.innerHTML = text[n];
+                        }
+                    };
+                    allSpan[i].onclick = function (){
+                       n = this.index;//n值记录被点击的星星的下标
+                    };
+                }
+            };
+
+    </script>
+</head>
+<body>
+
+<div id="box">
+    <strong>总体评价：</strong>
+    <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+    <p id="tips" class="tips">还没有评分哦!</p>
+</div>
+
+</body>
+</html>
