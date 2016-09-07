@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>全选练习</title>
+<style>
+body {
+	margin: 0;
+}
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.clearFix:after {
+	content:"";
+	display:block;
+	clear: both;
+}
+#ulList {
+	width: 440px;
+	border-bottom: 1px solid #000;
+}
+#ulList li {
+	width: 400px;
+	font:12px "宋体";
+	padding:10px; 
+}
+#ulList input ,
+#ulList span { 
+	margin-left: 20px;
+	float:left;
+}
+#ulList strong{
+	float: right;
+	font-weight:normal;
+}
+#checkAll {
+	width:400px;
+	margin-top: 10px;
+}
+#checkAll input {
+	margin-left: 20px;
+}
+</style>
+<script>
+	window.onload = function(){
+		/*
+			需求：
+				1，默认状态的是隔行变色
+				2，鼠标移入的时候 每行的颜色发生变化
+				3，鼠标移出的时候 还原成隔行变色的状态
+				4，鼠标点击列表里的选框的时候 其被勾选上 并且改行的颜色也发生变化，可以重复选
+				5，鼠标点击取消选框的时候 其背景颜色还原成原来的默认颜色
+				6，当所有的列表选框被选上的时候 全选的按钮也被选上；当点击全选的按钮时 所有列表的选框也被选上 颜色也变成勾选时候的颜色
+			
+			步骤：1，隔行变色
+			     2，鼠标移入移出：
+				       1，鼠标移入每行li（for循环） 的时候 
+					  			 判断： 如果当前的按钮所在行是被选中的  移入的时候颜色为#ccc
+						        	  如果当前的按钮所在行没有被选中    移入li的颜色变为 red 不会覆盖移入时候的颜色					   
+				       2，鼠标移开的时候 
+						   判断： 如果当前的按钮所在行是被选中的  移开的时候颜色为red
+						         如果当前的按钮所在行没有被选中    移开的时候隔行变色 
+				 3，li的每行选框点击选中，可以点击多个 每个点击选中之后， 颜色为红； 当所有的都点击选中的时候 全选框也会被选中
+				 4，点击全选框按钮 每个li的选框也会被选中 并且颜色为红色
+		
+		*/
+		var ulList= document.getElementById('ulList');
+		var ul_li= ulList.getElementsByTagName('li');	
+		var allInput =ulList.getElementsByTagName('input');	
+		var checkAll=document.getElementById('checkAll');
+		var checkAllInput=checkAll.getElementsByTagName('input')[0];			
+		for(var i = 0; i< allInput.length;i++){
+			ul_li[i].index = i;   //存的是每行li的下标
+			allInput[i].index1 = i; //存的是每行按钮的下标
+			var m = 0;	           
+			allInput[i].state=true ;	//每行按钮的初始状态是true 来记录当前的按钮的点击状态	
+			//默认的隔行变色 0为blue 1为白色
+			if(i%2==0){
+				ul_li[i].style.background= "blue";
+			}else {
+				ul_li[i].style.background= "#fff";
+			}
+			//鼠标移入每行li的时候
+			ul_li[i].onmouseover = function(){	
+				//this.style.background= "#ccc"; //当前移入的颜色为灰色
+				if(allInput[this.index].state){//单选按钮没有点击的时候 移入时#ccc
+					this.style.background= "#ccc"; 
+				}else{		
+					this.style.background='red';//选中状态时  移入的话 为红色 
+				}
+			}
+			//鼠标移出的时候
+			ul_li[i].onmouseout = function(){ 	
+				if(allInput[this.index].state){//单选按钮没有点击的时候 隔行变色
+					if(this.index%2==0){					
+						this.style.background= "blue";
+					}else {
+						this.style.background= "#fff";
+					}
+				}else{		
+					this.style.background='red';//单选按钮选中状态 移出时红色
+				}
+			}
+			//点击单个按钮的时候
+			allInput[i].onclick = function (){
+				if( this.checked ){ //单选按钮被选中状态 变为红色
+					ul_li[this.index1].style.background='red'; //每行li通过单选按钮的下标对应起来
+					m++;	//选中一个 m值增加1 					
+					this.state=false;// 记录选中的状态 true是没有选中 false是选中状态
+				}else{
+					m--      //单选按钮每取消选中一次 m值减1 
+					this.state=true;  //没有被选中的状态 记录为false
+				}
+				if( m == allInput.length ){  //选中的个数m 与按钮的个数一致的时候
+					checkAllInput.checked = true;  //全选按钮被选中
+				}else{
+					checkAllInput.checked = false; //全选按钮为false 未被选中
+				}
+			}	
+				//点击全选按钮的时候
+			 checkAllInput.onclick = function (){
+                   for( var i = 0; i < allInput.length; i++ ){
+                       allInput[i].checked = this.checked; //每个按钮的状态由全选按钮决定 全选按钮为true 每个单选也是true 是全部选中状态；全选按钮为false时 每个单选也是false 是未被选中状态
+					   if(this.checked){  //当全选按钮被选中的时候 所有的单选按钮也被选中
+						   ul_li[i].style.background='red';  //每行li的背景是red
+						   allInput[i].state= false;	   //false状态记录li选中的状态
+						}else{
+							allInput[i].state= true;  //全选未被选中时候 所有的按钮也未被选中  状态为true ，还原成原来的隔行变色 
+							if(i%2==0){             
+				            	ul_li[i].style.background= "blue";
+			             	}else {
+			            		ul_li[i].style.background= "#fff";
+			               }
+						}					   			   
+                    } 
+                    if( this.checked ){//全选按钮被选中的时候
+                        m = allInput.length;																																					 
+                    }else{
+                        m = 0;
+                    }//此条判断可有可无 
+				}
+				 
+		   }
+	}
+</script>
+</head>
+
+<body>
+    <ul id="ulList">
+        <li class="clearFix">
+            <input type="checkbox">
+            <span>私奔</span>
+            <strong>梁博</strong>
+        </li>
+        <li class="clearFix">
+            <input type="checkbox">
+            <span>北京北京</span>
+           <strong>梁博</strong>
+        </li>
+        <li class="clearFix">
+            <input type="checkbox">
+            <span>我爱你中国</span>
+            <strong>梁博</strong>
+        </li>
+        <li class="clearFix">
+            <input type="checkbox">
+            <span>花火</span>
+            <strong>梁博</strong>
+        </li>
+       <li class="clearFix">
+            <input type="checkbox">
+            <span>回来</span>
+            <strong>梁博</strong>
+        </li>
+       <li class="clearFix">
+            <input type="checkbox">
+            <span>爱要有你才完美</span>
+            <strong>梁博</strong>
+        </li>
+    </ul>
+    <div id="checkAll">
+        <input type="checkbox">
+        <span>全选</span>
+    </div>
+</body>
+</html>
