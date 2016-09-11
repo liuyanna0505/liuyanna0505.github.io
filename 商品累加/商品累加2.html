@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>商品累加</title>
+<style>
+em{
+	font-style:normal;
+}
+input{
+	margin-right:6px	
+}
+span ,i {
+	margin-right:10px	 
+}
+</style>
+<script>
+	function $(id){
+		return document.getElementById(id);
+	}
+	window.onload = function(){
+	/*
+		需求：
+			点击加减按钮 按钮中间的值改变 小计值也改变
+			点击加减按钮 件数进行加减 总价也进行加减
+			判断其中单价的最大值
+		步骤：默认加减按钮中的是件数 初始为0
+			1，对每个li里的加号按钮进行点击处理：
+				后面的小计相应的增加当前的单价的累计
+				商品合计的件数也相应的增加 为每个li里的件数的和
+				共花费的钱数是 每个li里的小计的和
+							
+			2， 对每个li里的减号按钮进行点击处理：
+				后面的小计相应的减少
+				商品合计的件数也相应的减少 为每个li里的件数的和
+				共花费的钱数减少是 每个li里的小计的和
+			  
+			3，对每个li里的减号进行点击的时候 当减到加减按钮中的件数为0的时候 判断 再点击减号的话  后面的小计值不再改变 合计的总件数也不改变 花费的钱数也不变			
+		
+	*/	
+		var ulList =$("ulList");  
+		var count =$("count");
+		var mostCost=$("mostCost");
+		var allLi = ulList.getElementsByTagName("li");	
+		
+		var ems = ulList.getElementsByTagName("em");
+		var strongs = ulList.getElementsByTagName("strong");
+		var is = ulList.getElementsByTagName("i")
+		var arr=[];  //声明一个空数组		 
+		
+		function counts(){   //总计函数
+                var num=0;//总件数
+                var n=0; //总花费  
+				var a=-Infinity;            
+                for(var i=0;i<allLi.length;i++){
+					num+=parseFloat(ems[i].innerHTML); //总件数等于每个li里 em的数字之和
+					n+=parseFloat(strongs[i].innerHTML);//总花费等于每个li里算出的 小计strong的和					
+					if(parseFloat(ems[i].innerHTML)>0){ //判断每个li里的件数是否大于0 
+						arr[i]=parseFloat(is[i].innerHTML);//大于0 的话 数组里存的是当前li所对应的单价
+					}else{
+						arr[i]=0;//不大于0 的时候 数组里对应的单价是 0
+					} 
+					//判断最大值					
+					if(a<arr[i]){
+					   a=arr[i];
+					}
+                } 
+			 count.innerHTML="商品合计共："+ num  +"件，共花费了: "+ n+"元";	
+			 mostCost.innerHTML="其中最贵的商品单价是："+ a +"元";	
+		}
+		//for循环嵌套for循环 外面执行一次 里面的执行一遍 所以总计的是内层for循环 外面的每个li里的按钮点击一次的时候 里面的总计循环会执行一遍 把所有的件数和总价算出来
+		//找到每个li		
+		for(var i= 0;i<allLi.length;i++){  //找到每一个li
+			fn(allLi[i]);	//传参的是每一个li		
+		}		  
+		function fn(li){   //函数声明  操作每个li下的元素
+			var allInput = li.getElementsByTagName("input");
+			var allSpan = li.getElementsByTagName("span");
+			var allStrong = li.getElementsByTagName("strong")[0];
+			var allI = li.getElementsByTagName("i")[0];	
+			var allEm = li.getElementsByTagName("em")[0];	
+			var m=0;//记录点击次数 也代表着每个li里的件数			
+			allInput[1].onclick = function(){				
+				m++;  //加号按钮点击的时候 m值加1
+				allEm.innerHTML=m;   //件数是点击完之后的m值
+				allStrong.innerHTML=m*parseFloat(allI.innerHTML)+"元"; //小计的价格是每行的件数乘以单价
+				counts();									
+			}
+			allInput[0].onclick = function(){	//	对减号按钮进行点击处理的时候
+				/*if(m==0){  //当件数减到小于0 的时候 不再减 让m值回到0初始值
+					return;				
+				}	
+				m--;
+				*/	
+				m--;    //每次的件数减1
+				if(m<=0){  //当件数减到小于0 的时候 不再减 让m值回到0初始值
+					m=0;				
+				}	
+				allEm.innerHTML=m;
+				allStrong.innerHTML=m*parseFloat(allI.innerHTML)+"元";
+				counts();				 
+			}
+		}
+	}
+</script>
+</head>
+
+<body>
+    <ul id="ulList">
+        <li>
+            <input type="button" value="-">
+            <em>0</em>
+            <input type="button" value="+">
+            <span>单价：<i>12.5元</i></span>
+            小计：<strong>0元</strong>
+        </li>
+        <li>
+            <input type="button" value="-">
+            <em>0</em>
+            <input type="button" value="+">
+            <span>单价：：<i>10.5元</i></span>
+            小计：<strong>0元</strong>
+        </li>
+        <li>
+            <input type="button" value="-">
+            <em>0</em>
+            <input type="button" value="+">
+            <span>单价：：<i>8.5元</i></span>
+           小计：<strong>0元</strong>
+        </li>
+       <li>
+            <input type="button" value="-">
+             <em>0</em>
+            <input type="button" value="+">
+            <span>单价：：<i>8元</i></span>
+           小计：<strong>0元</strong>
+        </li>
+        <li>
+            <input type="button" value="-">
+             <em>0</em>
+            <input type="button" value="+">
+            <span>单价：：<i>14.5元</i></span>
+            小计：<strong>0元</strong>
+        </li>
+    </ul>
+    <p id="count">商品合计共：0件，共花费了: 0元</p>
+    <p id="mostCost">其中最贵的商品单价是：0元</p>
+</body>
+</html>

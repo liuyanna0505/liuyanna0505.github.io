@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>累加练习</title>
+<script src="js/tool.js"></script>
+<script>
+	/*
+	  需求：对每行的加减按钮进行点击处理 件数相应的加减一 小计是为相应的件数乘以每行的单价
+	  		总的 算出所有的件数的和  小计的和 并比较出最贵的价格
+	  步骤：
+	  	1，对每行的加号按钮进行点击 件数每点击一次加1， 小计为此时的单价乘以件数 
+		2，对每行的减号按钮进行点击 件数每点击一次减1，小计为此时的单价乘以件数
+			当件数减到0的时候 判断 再点击 件数0 不再减小 小计也是 总计也不变		      
+	   一：全局变量	   二：for嵌套for
+	*/
+	window.onload = function(){
+		var list = $('#list');
+		var allLi = $("li",list);  //ul下的所有的li
+		
+		var allStrong = $("strong",list); //ul下的所有的strong
+		var allEm =$("em",list);          //ul下的所有的 em
+		
+		var totalNum =$("#totalNum");   //获取的总计里的元素
+		var totalSpan =$("span",totalNum);
+		//下面的总的 在window.onlod里，是全局的变量  局部的可以使用
+		var allNum = 0;   //总的件数
+		var allPrice = 0;  //总的价格和
+		var maxPrice = 0;  //最贵的价格	
+			
+		for(var i= 0; i<allLi.length;i++){
+			lis(allLi[i]);
+		}					 
+		function lis(li){
+			var li_input = $("input",li);
+			var li_strong = $("strong",li)[0];
+			var li_em = $("em",li)[0];
+			var li_span = $("span",li)[0];			
+			var n=0;// 每一个li里的件数
+			var price = parseFloat(li_em.innerHTML);//变量存储单价
+		 /*---------------点击加的按钮的时候---------------------------*/		
+			li_input[1].onclick = function(){   
+				n++; 
+				//每行li的件数和小计
+				li_strong.innerHTML = n;
+				li_span.innerHTML = price*n;
+				//总的
+				
+				allNum++; //总的件数加1
+				totalSpan[0].innerHTML =allNum;					
+				allPrice += price;//总的价格 是每次的价格和加上当前点击时候的单价
+				totalSpan[1].innerHTML =allPrice;
+				//判断最大的单价	每点击一次 都和当前的单价进行比较 存储下最大的价格
+				if(maxPrice < price){
+					 maxPrice=price;
+				}
+				totalSpan[2].innerHTML = maxPrice;
+			}
+	   /*---------------点击减的按钮的时候---------------------------*/		
+			li_input[0].onclick = function(){   
+				n--;  //n值减到0的时候 做判断 当n=0的 再次点击 n还是为0 且之后的代码不再执行 这里可以用return或者 是if(){}else{}语句 
+				if(n<0){
+					n=0;
+					return;
+				}
+				li_strong.innerHTML = n;
+				li_span.innerHTML = price*n;	
+				
+				allNum--; 
+				totalSpan[0].innerHTML =allNum;	
+				allPrice -= price;//每次点击 总的价格和 都减一次当前点击的单价
+				totalSpan[1].innerHTML =allPrice;
+				//当减到0 的时候		
+				if(n===0){ //当前减到n值是0的时候  最大值重置为0（可能n=0 对应的单价是最大的 所以需要将最大值重置为0）再重新比较n!=0的里面的最大单价 
+					maxPrice=0; //最大值重置为0  再重新比较
+					for(var j=0;j<allStrong.length;j++){
+						if( allStrong[j].innerHTML != 0){  //当前的件数不为0的时候 比较其中的单价 为0的不用比较
+							if(maxPrice < allEm[j].innerHTML){ //找所有不为0的件数的单价比较
+								maxPrice=parseFloat(allEm[j].innerHTML);
+							}
+						}
+					}
+					totalSpan[2].innerHTML = maxPrice;
+				}
+													
+			}
+		}
+	
+	}
+</script>
+</head>
+
+<body>
+<ul id="list">
+    <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>12.5</em>元
+    小计：<span>0</span>元
+  </li>
+  <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>13.5</em>元
+    小计：<span>0</span>元
+  </li>
+  <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>14.5</em>元
+    小计：<span>0</span>元
+  </li>
+  <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>17.5</em>元
+    小计：<span>0</span>元
+  </li>
+  <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>82.5</em>元
+    小计：<span>0</span>元
+  </li>
+    <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>40.5</em>元
+    小计：<span>0</span>元
+  </li>
+  <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>20.5</em>元
+    小计：<span>0</span>元
+  </li>
+  <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>90</em>元
+    小计：<span>0</span>元
+  </li>
+  <li>
+    <input type="button" value="-">
+    <strong>0</strong>
+    <input type="button" value="+">
+    单价：<em>150</em>元
+    小计：<span>0</span>元
+  </li>
+ 
+</ul>
+<p id="totalNum">
+商品合计共：<span>0</span>件，共花费了<span>0</span>元<br>
+其中最贵的商品单价是：<span>0</span>元
+</p>
+</body>
+</html>

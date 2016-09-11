@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				list-style: none;
+				
+			}
+			li{
+				width: 570px;
+				height: 41px;
+				line-height: 36px;
+				font-size: 18px;
+				
+				padding-left: 20px;
+				
+			}
+			 
+			ul li:nth-child(1){
+				border-bottom: 1px solid #bddede;
+				
+			}
+			ul p{
+				
+				height: 40px;
+				line-height: 40px;
+				float: left;
+				color: #000;
+			}
+			ul img{
+				width: 24px;
+				height: 24px;
+				float: left;
+				position: relative;
+				top:6px;
+				left: 5px;
+				cursor: pointer;
+			}
+			#box{
+				width: 590px;
+				height: 118px;
+				margin: 30px auto;
+				border-top: 1px solid #000;
+				box-shadow: 2px 2px 2px #8b8b8b;
+			}
+			
+			.div2 {
+				color: green;
+				display: none;
+			}
+			.div2 span{
+				cursor: pointer;
+			}
+			.div2 input{
+				width: 150px;
+				height: 25px;
+				border-width: 1px;
+				border-color: #6ba542;
+				outline: none;
+				font-size:18px;
+				
+			}
+			.show {
+				display: block;
+			}
+			.hide{
+				display: none;
+			}
+		</style>
+<script type="text/javascript">
+	/*
+		需求：
+			点击编辑图片，出现编辑的输入框
+			点击保存，保存修改内容
+			点击取消，放弃编辑
+
+		步骤：
+			1. 点击编辑图片
+				隐藏第一个div，出现第二个div
+				把标题p标签中的内容给到输入框的value
+			2. 点击保存
+				隐藏第二个div，出现第一个div
+				把输入框中的value值，给到展示的标题p标签中
+			3. 点击取消
+				隐藏第二个div，出现第一个div
+
+
+	*/
+	function $(id){
+		return document.getElementById(id);	
+	}
+	window.onload = function(){
+		var box = $("box");
+		var allLi = box.getElementsByTagName("li");
+
+		//给每一个li下面的img，添加点击处理
+
+		for( var i = 0; i < allLi.length; i++ ){
+			/*var imgs = allLi[i].getElementsByTagName("img")[0];
+			//获取到每一个li下面所有的div
+			// i 0
+			//每循环一次，都把上一次保存的div给覆盖了，循环结束后，这个变量保存的是最后一个li中的div
+			var li_div = allLi[i].getElementsByTagName("div");
+
+			imgs.onclick  = function (){
+				li_div[0].style.display = "none";
+				li_div[1].style.display = "block";
+			};*/
+
+			fn(allLi[i]);
+		}
+
+		function fn(li){
+			var imgs = li.getElementsByTagName("img")[0];
+			var li_div = li.getElementsByTagName("div");
+			var title = li.getElementsByTagName("p")[0];
+			var edtorInput = li.getElementsByTagName("input")[0];
+			var allSpan = li.getElementsByTagName("span");
+			imgs.onclick = function (){
+				li_div[0].style.display = "none";
+				li_div[1].style.display = "block";	
+				edtorInput.value = title.innerHTML;
+			};
+			//保存
+			allSpan[0].onclick = function (){
+				if( edtorInput.value.trim() === "" ){
+					alert("请输入内容");
+					return;
+				}
+				li_div[1].style.display = "none";
+				li_div[0].style.display = "block";
+				title.innerHTML = edtorInput.value;	
+			};
+
+			//取消
+			allSpan[1].onclick = function (){
+				li_div[1].style.display = "none";
+				li_div[0].style.display = "block";
+			};
+		}
+
+		//var str = "  abc  ";
+
+		// string.trim();   去掉字符串前后1个到多个空格
+
+		//console.log( "("+str.trim()+")" );
+
+	};
+
+</script>
+	</head>
+	<body>
+		<div id="box">
+			<h2>分类</h2>
+			<ul>
+				<li>
+					<div>
+						<p>妙味课堂</p>
+						<img src="edit.jpg" alt="" />
+					</div>
+					<div class="div2">
+						<input type="text" />
+						<span>保存</span>
+						<span>取消</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p>妙味课堂</p>
+						<img src="edit.jpg" alt="" />
+					</div>
+					<div class="div2">
+						<input type="text" />
+						<span>保存</span>
+						<span>取消</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p>妙味课堂</p>
+						<img src="edit.jpg" alt="" />
+					</div>
+					<div class="div2">
+						<input type="text" />
+						<span>保存</span>
+						<span>取消</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p>妙味课堂</p>
+						<img src="edit.jpg" alt="" />
+					</div>
+					<div class="div2">
+						<input type="text" />
+						<span>保存</span>
+						<span>取消</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

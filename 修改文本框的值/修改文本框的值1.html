@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>保存修改</title>
+<style>
+body{
+	margin: 0;
+	font: 16px "微软雅黑";
+}
+p {
+	margin: 0;
+}
+strong {
+	font-weight: normal;
+}
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+input {
+	padding: 0;
+}
+#box {
+	width:500px;
+	margin: 0 auto;
+}
+.classfity {
+	height: 30px;
+	line-height:30px;
+	background:#096;	
+	color:#fff;
+}
+.title {
+	float:left;
+	margin-right: 10px;
+}
+#list li {	
+	height:30px;
+	line-height: 30px;	
+	margin-top: 10px; 
+}
+input {
+	float:left;	 
+	display:none;
+	height: 30px;
+	font: 16px "微软雅黑";
+}
+.change {
+	float:left;
+	margin-right: 4px;	
+}
+.store ,
+.cancle {
+	float: left;
+	margin-right:4px;
+	display:none;	
+}
+</style>
+<script>
+	window.onload = function(){
+		function $(id){
+			return document.getElementById(id);
+		}
+		var list1 = $("list1");//获取元素
+		var list2 = $("list2");//获取元素
+		function tab(obj){
+			var title = obj.getElementsByClassName("title")[0];
+			var input = obj.getElementsByTagName("input")[0];
+			var allSpan =obj.getElementsByTagName("span");			
+			allSpan[0].onclick = function(){   //点击修改按钮的时候 修改隐藏 保存取消显示 input显示 title隐藏
+				allSpan[0].style.display= "none";
+				allSpan[1].style.display= "block";
+				allSpan[2].style.display= "block";
+				input.style.display= "block";	//文本框显示
+				title.style.display= "none";
+				input.value = title.innerHTML;		
+			}
+			allSpan[1].onclick = function(){   //点击保存按钮的时候
+				title.style.display= "block";
+				input.style.display= "none";
+				allSpan[0].style.display= "block";
+				allSpan[1].style.display= "none";
+				allSpan[2].style.display= "none";
+				title.innerHTML = input.value ;	
+				if(input.value==""){     //输入的内容为空的时候 进行提示  让input显示 并且状态改到修改时候的状态 ---修改隐藏 保存取消显示
+					alert("请输入内容"); 
+					input.style.display= "block";
+					allSpan[0].style.display= "none";
+					allSpan[1].style.display= "block";
+					allSpan[2].style.display= "block";
+				}					
+			}
+			allSpan[2].onclick = function(){   //点击取消的时候
+				title.style.display= "block";
+				input.style.display= "none";
+				allSpan[0].style.display= "block";
+				allSpan[1].style.display= "none";
+				allSpan[2].style.display= "none";	
+				input.value = title.innerHTML ;	
+			}
+		}
+		tab(list1); //函数调用 传参  传给父集li
+		tab(list2);			
+	
+	}
+</script>
+</head>
+
+<body>
+	<div id="box">
+        <p class="classfity">分类名称<p>
+        <ul id="list">
+            <li id="list1">
+                <strong class="title">远程课堂开班啦</strong>
+                <input type="text">
+                <span class="change">修改</span>
+                <span class="store">保存</span>	
+                <span class="cancle">取消</span>
+            </li>
+             <li id="list2">
+                <strong class="title">远程课堂开班啦</strong>
+                <input type="text">
+                <span class="change">修改</span>
+                <span class="store">保存</span>	
+                <span class="cancle">取消</span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
