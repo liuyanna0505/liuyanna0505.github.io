@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		     *{
+		     	margin: 0;
+		     	padding: 0;
+		     	font-family: "微软雅黑";
+		     }
+		     #box{
+		     	width: 256px;
+		     	height: auto;
+		     	background-color:#dee7e7 ;
+		     	margin: 50px auto;
+		     	box-shadow: 2px 2px  5px #999;
+		     	padding: 10px 6px;
+		     }
+		     
+		     .line{
+		     	width: 256px;
+		     	height: 28px;
+		     	color: #103142;
+		     
+		     }
+		     .line span{
+		     	float:left;
+		     	width: 37px;
+		     	height: 27px;
+		     	font-size: 12px;
+		     	border: 1px solid #94bdd6;
+		     	line-height: 27px;
+		     	text-align: center;
+		     	cursor: pointer;
+		     }
+		     .line span:nth-child(3){
+		     	border-left: none;
+		     	border-right: none;
+		     }
+		      .active{
+		     	background-color: #fff;
+		     	border-bottom: none;
+		     }
+		     .line p:first-child{
+		     	width: 141px;
+		     	height: 27px;
+		     	font-size: 20px;
+		     	font-family: '宋体';
+		     	border-top-color: transparent;
+		     	border-left: none;
+		     	border-right: none;
+		     	float: left;
+		     }
+		     .line span {
+		     	float: left;
+		     }
+		      .line span img {
+		      	margin-left: 17px;
+		      	
+		      }
+		      /*标题结束*/
+		      ul{
+		      	width: 256px;
+		      	list-style: none;
+		      	height: auto;
+		      	font-size: 12px;
+		        position: relative;
+		        top: 0;
+		        left: 0;
+		      }
+		      ul li{      	
+		      	padding: 0 5px;
+		      	position: relative;
+		      	top: 0;
+		      	left: 0;
+		      }
+		      .more{
+		      	height: 27px;
+		      }
+		      .xj{
+		      	height: 27px;
+		      	border-bottom: 1px dashed #fff;
+		      }
+		      .xj span{
+		      	width: 18px;
+		      	height: 14px;
+		      	text-align: center;
+		      	color: #fff;
+		      	background-color: #21638c;
+		      	display: block;
+		      	position: relative;
+		      	top: 7px;
+		      	line-height: 13px;
+		      	float: left;
+		      }
+		      .xj p{
+		      	float: left;
+		      	line-height: 27px;
+		      	margin-left: 10px;
+		      }
+		      .move{
+		      	width: 256px;
+		      	height: 80px;
+		      	background-color: #fff;
+		      	position: relative;
+		      	top: 0;
+		      	left:-5px;
+		      	display: none;
+		      }
+		      .move img{
+		      	margin-top: 8px;
+		    margin-left: 15px;
+		      	border: 2px solid #21638c;
+		      	float: left;
+		      }
+		      .move p{
+		      	width: 120px;
+		      	float: left;
+		      	margin-top: 8px;
+		      	margin-left: 7px;
+		      }
+		      .move span{
+		      	width: 18px;
+		      	height: 14px;
+		      	text-align: center;
+		      	color: #fff;
+		      	background-color: #21638c;
+		      	display: block;
+		      	position: relative;
+		      	top: 7px;
+		      	line-height: 13px;
+		      	left: 5px;
+		      	float: left;
+		      }
+		     
+		      .move strong img{
+		      	border: none;
+		      	float: right;
+		      	margin-right: 5px;
+		      	display: block;
+		      }
+		      a{
+		      	padding-top: 5px;
+		      	height: 27px;
+		      	
+		      }
+		      a:link,a:visited,a:hover,a:active{
+		      	color: #000;
+		      	font-size: 12px;
+		      	text-decoration: none;
+		      	position: absolute;
+		      	right: 5px;
+		      }
+		</style>
+	    <script type="text/javascript">
+		    /*
+				需求：
+					移入到某一项的时候，让当前这一样的标题隐藏，让图片显示出来
+					可以切换到不用栏目
+				步骤：
+					1. 鼠标移入到每个栏目的标题上，切换
+					2. 移入到某个栏目中的某一项的时候
+						让当前这个栏目中其他的项，图片隐藏，标题显示
+						让当前这一样的标题隐藏，让图片显示出来
+		    */
+		    function tab(actionEle,forAction,evName,classNames){
+				for( var i = 0; i < actionEle.length; i++ ){
+					actionEle[i].index = i;
+					actionEle[i][evName] = function (){
+						for( var i = 0; i < actionEle.length; i++ ){
+							forAction[i].style.display = "none";
+							actionEle[i].className = "";
+						}
+						this.className = classNames;
+						forAction[this.index].style.display = "block";
+					};		
+				}	
+			}
+		    window.onload = function(){
+		    	var headline = document.getElementById("headline");
+		    	var allSpan = headline.getElementsByTagName("span");
+		    	var allUls = document.getElementsByTagName("ul");
+		    	tab(allSpan,allUls,"onmouseover","active");
+		    	//切换li
+		    	for( var i = 0; i < allUls.length; i++ ){
+		    		fn(allUls[i]);	
+		    	};
+		    	function fn(u){
+		    		var allLi = u.getElementsByTagName("li");
+		    		var prev = allLi[0];
+		    		for( var i = 0; i < allLi.length; i++ ){
+		    			allLi[i].onmouseover = function (){
+		    				//上一次操作的li
+		    				var prevDiv = prev.getElementsByTagName("div");
+		    				prevDiv[0].style.display = "block";
+		    				prevDiv[1].style.display = "none";
+		    				var divs = this.getElementsByTagName("div");
+		    				divs[0].style.display = "none";	
+		    				divs[1].style.display = "block";
+		    				prev = this;	
+		    			};
+		    		}	
+		    	}
+				/*自己写的 清除之前的所有的样式 				
+				function fn(u){
+		    		var allLi = u.getElementsByTagName("li");
+		    		for( var i = 0; i < allLi.length; i++ ){						
+		    			allLi[i].onmouseover = function (){
+							for( var i = 0; i < allLi.length; i++ ){
+								var divs = allLi[i].getElementsByTagName("div");		    				
+		    					divs[0].style.display = "block";
+		    					divs[1].style.display = "none";
+							};		
+							var divs = this.getElementsByTagName("div");//获取的是当前元素下的div					
+		    				divs[0].style.display = "none";	
+		    				divs[1].style.display = "block";
+		    			};
+		    		}	
+		    	}*/
+		    };
+	    </script>
+	</head>
+	
+	<body>
+		<div id="box">
+			<div class="line" id="headline" >
+				<p><img src="./img/font.jpg" alt="" /></p>
+				<span class="active">每日</span>
+				<span>每周</span>
+				<span>全部</span>
+			</div> 
+			<ul>
+				<li>
+					<div class="xj" style="display: none;">
+						<span>每日</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move" style="display: block;">
+						<span>每日</span>
+						<img src="./img/tu.png" alt="" />
+						<p>1</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>2</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>2</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>3</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>3</span>
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>4</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>4</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>5</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>5</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>6</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>6</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>7</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>7</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>8</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>8</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>9</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>9</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>10</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>10</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<div class="more"><a href="javascript:void(0)">>>更多</a></div>	
+			</ul>
+		    <ul style="display: none;">
+				<li>
+					<div class="xj" style="display: none;">
+						<span>每周</span>
+						<p>解密2：关于地球的一千零一问</p>
+					</div>
+					<div class="move" style="display: block;">
+						<span>每周</span>
+						<img src="./img/tu.png" alt="" />
+						<p>2</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>2</span>
+						<p>解密2：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>2</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>3</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>3</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>4</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>4</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>5</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>5</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>6</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>6</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>7</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>7</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>8</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>8</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>9</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>9</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li><li>
+					<div class="xj">
+						<span>10</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>10</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<div class="more"><a href="javascript:void(0)">>>更多</a></div>
+			</ul>
+			<ul style="display: none;">
+				<li>
+					<div class="xj"style="display: none;">
+						<span>全部</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move" style="display: block;">
+						<span>全部</span>
+						<img src="./img/tu.png" alt="" />
+						<p>3</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>2</span>
+						<p>解密2：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>2</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>3</span>
+						<p>解密2：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>3</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>4</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>4</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li>
+					<div class="xj">
+						<span>5</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>5</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li><div class="xj">
+						<span>6</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>6</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li><div class="xj">
+						<span>7</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>7</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li><div class="xj">
+						<span>8</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>8</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li><div class="xj">
+						<span>9</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>9</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				<li><div class="xj">
+						<span>10</span>
+						<p>解密：关于地球的一千零一问</p>
+					</div>
+					<div class="move">
+						<span>9</span>
+						<img src="./img/tu.png" alt="" />
+						<p>经典传奇：探索全世界重大历史事件</p>
+						<strong><img src="./img/play.jpg" alt="" /></strong>
+				    </div>
+				</li>
+				
+				<div class="more"><a href="javascript:void(0)">>>更多</a></div>	
+			</ul>
+			
+		</div>
+		
+		
+	</body>
+</html>

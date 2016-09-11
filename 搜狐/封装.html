@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>搜狐</title>
+<style>
+body {
+	margin: 0;
+	font: 12px "微软雅黑";
+}
+p,
+h3 {
+	margin:0;
+}
+ol {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+a {
+	text-decoration:none;
+}
+#section {
+	width:300px;
+	margin: 0 auto;
+}
+#header {
+	height:40px;
+	line-height:40px;
+	background: #99C;
+}
+#header h3{
+	float:left;
+	font-size:20px;
+}
+#header p{
+	float:right;
+	font-size:14px;
+}
+#date a:hover {
+	background: #3F9;
+}
+.active {
+	background: #3F9;
+}
+ol {
+	display:none;
+}
+em{
+	font-style:normal;	
+}
+strong {
+	font-weight:normal;
+}
+ol {
+	background: #FC6;
+	padding:4px;
+}
+.clearFix:after {
+	content:'';
+	display:block;
+	clear:both;
+}
+li{
+	padding-top:16px;
+}
+ol li img{
+	display: none;
+	float:left;
+	margin-right:4px;
+	vertical-align:top;
+}
+ol li span{
+	float:left;
+}
+ol li .play {
+	display:none;
+	float:right;
+	height:20px;
+	width:40px;
+	background:url(img/ico.png) no-repeat;
+}
+ol li img {
+	display:none;
+}
+ol li .number {
+	float:left;
+	width:14px;
+	height:14px;
+	background:#CF6;
+	margin-right:6px;
+	border: 1px solid #CF6;
+	border-radius:6px;
+}
+
+ol li:nth-of-type(1) img ,
+ol li:nth-of-type(1) .play
+{
+	display:block;	
+} 
+</style>
+<script>
+	function $(id){//&函数名 id 形参
+		return document.getElementById(id);
+	}	 
+	window.onload = function(){	
+			var date = $('date');   //获取p元素  id
+			function nav(a){
+				 var allA = a.getElementsByTagName("a");//获取a元素
+				 var allol= document.getElementsByTagName("ol");	//通过标签名获取所有的ol			
+				 for( var i=0;i<allA.length;i++){
+				 allA[i].index = i;
+				 allA[i].onclick = function(){
+					for(var i=0;i<allA.length;i++){  //清除之前的样式
+						allA[i].className = "";	
+						allol[i].style.display="none";
+					} 
+					this.className = "active";     //当前的样式设置
+					allol[this.index].style.display="block";
+				   }
+			    }	
+			}
+			nav(date);// 传参
+			
+			//以下是未封装的代码	
+			/*var allol= document.getElementsByTagName("ol");	//通过标签名获取所有的ol			 	
+		 	var date = document.getElementById("date");//获取p元素		 
+		    var allA = date.getElementsByTagName("a");//获取a元素			 
+			//选项卡 
+			 for( var i=0;i<allA.length;i++){
+				 allA[i].index = i;
+				 allA[i].onclick = function(){
+					for(var i=0;i<allA.length;i++){
+						allA[i].className = "";	
+						allol[i].style.display="none";
+					} 
+					this.className = "active";
+					allol[this.index].style.display="block";
+				}
+			 }	*/
+			 
+			 //以下是封装之后的代码 每个ol的id名分别是：ollist1  ollist2  ollist3
+			 function allOl(ol){  //ol是形参 变量 函数内部使用
+				 var allLi =ol.getElementsByTagName("li");  //每个ol 下的所有li 
+				 var img =ol.getElementsByTagName("img");   //每个ol 下的li里的img
+				 var play =ol.getElementsByClassName("play"); //每个ol 下的li里的播放按钮		
+				 for(var i=0; i<allLi.length;i++){
+					allLi[i].index = i;  //下标
+					allLi[i].onmouseover = function(){  //鼠标移入处理
+						for(var j=0; j<allLi.length;j++){  //每次循环清除之前的样式
+							allLi[j].style.background= "";  //样式为默认的颜色
+							img[j].style.display= "none";   //每个li里的图片隐藏
+							play[j].style.display= "none"; ////每个li里的播放按钮隐藏
+						}
+						this.style.background= "#fff";		//当前移入的li的背景为白色			 
+						img[this.index].style.display= "block";  //通过下标值找到对应的图片 使图片显示
+						play[this.index].style.display= "block";  //通过下标值找到对应的播放按钮 显示
+			   			} 
+				 	}
+		    	 }				 
+			 var  ol1=$('ollist1');  //获取元素  ol1是变量 给变量赋值 
+			 var  ol2=$('ollist2');  
+			 var  ol3=$('ollist3');
+			 
+			 allOl(ol1);   //传参
+			 allOl(ol2); 
+			 allOl(ol3); 
+			 
+			 
+			 //以下是未封装的效果
+			/* //每个li		
+			var ollist= document.getElementsByTagName("ol");
+			var allLi1 =ollist[0].getElementsByTagName("li");
+			var allLi2 =ollist[1].getElementsByTagName("li");	
+			var allLi3 =ollist[2].getElementsByTagName("li");
+			
+			var img = ollist[0].getElementsByTagName("img");
+			var textCon =ollist[0].getElementsByTagName("em");
+			var play = ollist[0].getElementsByClassName("play");
+			
+			var img1 = ollist[1].getElementsByTagName("img");
+			var textCon1 =ollist[1].getElementsByTagName("em");
+			var play1 = ollist[1].getElementsByClassName("play");	
+			
+			var img2 = ollist[2].getElementsByTagName("img");
+			var textCon2 =ollist[2].getElementsByTagName("em");
+			var play2 = ollist[2].getElementsByClassName("play");	
+			//第一个列表的					
+			for(var i=0; i<allLi1.length;i++){
+				allLi1[i].index1 = i;
+				allLi1[i].onmouseover = function(){
+					for(var i=0; i<allLi1.length;i++){
+						allLi1[i].style.background= ""; 
+						img[i].style.display= "none"; 
+						play[i].style.display= "none"; 
+					}
+					this.style.background= "#fff";					 
+					img[this.index1].style.display= "block";
+					play[this.index1].style.display= "block";
+			   }
+		  }
+		 //第二个列表的
+		  for(var i=0; i<allLi2.length;i++){
+				allLi2[i].index2 = i;
+				allLi2[i].onmouseover = function(){
+					for(var i=0; i<allLi2.length;i++){
+						allLi2[i].style.background= ""; 
+						img1[i].style.display= "none"; 
+						play1[i].style.display= "none"; 
+					}
+					this.style.background= "#fff";					 
+					img1[this.index2].style.display= "block";
+					play1[this.index2].style.display= "block";
+			   }
+		  }
+		 //第三个列表的
+		  for(var i=0; i<allLi3.length;i++){
+				allLi3[i].index3 = i;
+				allLi3[i].onmouseover = function(){
+					for(var i=0; i<allLi3.length;i++){
+						allLi3[i].style.background= ""; 
+						img2[i].style.display= "none"; 
+						play2[i].style.display= "none"; 
+					}
+					this.style.background= "#fff";					 
+					img2[this.index3].style.display= "block";
+					play2[this.index3].style.display= "block";
+			   }
+		 }	 
+		 */
+	}
+</script>
+</head>
+
+<body>
+	<section id="section">
+        <div id="header">
+            <h3>观看排行版</h3>
+            <p id="date">
+                <a href="#" class="active">每日</a>
+                <a href="#">每周</a>
+                <a href="#">全部</a>
+            </p>
+        </div>
+        <ol id="ollist1" style="display:block">
+            <li class="clearFix" style="background:#fff;">
+                <strong class="number">1</strong>
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零 </em>
+                <span class="play"></span>
+            </li>
+            <li class="clearFix">
+               <strong class="number">2</strong> 
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零一问</em>
+                <span class="play"></span>
+            </li>
+            <li class="clearFix">
+                <strong class="number">3</strong>
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零一问</em>
+                <span class="play"></span>
+            </li>
+            <li  class="clearFix">
+                <strong class="number">4</strong>
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零一问</em>
+                <span class="play"></span>
+            </li>
+            <li  class="clearFix">
+                <strong class="number">5</strong>
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零一问</em>
+                <span class="play"></span>
+            </li>
+        </ol>
+        <ol id="ollist2">
+        	 <li class="clearFix" style="background:#fff;">
+                <strong class="number">1</strong>
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零 </em>
+                <span class="play"></span>
+            </li>
+            <li class="clearFix">
+               <strong class="number">2</strong> 
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零一问</em>
+                <span class="play"></span>
+            </li>
+       </ol>
+      <ol id="ollist3">
+         <li class="clearFix" style="background:#fff;">
+                <strong class="number">1</strong>
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零 </em>
+                <span class="play"></span>
+            </li>
+            <li class="clearFix">
+               <strong class="number">2</strong> 
+                <img src="img/1.png">
+                <em class="textCon">解密：关于地球与人类的一千零一问</em>
+                <span class="play"></span>
+            </li>
+        </ol>
+    </dsection>
+</body>
+</html>
