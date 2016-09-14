@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>聚美选项卡套选项卡</title>
+<style>
+	body{
+		margin:0;	
+	}
+	ul{
+		margin: 0;
+		padding: 0;
+		list-style:none;
+		
+	}
+	p{
+		margin: 0;
+	}
+	img {
+		vertical-align:top;
+	}
+	.clear:after{
+		content:'';
+		display: block;
+		clear: both;
+	}
+	#section {
+		width:1000px;
+		margin:20px auto 0;
+	}
+	#left{
+		float:left;
+		width:150px;		
+		background: #e7e7e7;
+	}
+	#left li{
+		height: 80px;
+		line-height:80px; 
+		text-align:center;
+		
+	}
+	#picBox {
+		float:left;
+		width:810px;		
+	}
+	#picBox li,
+	#picBox li img{
+		display:none;
+		width:810px;
+		height:300px;
+	} 
+	#goodsList {
+		width:810px;	
+		background: #000;
+		opacity:.5;	
+		height: 20px;
+	}
+	#goodsList span {
+		float:left;		 
+		padding:0 30px;
+		background: #000;
+		opacity:.5;	
+		color:#fff;	
+		border: 1px solid #fff;
+		border-left:none;
+	}
+</style>
+<script>
+	function $(id){
+		return document.getElementById(id);//函数定义 
+	}	
+	function left(actionEle,forAction,evName,classNames){
+		 for(var i= 0;i<actionEle.length;i++){   // 左边的选项卡
+				actionEle[i].index=i;
+				actionEle[i][evName] = function(){
+					for(var i= 0;i<actionEle.length;i++){
+						actionEle[i].style.background='';   //清除左边的li的背景颜色和对应的右边的图片li 
+						forAction[i].style.display="none";
+					}
+					this.style.background='yellow';    // 当前的左边li的背景颜色和右边对应的图片li显示
+					forAction[this.index].style.display="block";
+			  }
+		  }	
+	}
+	window.onload = function(){	
+		var leftUl=$('left');
+		var leftLi = leftUl.getElementsByTagName('li');	
+		var rigthUl =$("picBox");
+		var rigthLi =rigthUl.getElementsByTagName('li');	
+		left(leftLi,rigthLi,"onmouseover");	
+		//z左边控制右边 只有一个选项卡	
+			
+		/*---------------------左右分界----------------------------*/
+		//右边每一个li 下都是选项卡  需要用到循环  要找到右边每一个对应的li下的 span和图片 相互之间的操作不影响	
+		for( var i = 0; i < rigthLi.length; i++ ){
+			 fn(rigthLi[i]);//右边的每一个li为实参
+		 }
+		 function fn(u){
+			var allSpan = u.getElementsByTagName("span");	
+			var allImg = u.getElementsByTagName('img');			 
+			for( var j = 0; j < allSpan.length; j++ ){
+				allSpan[j].index1=j;
+				allSpan[j].onmouseover = function (){			   
+					for(var i= 0;i<allSpan.length;i++){ 
+						 allSpan[i].style.background=''; //清除之前每组的背景颜色和对应图片隐藏
+						 allImg[i].style.display="none";
+					 } 
+					 this.style.background='red';      // // 当前的li的背景颜色和对应的图片显示
+					 allImg[this.index1].style.display="block";				 
+				};
+			}	
+		 }
+	
+	}
+</script>
+</head>
+
+<body>
+<section id="section" class="clearFix">
+	<ul id="left">
+    	<li style="background:yellow;">最新团购</li>
+        <li>商城特惠</li>
+        <li>名品推荐</li>
+        <li>缤纷活动</li>
+    </ul>
+    <ul id="picBox">
+    	<li id="list1" style="display:block">
+            <img src="img/1.png" style="display:block">
+            <img src="img/Tulips.jpg">
+            <img src="img/Hydrangeas.jpg"> 
+            <p id="goodsList">
+               <span style="background:red;">肌研满150减30</span>
+               <span>肌研满150减30</span>
+               <span>肌研满150减30</span>
+            </p>
+        </li>
+        <li id="list2">
+            <img src="img/shu.png" style="display:block">
+            <img src="img/2(1).jpg">
+            <img src="img/Chrysanthemum.jpg">
+            <p id="goodsList">
+               <span style="background:red;">万达大歌星唱响券</span>
+               <span>万达大歌星唱响券</span>
+               <span>万达大歌星唱响券</span>
+            </p>
+        </li>
+        <li id="list3">
+            <img src="img/Desert.jpg" >
+            <img src="img/Hydrangeas.jpg" style="display:block">
+            <img src="img/Jellyfish.jpg">
+            <p id="goodsList">
+               <span>贝德玛满228减28</span>
+               <span style="background:red;">贝德玛满228减28</span>
+               <span>贝德玛满228减28</span>
+            </p>
+        </li>
+         <li id="list4">
+            <img src="img/shu.png">
+            <img src="img/kaola.png">
+            <img src="img/niao.png">
+            <img src="img/shu.png" style="display:block">
+            <p id="goodsList">
+                <span>雅诗兰黛花样唇膏</span>
+               <span>雅诗兰黛花样唇膏</span>
+               <span>雅诗兰黛花样唇膏</span>
+               <span style="background:red;">雅诗兰黛花样唇膏</span>
+            </p>
+        </li>
+    </ul>
+</section>
+</body>
+</html>
