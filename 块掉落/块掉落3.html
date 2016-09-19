@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>掉块setTimeout</title>
+<style>
+div {
+	width: 50px;
+	height: 50px;
+	background: red;
+	position: absolute;
+	top: 40px;
+	left: 0;	
+}
+</style> 
+<script src="tools/FZ.js"></script>
+<script src="tools/tools.js"></script>
+<script>
+	window.onload = function(){
+		var allDiv = $('div');//获取所有的div
+		var len=15;   //div块的长度
+		var str="";
+		for(var i=0;i<len;i++) {//生成div
+        	str += '<div style="left:'+ i*70 +'px;"></div>';
+        };	
+		document.body.innerHTML = str;//生成的div		
+		var n = 0;
+		var timer = null;
+		var onOff = true;
+		var target =0;
+		document.onclick = function (){
+			if( timer ) return;// 
+			for( var i = 0; i < len; i++ ){
+				fn(i);
+			}
+			function fn(n){
+				var target = onOff ? 300 : 40;
+				timer = setTimeout(function (){ //可以不用想何时清除计时器 timeout执行一次就结束
+					FZ(allDiv[n],"top",500,target,"linear",function (){
+						if( n === len-1 ){
+							timer = null;
+							onOff = !onOff;
+						}	
+					})
+				},n*100);
+			} 
+		}
+    }
+
+</script>
+</head>
+<body>
+<!--<div>
+</div>-->
+</body>
+</html>

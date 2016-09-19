@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>掉块</title>
+<style>
+div {
+	width: 50px;
+	height: 50px;
+	background: red;
+	position: absolute;
+	top: 40px;
+	left: 0;	
+}
+</style> 
+<script src="tools/FZ.js"></script>
+<script src="tools/tools.js"></script>
+<script>
+	window.onload = function(){
+		var allDiv = $('div');//获取所有的div
+		var len=15;   //div块的长度
+		var str="";
+		for(var i=0;i<len;i++) {//生成div
+        	str += '<div style="left:'+ i*70 +'px;"></div>';
+        };	
+		document.body.innerHTML = str;//生成的div		
+		var n = 0;
+		var timer = null;
+		var onOff = true;
+		document.onclick = function (){
+			if( timer ) return;
+			//每个div块身上都有计时器 这个是保证只有一个定时在运行
+			if( onOff ){  //向下下落
+				timer = setInterval(function (){  //计时器开启的时候 运动函数里面每个元素身上的定时器开始了 每个div身上都有一个计时器 编号从1-len
+					FZ(allDiv[n],"top",500,300,"linear",function (){
+						if( n > len-1 ){
+							timer = null;//运行到最后一个div的时候 timer的编号清空 都清空 下次再从0  第一个开始
+							n = 0;	
+						}
+					});
+					n++;
+					if( n > len - 1){  //走完最后一个div的时候 停止计时器 但是没有清除 编号还是在元素的身上
+						clearInterval(timer);
+					}	
+				},100);
+				onOff = false;
+			}else{  //向上上升
+				timer = setInterval(function (){
+					FZ(allDiv[n],"top",500,0,"linear",function (){
+						if( n > len-1 ){
+							timer = null;
+							n = 0;	
+						}
+					});
+					n++;
+					if( n > len - 1){
+						clearInterval(timer);
+					}	
+				},100);
+				onOff = true;
+			}
+		};
+    }
+
+</script>
+</head>
+<body>
+<!--<div>
+</div>-->
+</body>
+</html>
