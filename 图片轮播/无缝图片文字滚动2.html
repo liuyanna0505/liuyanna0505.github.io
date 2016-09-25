@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>图片轮播文字显示隐藏</title>
+<style>
+	body{
+		margin: 0;	
+	}
+	ul {
+		margin:0; 
+		padding:0;
+		list-style:none
+	 }
+	#box{
+		margin: 20px auto;
+		width:500px;
+		height:500px;
+		position:relative;
+		overflow:hidden;	
+	}
+	ul{
+		width:500px;
+		position:absolute;
+		top:0px;
+		left:0;
+	}
+	li {
+		float: left;
+		}
+	#text{
+		width:500px;
+		height:60px;
+		background:rgba(0,0,0,0.5);
+		position:absolute;
+		bottom:0px; 
+		left:0;
+		}
+	#text p{		
+		margin:0 auto;
+		line-height:60px;
+		color:#FF0;
+		font-weight:bold;
+		font-size:30px;
+		text-align:center;
+	}
+	</style>
+	<script src="tools/tools.js"></script>
+	<script src="tools/FZ.js"></script>
+    <script>
+	   /*li浮动 图片前后多放一张*/
+		window.onload=function(){
+			var list = $('#list');
+			var allLi =$('li',list);	
+			var box=$('#box');
+			var text=$('#text');		
+					
+			var oneLiW=parseInt(getStyle(allLi[0],'width'));//一个li的宽度
+			var len =allLi.length;	     //所有li的宽度
+			list.style.width = oneLiW*len +'px'; //ul等于所有li的宽度 li在一行排列
+			list.style.left =  -oneLiW + "px";;//ul的初始位置是从现在的第二张图片开始
+							
+			var arr=['花开富贵','文艺风','百合花','无边沙漠','花开富贵','文艺风']; //对应文字
+			text.innerHTML='<p>'+arr[1]+'</p>' //第一张图片对应的 文字
+			var n = 1;//记录图片//起始值的下标值 从1开始 显示的是第二张图片 但是是正常展示的第一张图片
+			var m = 1;//记录文字 也是从1开始 数组了第二个开始 
+			var timer = null;
+			timer = setInterval(function(){
+				n++;	
+				m++;
+				var l = -n * oneLiW ; 				
+				//回调函数 操作的是ul和text
+				FZ(text,'bottom',1000, -60, 'linear',function(){  //文字相对父集底部的初始位置
+					FZ(list,'left', 1000 ,l, 'linear',function(){
+						if(n === len - 1){ //当走到最后一张图片的时候 瞬移到第二张即正常图片的第一张
+							n=1;
+							list.style.left = -n * oneLiW + "px"; 
+						}						
+						if(m===len-1){ //文字到最后一张的时候 回到第一张 对应文字是数组li的第二个 
+							m=1;
+						};	
+						text.innerHTML='<p>'+arr[m]+'</p>'
+						FZ(text,'bottom',1000,0,'linear')						
+					})
+				});
+			},4000);
+		}
+</script>
+</head>
+
+<body>
+<div id="box">
+    <ul id='list'>
+    	<li><img src="img1/4.png"></li>
+        <li><img src="img1/1.png"></li>
+        <li><img src="img1/2.png"></li>
+        <li><img src="img1/3.png"></li>
+        <li><img src="img1/4.png"></li>
+        <li><img src="img1/1.png"></li>
+    </ul>
+ 	<div id="text">
+  	   <!-- <p>滚动文字</p>-->
+ 	</div>
+ </div>
+</body>
+</html>

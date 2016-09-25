@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>图片轮播文字显示隐藏</title>
+<style>
+	body{
+		margin: 0;	
+	}
+	ul {
+		margin:0; 
+		padding:0;
+		list-style:none
+	 }
+	#box{
+		margin: 20px auto;
+		width:500px;
+		height:500px;
+		position:relative;
+		overflow:hidden;	
+	}
+	ul{
+		width:500px;
+		position:absolute;
+		top:0px;
+		left:0;
+	}
+	li {
+		float:left;
+		position: relative;/*相对定位*/
+		}
+	#text{
+		width:500px;
+		height:60px;
+		background:rgba(0,0,0,0.5);
+		position:absolute;
+		bottom:0px; 
+		left:0;
+		}
+	#text p{		
+		margin:0 auto;
+		line-height:60px;
+		color:#FF0;
+		font-weight:bold;
+		font-size:30px;
+		text-align:center;
+	}
+	</style>
+	<script src="tools/tools.js"></script>
+	<script src="tools/FZ.js"></script>
+    <script>
+	   /*li相对定位 只显示第一张*/
+		window.onload=function(){
+			var list = $('#list');
+			var allLi =$('li',list);	
+			var box=$('#box');
+			var text=$('#text');		
+					
+			var oneLiW=parseInt(getStyle(allLi[0],'width'));//一个li的宽度
+			var len =allLi.length;	     //所有li的宽度
+			list.style.width = oneLiW*len +'px'; //ul等于所有li的宽度 li在一行排列
+					
+			var arr=['文艺风','百合花','无边沙漠','花开富贵']; //对应文字
+			text.innerHTML='<p>'+arr[0]+'</p>' //第一张图片对应的 文字
+			var n = 0;//记录图片
+			var m = 0;//记录文字
+			var timer = null;
+			timer = setInterval(function(){
+				n++;	
+				m++;				
+				if( n > len-1){ //当走到最后一张的时候 把第一张放到最后 li相对定位 left值为所有li的长度
+					allLi[0].style.left = len * oneLiW + "px";
+				}
+				if( n > len ){ //再次点击的时候 第一张回到自己最初始的位置 ul也回到初始0 的位置 运动从第二张开始 
+					allLi[0].style.left =  0;
+					list.style.left = 0;
+					n = 1;
+				}
+				var l =-n*oneLiW;  //ul的left值
+				//回调函数 操作的是ul和text   回调函数 先执行外层 再执行里面的 一层层的来 默认字和图片都是显示的 首先文字隐藏运动 然后图片换下一张 文字再出现 然后隐藏。。。。
+				FZ(text,'bottom',500, -60, 'linear',function(){  //文字相对父集底部的初始位置
+					FZ(list,'left', 1000 ,l, 'linear',function(){
+						if(m>len-1){ //文字到最后一张的时候 回到第一张
+							m=0;
+						};	
+						text.innerHTML='<p>'+arr[m]+'</p>'
+						FZ(text,'bottom',500,0,'linear')
+					})
+				});
+			},3000);
+		}
+</script>
+</head>
+
+<body>
+<div id="box">
+    <ul id='list'>
+        <li><img src="img1/1.png"></li>
+        <li><img src="img1/2.png"></li>
+        <li><img src="img1/3.png"></li>
+        <li><img src="img1/4.png"></li>
+    </ul>
+ 	<div id="text">
+  	   <!-- <p>滚动文字</p>-->
+ 	</div>
+ </div>
+</body>
+</html>

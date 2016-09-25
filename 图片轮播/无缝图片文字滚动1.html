@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>图片轮播文字显示隐藏</title>
+<style>
+	body{
+		margin: 0;	
+	}
+	ul {
+		margin:0; 
+		padding:0;
+		list-style:none
+	 }
+	#box{
+		margin: 20px auto;
+		width:500px;
+		height:500px;
+		position:relative;
+		overflow:hidden;	
+	}
+	ul{
+		width:500px;
+		position:absolute;
+		top:0px;
+		left:0;
+	}
+	li {
+		position:absolute;
+		left: 0;
+		top: 0;
+		}
+	#text{
+		width:500px;
+		height:60px;
+		background:rgba(0,0,0,0.5);
+		position:absolute;
+		bottom:0px; 
+		left:0;
+		}
+	#text p{		
+		margin:0 auto;
+		line-height:60px;
+		color:#FF0;
+		font-weight:bold;
+		font-size:30px;
+		text-align:center;
+	}
+	</style>
+	<script src="tools/tools.js"></script>
+	<script src="tools/FZ.js"></script>
+    <script>
+	   /*li相对绝对定位 只显示第一张*/
+		window.onload=function(){
+			var list = $('#list');
+			var allLi =$('li',list);	
+			var box=$('#box');
+			var text=$('#text');		
+					
+			var oneLiW=parseInt(getStyle(allLi[0],'width'));//一个li的宽度
+			var len =allLi.length;	     //所有li的宽度
+			list.style.width = oneLiW*len +'px'; //ul等于所有li的宽度 li在一行排列
+			
+			for( var i = 1; i < len; i++ ){  //除了第一张 所有其他的图片都不要在ul的可视区域内
+           		allLi[i].style.left = "10000px";
+           }		
+			var arr=['文艺风','百合花','无边沙漠','花开富贵']; //对应文字
+			text.innerHTML='<p>'+arr[0]+'</p>' //第一张图片对应的 文字
+			var n = 0;//记录图片
+			var m = 0;//记录文字
+			var oprev = 0;//记录上一个li
+			var timer = null;
+			timer = setInterval(function(){
+				n++;	
+				m++;				
+				if(n>len-1){ //图片到了最后一张 回到第一张
+					n=0;
+				}
+				allLi[oprev].style.left = 0;//把上一次操作的li拉到0的位置 
+				allLi[n].style.left =  oneLiW  +'px';//当前的li在可视区域的右边			 
+				list.style.left = 0;   //瞬间把ul拉倒0的位置 下一次运动从0到-oneLiW
+				 
+				//回调函数 操作的是ul和text
+				FZ(text,'bottom',1000, -60, 'linear',function(){  //文字相对父集底部的初始位置
+					FZ(list,'left', 1000 ,-oneLiW, 'linear',function(){
+						allLi[oprev].style.left =  "10000px";    //上一次操作的li 让其不在可视区域显示              
+						oprev = n;  //运动结束之后 记录当前li的下标
+						if(m>len-1){ //文字到最后一张的时候 回到第一张
+							m=0;
+						};	
+						text.innerHTML='<p>'+arr[m]+'</p>'
+						FZ(text,'bottom',1000,0,'linear')						
+					})
+				});
+			},4000);
+		}
+</script>
+</head>
+
+<body>
+<div id="box">
+    <ul id='list'>
+        <li><img src="img1/1.png"></li>
+        <li><img src="img1/2.png"></li>
+        <li><img src="img1/3.png"></li>
+        <li><img src="img1/4.png"></li>
+    </ul>
+ 	<div id="text">
+  	   <!-- <p>滚动文字</p>-->
+ 	</div>
+ </div>
+</body>
+</html>
