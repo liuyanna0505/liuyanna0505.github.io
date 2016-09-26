@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			body{
+				background: #232323;
+				 color: #fff; 
+				 font-family: "微软雅黑"
+			}
+			img{
+				width: 150px;
+				height: 210px;
+				border: none;
+				vertical-align: top;
+			}
+			.box{
+				width: 1200px;
+				height: 210px;
+				margin: 100px auto;
+			}
+			ul li{
+				list-style: none;
+				vertical-align: top;
+				width: 150px;
+				height: 210px;
+				overflow: hidden;
+				float: left;
+				position: relative;
+			}
+			ul li p{
+				width: 150px;
+				height: 420px;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+<script src="tools/FZ.js" ></script>
+<script src="tools/tools.js" ></script>
+<script>
+	function addZero(n){//判断小于10 的函数
+		return n<10?'0'+n:n;
+	}
+	//时间函数
+	function getTimes(){
+		var d = new Date();
+		var H = d.getHours();
+		var M = d.getMinutes();
+		var S = d.getSeconds();
+		return {
+			hours:H,
+			minutes:M,
+			second:S
+		}//返回的是一个对象
+	} 
+	var time = getTimes();//对象赋值给一个变量  类似 var obj = {};取值取的是对象身上的属性
+	var onTime = addZero(time.hours)+":"+addZero(time.minutes)+":"+addZero(time.second);
+	window.onload = function(){
+		var list = $('#list');
+		var allP = $("p",list);
+		
+		for( var i = 0; i < allP.length; i++ ){
+			var imgs = $("img",allP[i]);
+			if( onTime.charAt(i) !== ":" ){//当第一行对应图片不是冒号的时候
+				imgs[0].src = "img/"+onTime.charAt(i)+".png";//第一行图片
+			}
+		}
+		//冒号函数 
+//		function fn(img){
+//			setTimeout(function (){
+//				img[0].src = "img/fuh.png";		
+//			},500)		
+//		}
+		var oldTime = onTime; //记录当前时间
+		setInterval(function (){
+			var times = getTimes();			
+			var nowTime =addZero(times.hours)+":"+addZero(times.minutes)+":"+addZero(times.second);
+			for( var i = 0; i < nowTime.length; i++ ){
+				if(nowTime.charAt(i) === ":"){
+					var img = $("img",allP[i]);//获取的是冒号
+					img[0].src = "img/nfh.png"; //刚开始是没有冒号
+ 				    //fn(img);
+					setTimeout(function (Img){
+						Img[0].src = "img/fuh.png";		
+					},500,img);//函数里的参数是形参  最后一个img是实参
+				}else{
+					if( nowTime.charAt(i) !== oldTime.charAt(i) ){//跟之前的时间对比
+						var imgs = $("img",allP[i]);
+						allP[i].style.top = 0;//运动P 瞬移
+						imgs[0].src = "img/"+oldTime.charAt(i)+".png";//第一行是上一秒的时间
+						imgs[1].src = "img/"+nowTime.charAt(i)+".png";//第二行是当前实时获取的时间
+						FZ(allP[i],"top",500,"-210","linear");
+						//p 运动每隔500s运动一个图片的高度 上一秒时间隐藏 当前时间运动到p的top为0处 
+					}
+				}
+			}
+			oldTime = nowTime;   
+		},1000);		
+	}
+</script>
+	</head>
+	<body>
+		<div class="div1"></div>
+
+		<div class="box">
+			<ul id="list">
+				<li>
+					<p>
+						<img src="img/0.png" alt="0" />
+						<img src="img/0.png" alt="0" />
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png" alt="0" />
+						<img src="img/0.png" alt="0" />
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/fuh.png" alt="0" />						
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png" alt="0" />
+						<img src="img/0.png" alt="0" />
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png" alt="0" />
+						<img src="img/0.png" alt="0" />
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/fuh.png" alt="0" />
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png" alt="0" />
+						<img src="img/0.png" alt="0" />
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="img/0.png" alt="0" />
+						<img src="img/0.png" alt="0" />
+					</p>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
