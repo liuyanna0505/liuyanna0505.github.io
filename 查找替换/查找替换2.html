@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>查找替换</title>
+<style>
+    body,
+	p{
+		margin:0; 
+		font-family:'微软雅黑';
+	}
+	em{
+		font-style:normal;
+	}
+	input{
+		outline:none;
+	}
+	#wrap {
+		margin:10px;
+		position:relative;
+		width:400px;
+		height: 250px;
+		background:#CCC;
+		padding: 40px 80px 100px 20px;
+	}
+	#text {
+		background: #fff;
+		padding:20px;
+		font:16px/30px '微软雅黑';
+	}
+	#unfold{
+		width:40px;
+		position:absolute;
+		left:450px;
+		top:30px;
+		background:#333;
+		color:#fff;
+		font:14px/24px "微软雅黑";	
+		text-align:center;	
+	}
+	#unfold span{
+		display:block;
+		cursor:pointer;
+	}
+	#unfold span:nth-of-type(2),
+	#unfold span:nth-of-type(3){
+		display:none;
+	}
+	#seekBox{
+		display:none;
+		position: absolute;
+		padding:6px;
+		width:380px;
+		left:20px;
+		bottom:40px;
+		background:#e7e7b5;
+		border:4px solid #C69;
+	}
+	#seekBox p{
+		padding-top:6px;
+		height: 30px;
+	}
+	em{
+		display:inline-block;
+		width:40px;
+		font: 14px/24px "微软雅黑"; 
+		text-align:center ;
+		cursor:pointer;
+	}
+	.red {
+		background: red;
+	}
+	.orange {
+		background: orange;
+	}
+	#seekCon {
+		margin-bottom:20px;
+		padding-top:10px;
+		border-top:2px solid #F60;
+	} 
+	#seekCon div{
+		display:none;
+	}
+	.seekText, 
+	.replaceText,
+	.seekText2{
+		width:100px;
+		height:24px; 
+	}
+	.seek,
+	.replace{
+		border-radius:10px;
+		width: 46px;
+		height:24px;
+		font-family:'微软雅黑';
+	} 
+	.close {
+		position:absolute;
+		width:20px ;
+		height: 14px;
+		font-size: 14px;
+		top:4px;
+		right:4px;
+		cursor:pointer;
+	}
+	i {
+		font-style:normal;
+		background: orange;
+	}
+</style>
+<script src="tools/tools.js"></script>
+<script>
+	window.onload = function(){
+		var text = $('#text');
+		var unfold = $('#unfold');
+		var allSapn = $('span' ,unfold);
+		var seekBox = $('#seekBox');
+		var ems = $('em',seekBox);
+		var seekCon= $('#seekCon');
+		var seekdiv = $( 'div',seekCon );		
+		var inputs = $('input',seekBox);
+		var seekText= $('.seekText',seekBox)[0];
+		var seekText2= $('.seekText2',seekBox)[0];
+		var replaceText= $('.replaceText',seekBox)[0];
+		var seekBtn = $('.seek',seekBox)[0];
+		var replaceBtn = $('.replace',seekBox)[0];
+		var is= $('i',seekBox)[0];
+		var closeBTN = $('strong',seekBox)[0];
+		//开关 判断点击的状态
+		var onoff = true;
+		function show(){
+			allSapn[1].style.display = "block";
+			allSapn[2].style.display = "block";
+		}
+		function hide(){
+			allSapn[1].style.display = "none";
+			allSapn[2].style.display = "none";
+		}
+		//查找替换文字
+		allSapn[0].onclick = function(){
+			if(onoff){
+				show();
+				onoff =false;
+			}else{
+				hide();
+				onoff =true;
+			} 
+		} 
+		for(var i = 1;i < allSapn.length;i++){
+			allSapn[i].onmouseover= function(){
+				this.className="orange";
+			}
+			allSapn[i].onmouseout = function(){
+				this.className="";
+			}
+		} 
+		//右上角查找替换按钮点击事件 查找替换方框的显示隐藏
+		function onstate(obj,i1,i2){
+			obj.onclick = function(){
+				hide();
+				seekBox.style.display = "block";
+				seekdiv[i1].style.display = "none";
+				seekdiv[i2].style.display = "block";
+				ems[i1].className ="";
+				ems[i2].className ="red";
+				onoff =true;
+			}
+		}
+		onstate(allSapn[1],1,0);
+		onstate(allSapn[2],0,1);
+		//查找替换按钮 选项卡封装
+		for(var i=0 ; i<ems.length;i++){
+			ems[i].index = i;
+			ems[i].onclick = function(){
+				for(var i=0 ; i<ems.length;i++){
+					ems[i].className ="";
+				}
+				this.className ="red";
+				if(this.index%2==0){
+					seekdiv[0].style.display = "block";
+					seekdiv[1].style.display = "none"; 
+				}else{
+					seekdiv[1].style.display = "block";
+					seekdiv[0].style.display = "none";
+				}
+			}
+		}
+		/*ems[0].onclick = function(){
+			ems[0].className ="red";
+			ems[1].className ="";
+			seekdiv[0].style.display = "block";
+			seekdiv[1].style.display = "none";
+		}
+		ems[1].onclick = function(){
+			ems[1].className ="red";
+			ems[0].className ="";
+			seekdiv[1].style.display = "block";
+			seekdiv[0].style.display = "none";
+			/*if(!state){
+				//如何消除查找里的背景颜色？？？？？？？？？？？？？
+				text.style.background = "#fff";
+			}*/
+		 
+		//X号关闭查找替换文本框
+		closeBTN.onclick = function(){
+			seekBox.style.display = "none";
+		}
+		//查找替换文字
+		/*
+			查找：文本框输入内容
+				输入的内容与页面的文字对比	
+					输入的为空 弹出
+					查找不到 弹出
+					查找到 查找到的文字背景变色 
+					再次查找 之前的颜色消失 		
+		*/
+		/*
+			替换：
+				之前查找的文字颜色消失
+				第一个框输入文本 
+					做判断 看是否是原页面里的文字
+				第二个框输入文字
+					如果为空 提示
+					如果文字是原文本中存在的文字 后面输入的文字替换前面的 再给原文本
+				*/
+		 //查找文字
+		var state = true;
+		var ptext= text.innerHTML;//文本赋给变量存储 全局变量
+		seekBtn.onclick =function(){ 
+			var seekCon = seekText.value; //文本框的内容赋给变量存储 
+			if(!seekCon){
+				alert('请输入内容');
+				return;
+			}
+			if( ptext.indexOf(seekCon) == -1){//indexOf 查找整个字符串里某字符串在其中的位置（下标） 如果找不到 则返回-1
+				alert('查找不到');
+				return;
+		    }		 
+			text.innerHTML = ptext.split(seekCon).join('<i>'+seekCon+'</i>');
+			state = false;	 
+			seekText.value= ''; 	//点击完成之后 文本框内容清除		
+		}  
+		//替换文字   注意用trim去空格
+		replaceBtn.onclick =function(){  
+			var seekCon2 = seekText2.value; //查找文本
+			var replaceCon =  replaceText.value;//替换的文本内容 
+			if( replaceCon == "" || seekCon2 ==""){
+					alert('查找和替换都要输入哦');
+					return;
+				};			
+			if(ptext.indexOf(seekCon2) == -1){
+					alert('查找不到此内容 请重新输入');
+					return;
+				}  
+			text.innerHTML = ptext.split(seekCon2).join(replaceCon);//拼接以替换文本框里的内容拼接	
+			ptext =ptext.split(seekCon2).join(replaceCon);	//ptext 全局变量 将拼接后的内容再赋给原始的  
+			seekText2.value= ''; 
+			replaceText.value='';//点击完之后 文本框的内容都清空
+		}
+	}
+</script>
+</head>
+
+<body>
+<section id="wrap">
+	<p id="text">一本写满离奇故事的笔记，传了数代人。笔记早已残破不堪，当中的故事早已难辨真假。但无论是故事，还是真正的传奇，笔记透露出的信息，足以让人回味无穷。</p>
+    <p id="unfold">
+    	<span>展开</span>
+        <span>查找</span>
+        <span>替换</span>
+    </p>
+	<div id="seekBox">
+    	<p>
+            <em class="red">查找</em>
+            <em>替换</em>
+        </p>
+        <div id ="seekCon">
+        	<div>
+                 <input type="text" class="seekText"/>
+                 <input type="button" class="seek"  value="查找"> 
+            </div> 
+            <div>
+                 <input type="text" class="seekText2">
+                 <input type="text" class="replaceText"> 
+                <input type="button" class="replace"  value="替换"> 
+             </div>
+         </div>
+         <strong class = "close">X</strong>
+    </div>
+</section>
+</body>
+</html>

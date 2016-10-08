@@ -1,0 +1,184 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>文字搬运工</title>
+<style>
+*{ 
+	margin:0;
+ 	padding:0; 
+ 	list-style:none
+}
+input {
+	outline:none;
+}
+#box{ 
+	margin:30px auto; 
+	width:980px; 
+	background-color:#FFFBF9; 
+	border:5px solid #BCC1C4; 
+	height:310px;
+}
+.fl{ 
+	float:left; 
+	margin:5px; 
+	border:1px dotted #c90; 
+	height:300px;
+}
+.one{ 
+	background-color: #F0EED7; 
+	width:380px;
+}
+textarea{ 
+	background-color: #F0EED7; 
+	width:380px; 
+	height:300px; 
+	outline:none; 
+	resize:none;
+	font-size:18px;
+}
+.two{
+	width:160px;
+}
+.two input{
+	width:100px; 
+	height:30px; 
+	line-height:30px; 
+	text-align:center;
+}
+.two p{
+	margin:10px 0;
+	text-align:center;
+}
+.three{ 
+	background-color: #FAF5C6; 
+	width:380px;
+}
+#speedLi{ 
+	height:10px; 
+	width:140px;
+	margin:10px auto; 
+	height:10px; 
+	opacity:0;
+ }
+#speedLi li{
+	width:10px; 
+	height:10px; 
+	margin:0 2px; 
+	background:#ccc; 
+	float:left;
+	}
+#btn {
+	background:red;
+	opacity:0.8;
+	color: #fff;
+}
+#btn:hover {
+	opacity:1;
+}
+#speedLi li.active{
+	background: #f90;
+}
+</style>
+</head>
+<script src="tools/tools.js"></script>
+<script src="tools/FZ.js"></script>
+<script>
+	window.onload = function(){
+		var text = $('#text');
+		var btn = $('#btn');
+		var numtex = $('#numtex');
+		var speedLi = $('#speedLi');
+		var allLI = $('li',speedLi);
+		var showTex = $('#showTex');
+		/*
+		步骤：
+				点击按钮：
+					开启定时器：
+					numtex 获取左边文字的宽度
+					speedLi 显示 且每个li交替active
+					左边的文字一个个的减少 右边的文字一个个的增加 即截取左边的文字 赋给右边
+				定时器结束：
+					ul隐藏
+					numtex显示页数分之页数
+					左边文字清空 
+					右边文字为左边文字
+				再次点击：
+				左边的移动到右边 右边的文字清空
+		*/
+		var timer = null; 
+		btn.onclick = function(){ 
+			 if(!text.value){
+				alert("请输入内容");
+				return;
+			}
+			if(timer){//清除定时器  有问题？？
+				return;
+			} 
+			//自定义属性 按钮 当为true 输入的内容为空 不进行计时器 当为true的时候 开启计时器 等计时器挺值的时候 状态改为false
+//			if (!text.value) {
+//				alert("请输入内容");
+//				btn.onOff = false;
+//				return;//停止函数的执行
+//			}
+//			if (btn.onOff) { //false的时候 
+//				return;
+//			}
+//			console.log(btn.onOff);//首次是undefined
+//			btn.onOff = true;	
+			//上面是按钮状态 
+			var n=0; //记录定时器
+			var str =""; //右边 字符串
+			var textCon = text.value;  //存储文本域的文本
+			var len =textCon.length;  //左边文本长度
+			numtex.innerHTML = 0+"/"+len;//初始页码显示
+			FZ(btn,'opacity',500,0.5,'linear'); //按钮的透明度变化	
+			FZ(speedLi,'opacity',500,1,'linear');	//ul的透明度变化
+			timer=setInterval(function(){ 
+				str += text.value.substring(0,1)//右边的字符是从每次左边改变后的字符串截取第一个				
+				text.value=text.value.substring(1)//左边的字符是左边的字符截取第一位之后的所有字符  
+				showTex.innerHTML=str;//赋值给右边的文本框				
+				n++;
+				numtex.innerHTML = n+"/"+len;//页数
+				for (var i = 0; i < allLI.length; i++) {
+					allLI[i].style.background = "";
+				}			
+				allLI[n%allLI.length].style.background = "#f90";
+				if(n>len-1){
+					clearInterval(timer);
+					timer = null;
+					FZ(speedLi,'opacity',500,0,'linear');
+					FZ(btn,'opacity',500,0.8,'linear');
+					//btn.onOff = false;	//按钮状态 计时器停止的时候				
+				} 
+			},100); 
+		} 		
+	}
+</script>
+<body>
+
+<div id="box">
+	<div class="fl one">
+		<textarea id="text" cols="30" rows="10">一本写满离奇故事的笔记，传了数代人。笔记早已残破不堪，当中的故事早已难辨真假。但无论是故事，还是真正的传奇，笔记透露出的信息，足以让人回味无穷。</textarea>
+	</div>
+	<div class="fl two">
+		<p><input type="button" value="start" id="btn"/></p>
+		<p id="numtex">0/0</p>
+		<div></div>
+		<ul id="speedLi">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<div class="fl three" id="showTex"></div>
+</div>
+</body>
+</html>

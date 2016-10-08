@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>消除表情小游戏</title>
+<style>
+        body,
+        p,
+        h2 {
+            margin: 0;
+            padding: 0;
+        }
+       
+        #bigbox {
+            width: 1000px;
+            margin: 30px auto;
+        }
+       
+        #bigbox .top {
+            text-align: center;
+            line-height: 45px;
+        }
+       
+        #bigbox .content {
+            width: 1000px;
+            height: 450px;
+        }
+       
+        #bigbox .left {
+            width: 80px;
+            float: left;
+            border: 1px solid darkgrey;
+            border-right: none;
+            line-height: 35px;
+            background: orange;
+            padding: 10px;
+            color: #fff;
+        }
+       
+        #bigbox .right {
+            width: 800px;
+            height: 450px;
+            left: 100px;
+            border: 1px solid darkgrey;
+            position: relative;
+            top: 0;
+        }
+       
+        #bigbox img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+</style>
+<script src="../tools/FZ.js"></script>
+<script src="../tools/tools.js"></script>                
+<script>  
+ function getClass(obj, name) {
+            var arry = [];
+            for (var i = 0; i < obj.length; i++) {
+                    if (obj[i].className == name) {
+                            arry.push(obj[i]);
+                    }
+            }
+            return arry;
+    }  
+	//抖动函数
+  function shake(obj, attr, speed, callBack) { //抖动
+	if(obj.timer) return; // 如果定时器还在运行则不执行函数
+	var n = 0; // 变量 n 用来控制数组的第 n 项
+	var arr = []; // 生成空的数组用来储存 设置的抖动范围
+	for(var i = speed; i > 0; i -= 3) {
+		arr.push(-i, i)
+	}
+	arr.push(0); //循环生成数组内容 并在数组的最后一个值加入 0 时期在最后回到初始位置
+	var num = parseFloat(getStyle(obj, attr)); //获取 obj[attr] 的值 
+	obj.timer = setInterval(function() { //生成定时器
+		obj.style[attr] = num + arr[n] + 'px'; //把数组的 第n个值 赋给 obj[attr]
+		n++; // 增加n 值 为下次获取 数组的下一个值
+		if(n > arr.length - 1) {
+			clearInterval(obj.timer); //如果循环到数组的最后一个值 则停止定时器 并清空 obj.timer 的值
+			obj.timer = null;
+			if(typeof callBack === 'function') {
+				callBack();
+			};
+		}
+	}, 30)
+};
+
+    window.onload = function() {
+        var Start =$('#btn');
+        var Bigbox = $("#bigbox");
+        var Divs =$("div",Bigbox);
+        var Right = $('.right')[0];
+        var Img =$("img",Right)[0];
+        var get = $("#get");
+        var Lost = $("#lost");
+        var num = 0;
+        var n = 0;
+        var e=0;
+        //初始化方法；图片的位置
+        function init() {
+            var num = Math.ceil(Math.random() * 5);
+            var left = Math.round(Math.random() * 600);
+            Img.src = "img/"+num+".png" ;//初始化开始；
+            Img.style.left = left + "px";//初始化图片位置
+        }
+        //开始游戏按钮的方法
+        Start.onclick = function() {
+            if (Start.onOff) {
+                return;
+            };
+            Start.onOff = true;//为真的时候 是已经被点击了
+            Start.value = "游戏进行中......"; //点击后变成游戏状态;
+            init();//初始状态
+            Img.onOff = true;//图片的状态
+            click(Img);//点击图片
+        }
+        function click(obj) {//点击图片处理  点击不中
+            obj.onOff = true;
+            obj.onmousedown = function() { //点击方法；
+                num++;
+                Score.innerHTML = num + "分"; //得分计数；
+                var th = this;//存this值
+                this.src =  "img/6.png" ;//未点击中。。。
+                clearInterval(obj.timer); //关闭定时器。 
+                shake(this, "left", function() {//抖动函数
+                    th.style.display = "none";
+                    th.style.top = 430 + "px";
+                    obj.onOff = false;
+                    start(obj); //重新开启定时器；
+                });
+            }
+            start(obj); //未点中的方法；继续下落图片
+        } 
+        function start(obj) {//图片下落函数
+            if (obj.onOff) {
+                FZ(obj, "top", 2000, 430,'linear', function() {
+                    n++;  
+                    if(n>=5){                    	
+                    	alert('游戏失败')
+                    	clearInterval(timer); 
+                    	Start.value ='游戏开始'; 
+                    	n=0;
+                    }
+                    Lost.innerHTML = n + "分"; //失分计数                    
+                    obj.style.top = 0;
+                    init();//初始图片的位置
+                    shake(Right,"top",20);
+                    click(obj);
+                });
+            }else {
+                FZ(obj, "top", 2000, 430, 'linear',function() {
+                    obj.style.display = "block";
+                    obj.style.top = 0;
+                    init();
+                    click(obj);
+                });
+            }
+        }
+    }
+</script>
+</head>
+<body>
+        <div id="bigbox">
+            <div class="top">
+                    <h2>你的鼠标有多快？</h2>
+                    <p>游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去!!</p>
+                    <input type="button" value="开始游戏" id="btn">
+            </div>
+            <div class="content">
+                    <div class="left">
+                            <p>得分:<span id="get">0分</span></p>
+                            <p>失分:<span id="lost">0分</span></p>
+                    </div>
+                    <div class="right">
+                            <img src="" />
+                    </div>
+            </div>
+        </div>
+</body>
+

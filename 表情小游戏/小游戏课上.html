@@ -1,0 +1,142 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>妙味课堂-JS4课练习-游戏：你的鼠标有多快？</title>
+<style>
+body { background:#f1f1f1; font-family:微软雅黑; font-size:16px; user-select: none; }
+#box { width:800px; height:450px; border:1px solid #066; background:#FFF; margin:20px auto 0; position:relative; top:0; left:0; }
+#fraction { width:130px; border:1px solid #066; position:relative; top:-1px; left:-152px; background:#FFC; padding:10px; }
+#fraction p { margin:0; font-family:微软雅黑; font-size:16px; line-height:30px; }
+
+#alert { text-align:center; }
+#qq img{
+	position: absolute;
+	left: 0px;
+	top:0px;
+}
+</style>
+<script src="mTween3.js"></script>
+<script src="tools.js"></script>
+<script>
+//抖动函数
+//		function shake(obj,attr,speed,callBack){
+//			if(obj.timer1) return;//停止狂点
+//			var arr = [];//声明一个空数组 用来存放抖动的幅度
+//			for(var i = speed; i>0; i-=3){
+//				arr.push(i,-i);//往数组中追加元素  存放的数字是 正负数字 大的数字到小数字 
+//			}
+//			arr.push(0);//最后一个为0 让元素回到最初始的位置
+//			var begin =parseInt(getStyle(obj,attr));//获取元素的起始位置
+//			var n = 0; //n记录定时器的开启次数
+//			obj.timer1 = setInterval(function(){//timer 元素身上的自定义属性 类似变量 用来存放定时器编号 每次调用都开启的是一个编号
+//				//定时器开启之后 每隔一定的时间执行里面的代码 但是编号一直是一个
+//				obj.style[attr] = begin +arr[n]+'px';//每次定时器开启的时候 元素的位置
+//				n++;
+//				if(n>arr.length-1){
+//					clearInterval(obj.timer1);//停止当前的计时器
+//					obj.timer1 = null;//清除计时器
+//					if(typeof callBack == 'function'){
+//						callBack();
+//					}
+//				}
+//			},16)
+//		}
+
+	window.onload = function(){
+		var btn = $("#btn");  //按钮
+		var runImg = $("#runImg"); //要运动的图片
+		var box = $("#box");//抖动的box
+		var allP = $("p",$("#fraction"));
+		var t =3000;
+		var winNum = 0;  //得分
+		var loseNum = 0; //失分
+		var totalWinNum = 30;
+		var totalLoseNum = 10;
+		function init(){//初始位置函数
+			winNum = 0;
+			loseNum = 0;
+			allP[0].innerHTML = '得分：'+0+' 分';
+			allP[1].innerHTML = '失分：'+0+' 分';
+			btn.disabled = false;//disabled 表示禁用 按钮的状态改成可以点击的
+			runImg.style.top = 0;	//图片拉回到最初的位置
+			t=3000;//最后t回到初始的
+		}
+
+		function fn(){//递归函数 自由掉落 没有点击中图片的时候 
+			runImg.style.top = 0;	//图片初始位置
+			var l = Math.round( Math.random() * 776 ); //随机一个left值 0 - 776
+			runImg.style.left = l + "px";			
+			var n = Math.round( Math.random()*10 )+1;//随机1- 11的数
+			runImg.src = "./image/"+n+".png"; //随机的是图片的地址src
+			//图片运动起来
+			t -= 500;//掉落的速度越来越快 即时间越来越短
+			if( t <= 100 ){
+				t = 100;
+			}
+			MTween(runImg,{top:426},t,"linear",function (){	//执行了这个回调函数，说明没点到
+				shake( box,"top",30,function (){//运动到底部后 box抖动 抖动之后
+					loseNum++; //失分加1
+					allP[1].innerHTML = '失分：'+loseNum+' 分';
+					if( loseNum >= totalLoseNum ){//失分大于给定的游戏总分的时候 失败
+						alert("game over!");
+						init();//所有的的都回到初始的状态
+					}else{
+						fn();//自己调用自己 再从初始掉落
+					}
+
+				} )
+			})	
+		}
+
+		btn.onclick = function (){
+			this.disabled = true;//按钮点击之后 不成不可点击的状态
+			fn();//执行图片掉落函数
+		};
+
+		//点中图片
+		runImg.onmousedown = function (){
+			if( this.timer1) return; //抖动函数的定时器开启的话 不执行下面的代码	防止狂点 保证抖动函数只有一个定时器在运动	
+			//先要停止运动
+			//timer = null;？？？？
+			clearInterval(this.timer);//点击图片的时候 停止mt的运动函数定时器				
+			this.src = "./image/bad.png";//图片变成另外一张
+			shake(this,"left",20,function (){//抖动图片
+				winNum++;//得分加1
+				allP[0].innerHTML = '得分：'+winNum+' 分';
+				if( winNum >= totalWinNum ){//当大于总的规定得分 游戏结束
+					alert("您赢了");
+					init();//一切回到初始的状态
+				}else{
+					fn();//否则继续执行掉落
+				}
+					
+			});
+		};
+
+	};
+
+</script>
+</head>
+
+<body>
+
+<div id="alert">
+	<h2>你的鼠标有多快？</h2>
+  <p>游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去！！</p>
+  <input type="button" value="开始游戏" id="btn" />
+</div>
+
+<div id="box">
+	<div id="fraction">
+	  	<p>得分：0 分</p>
+	  	<p>失分：0 分</p>
+	  </div>
+  <div id="qq">
+  	<img src="./image/1.png" id="runImg" />
+  </div>
+</div>
+
+</body>
+</html>

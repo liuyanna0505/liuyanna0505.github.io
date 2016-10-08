@@ -1,0 +1,178 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>文字搬运工2</title>
+<style>
+*{ 
+	margin:0;
+ 	padding:0; 
+ 	list-style:none
+}
+input {
+	outline:none;
+}
+#box{ 
+	margin:30px auto; 
+	width:980px; 
+	background-color:#FFFBF9; 
+	border:5px solid #BCC1C4; 
+	height:310px;
+}
+.fl{ 
+	float:left; 
+	margin:5px; 
+	border:1px dotted #c90; 
+	height:300px;
+}
+.one{ 
+	background-color: #F0EED7; 
+	width:380px;
+}
+textarea{ 
+	background-color: #F0EED7; 
+	width:380px; 
+	height:300px; 
+	outline:none; 
+	resize:none;
+	font-size:18px;
+}
+.two{
+	width:160px;
+}
+.two input{
+	width:100px; 
+	height:30px; 
+	line-height:30px; 
+	text-align:center;
+}
+.two p{
+	margin:10px 0;
+	text-align:center;
+}
+.three{ 
+	background-color: #FAF5C6; 
+	width:380px;
+}
+#speedLi{ 
+	height:10px; 
+	width:140px;
+	margin:10px auto; 
+	height:10px; 
+	opacity:0;
+	-transition: 0.8s;
+ }
+#speedLi li{
+	width:10px; 
+	height:10px; 
+	margin:0 2px; 
+	background:#ccc; 
+	float:left;
+	}
+#btn {
+	background:red;
+	opacity:0.8;
+	color: #fff;
+}
+#btn:hover {
+	opacity:1;
+}
+#speedLi li.active{
+	background: #f90;
+}
+</style>
+</head>
+<script src="tools/tools.js"></script>
+<script src="tools/FZ.js"></script>
+<script>
+	window.onload = function(){
+		var text = $('#text');
+		var btn = $('#btn');
+		var numtex = $('#numtex');
+		var speedLi = $('#speedLi');
+		var allLI = $('li',speedLi);
+		var showTex = $('#showTex');
+		/* 左边是文本域 可以输入编辑文字 value；  右边是div 只可以修改 innerHTML
+		步骤：
+				点击按钮：
+					开启定时器：
+					numtex 获取左边文字的宽度
+					speedLi 显示 且每个li交替active
+					左边的文字一个个的减少 右边的文字一个个的增加 即截取左边的文字 赋给右边
+				定时器结束：
+					ul隐藏
+					numtex显示页数分之页数
+					左边文字清空 
+					右边文字为左边文字
+				再次点击：
+				左边的移动到右边 右边的文字清空
+		*/
+		var timer = null; 
+		btn.onclick = function(){ 
+			 if(!text.value){
+				alert("请输入内容");
+				return;
+			}
+			if(timer){//清除定时器  有问题？？
+				return;
+			} 
+			var old = 0;//记录上一个的li
+			var n=0; //记录定时器
+			var str =""; //右边 字符串
+			var textCon = text.value;  //存储文本域的文本
+			var len =textCon.length;  //左边文本长度
+			numtex.innerHTML = 0+"/"+len;//初始页码显示
+			FZ(btn,'opacity',500,0.5,'linear'); //按钮的透明度变化	
+			//speedLi.style.opacity = 1;
+			//ul的显示隐藏可以 ，也可以用css3里的transition
+			FZ(speedLi,'opacity',500,1,'linear');	//ul的透明度变化
+			timer=setInterval(function(){ 
+				n++;	//n ： 1 2 3 。。。		
+				text.value = textCon.slice(n);//左边文本截取 每次截取都是从原始文本身上截取 从1开始
+				showTex.innerHTML = textCon.slice(0,n);//右边文字生成 每次都是从原文本0的位置截取  n=1是截取第一个字符。。
+				numtex.innerHTML = n+"/"+len;//页数				
+//				for (var i = 0; i < allLI.length; i++) {
+//					allLI[i].style.background = "";
+//				}	
+	            allLI[old%allLI.length].style.background = '';//上一个li的背景颜色清空
+				allLI[n%allLI.length].style.background = "#f90";//当前的li赋背景
+				old = n; //old等于上一次的li对应的下标值
+				if(n>len-1){
+					clearInterval(timer);
+					timer = null;//每次停止计时器  但是元素身上的计时器编码还在 所以在走完最后一个的时候 需要将所有的计时器编码都清除
+					FZ(speedLi,'opacity',500,0,'linear');
+					//speedLi.style.opacity = 0;
+					FZ(btn,'opacity',500,0.8,'linear');
+					//btn.onOff = false;	//按钮状态 计时器停止的时候				
+				} 
+			},100); 
+		} 		
+	}
+</script>
+<body>
+
+<div id="box">
+	<div class="fl one">
+		<textarea id="text" cols="30" rows="10">一本写满离奇故事的笔记，传了数代人。笔记早已残破不堪，当中的故事早已难辨真假。但无论是故事，还是真正的传奇，笔记透露出的信息，足以让人回味无穷。</textarea>
+	</div>
+	<div class="fl two">
+		<p><input type="button" value="start" id="btn"/></p>
+		<p id="numtex">0/0</p>
+		<div></div>
+		<ul id="speedLi">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<div class="fl three" id="showTex"></div>
+</div>
+</body>
+</html>

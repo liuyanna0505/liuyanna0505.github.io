@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body ,
+			p {
+				margin: 0;
+			}
+			section{
+				width:600px;
+				margin:0 auto;
+				text-align: center;
+			}
+			p{
+				height:30px;
+				line-height: 30px;;
+			}
+			input{
+				width:160px;
+				height:30px;
+				font:14px/30px "宋体";
+			}
+			#scoreBox {
+				margin-top:20px;
+				position:relative;
+				width:600px;
+				height:600px;
+			}
+			#left{
+				position:absolute;
+				left:-100px;
+				top:0;
+				width:100px;
+				height:100px;
+				border:1px solid #000;
+				background:coral;
+			}
+			#left span{
+				margin-top:20px;
+				display:block;
+				font:18px/24px '宋体';
+				color:blue;
+			}
+			#right{
+				position:absolute; 
+				top: 0;
+				border:1px solid #000;
+				width:600px;
+				height:400px; 
+			}
+			#right img{
+				position:absolute;
+				left:0;
+				top:24px;
+			}
+		</style>
+		<script src="../tools/tools.js"></script>
+		<script src="../tools/FZ.js"></script>
+		<script>
+			//抖动函数
+			function shake(obj,attr,speek){
+				var arr = [];
+				for( var i = speek; i >= 0 ; i-=3 ){
+					arr.push(i,-i);
+				}
+				arr.push(0);
+				var n = 0;
+				var start = parseInt(getStyle(obj,attr));
+				obj.timer = setInterval(function (){
+					obj.style[attr] = start + arr[n] + "px";
+					n++;
+					if( n > arr.length ){
+						clearInterval(obj.timer);
+					} 
+				},16)
+			} 
+			/*
+				点击按钮：
+					图片开始掉落 每次掉落一个 定时器
+					不再次点击的话 图片掉到底部 抖动整个box块
+					再次点击中图片的话 图片抖动 并变成黑丝的 消失		  
+			*/
+			window.onload = function(){
+				 var btn = $('input',$('#top'))[0];
+				 var left =$('#left');
+				 var allSpan =$('span',left);
+				 var right =$('#right');
+				 var imgs = $('img',right)[0];
+				 var num = 0;
+				 var n = 0;
+				 var onoff = true;
+				 function random(){//图片初始位置随机化
+				 	var lefts = Math.round(Math.random()*600);
+				 	var num =  Math.ceil(Math.random()*5);
+				 	imgs.src="img/"+num+".png"
+				 	imgs.style.left = lefts + "px";
+				 }				 
+				 btn.onclick = function(){				 	
+				 	btn.value = '游戏进行中...';		
+				 	
+				 	random();				 	
+				 }
+				function move(){
+					setInterval(function(){
+				 		FZ(imgs,'top',100,400,'linear',function(){
+				 			n++;
+				 			
+				 		})
+				 	},500)
+				} 
+			}
+		</script>
+	</head>
+	<body>
+		<section>
+			<div id="top">
+				<h2>你的鼠标有多快</h2>
+				<p>游戏说明：点击“开始右下”，随机掉下QQ表情，点中它，千万别让它掉下去！！</p>
+				<input type ="button" value = "开始游戏">
+			</div>
+			<div id = "scoreBox">
+				<div id = 'left'>
+					<span>得分：0分</span>
+					<span>失分：0分</span>
+				</div>
+				<div id ="right">
+					<!--<img src="img/img1.png">-->
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

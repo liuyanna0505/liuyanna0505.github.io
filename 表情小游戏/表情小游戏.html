@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+</head>
+<style>
+	*{
+		margin:0;
+		padding:0;
+		
+	}
+	ul{
+		list-style:none;
+	}
+	input{
+		outline:none;
+	}
+	#section {
+		position:relative;
+		width:900px;
+		height:578px;
+	}
+	#title {
+		height:24px;
+		font:24px/24px "宋体";
+		color:#000;
+		text-align: center;
+	}
+	#state{
+		height:54px;
+		font:16px/54px "宋体";
+		color:#000;
+		text-align: center;
+	}
+	#btn{
+		position:absolute;
+		left:590px;
+		top:85px;
+		height:19px;
+	}
+	#box{
+		position:absolute;
+		left:250px;
+		bottom:0;
+		width:800px;
+		height:450px;
+		border:1px solid #006666;
+		overflow:hidden;
+	}
+	#score{
+		position:absolute;
+		left:99px;
+		top:126px;
+		padding:10px;
+		width:130px;
+		height:60px;
+		border:1px solid #006666;
+		border-right:none;
+		background:orange;
+	}
+	#score p{
+		height:30px;
+		font:14px/30px "宋体";
+		color:#000;
+	}
+	#box img {
+		position:absolute;
+		top:-60px;
+		left:0;
+		width:24px;
+		height:24px;
+		padding:20px;
+	}
+</style>
+<script src="tools.js"></script>
+<script src="MTween3.js"></script>
+
+<script> 
+	window.onload = function(){
+		var btn = $("#btn");
+		var img = $("#img");
+		var lose = $("#lost");
+		var get = $("#get");
+		var timerA;
+		var m =0; //记录得分
+		var n=0; //记录失分
+		var t = 5000;
+		function interval(){
+			timerA = setInterval(function(){
+				move();
+			},t+500)
+		}
+		
+		function move(){
+			var num = (Math.ceil(Math.random()*6))+1 //所及获取1-7之间的随机数
+			img.src = 'img/'+num+'.png';
+			img.style.left = num*60 + "px";
+			MTween(img,{top:450},t,"linear",function(){ 
+				if(!onOff){
+					img.style.top = "-60px";
+					shake(box,"top",30,function(){
+						n++;//失分加1，必须放回调函数中
+						if(n===2){
+							alert("失败了，重新开始吧");
+							clearInterval(timerA);
+							//左边得分失分都清为零，且赋值
+							n=0;
+							lose.innerHTML = n;
+							m=0;
+							get.innerHTML = m;
+							btn.value = "开始游戏";
+						}
+						lose.innerHTML = n;
+					});
+				}
+			})
+		}
+		
+				
+		btn.onclick = function(){
+			this.value = "游戏进行中……";
+			move();
+			interval();
+			
+		}
+		img.onmousedown = function(){
+			onOff = true;
+			clearInterval(timerA);
+			img.src = "img/black.png";
+			shake(img,"left",20,function(){
+				t-=500;
+				img.style.top = "-60px";
+				m++;
+				get.innerHTML = m;
+				onOff = false;
+				move();
+				interval();
+			})
+		}
+		
+	}
+</script>
+<body>
+	<section id="section">
+		<p id="title">你的鼠标有多快？</p>
+		<p id="state">游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去！！</p>
+		<input type="button" value="开始游戏" id="btn" />
+		<div id="score">
+			<p>得分:<span id="get">0分</span></p>
+            <p>失分:<span id="lost">0分</span></p>
+		</div>
+		<div id="box">
+			<img src="img/1.png" alt="" id="img"/>
+			 
+		</div>
+	</section>
+</body>
+</html>

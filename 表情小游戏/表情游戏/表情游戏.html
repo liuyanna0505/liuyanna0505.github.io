@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+        <meta charset="UTF-8">
+        <title>消除表情小游戏</title>
+        <style>
+                body,
+                p,
+                h2 {
+                        margin: 0;
+                        padding: 0;
+                }
+               
+                #bigbox {
+                        width: 1000px;
+                        margin: 30px auto;
+                }
+               
+                #bigbox .top {
+                        text-align: center;
+                        line-height: 45px;
+                }
+               
+                #bigbox .content {
+                        width: 1000px;
+                        height: 450px;
+                }
+               
+                #bigbox .left {
+                        width: 80px;
+                        float: left;
+                        border: 1px solid darkgrey;
+                        border-right: none;
+                        line-height: 35px;
+                        background: #FF69B4;
+                        padding: 10px;
+                        color: #fff;
+                }
+               
+                #bigbox .right {
+                        width: 800px;
+                        height: 450px;
+                        left: 100px;
+                        border: 1px solid darkgrey;
+                        position: relative;
+                        top: 0;
+                }
+               
+                #bigbox .right img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        cursor: pointer;
+                }
+        </style>
+                
+                <script>
+                        function getClass(obj, name) {
+                                var arry = [];
+                                for (var i = 0; i < obj.length; i++) {
+                                        if (obj[i].className == name) {
+                                                arry.push(obj[i]);
+                                        }
+                                }
+                                return arry;
+                        }
+
+                        function getStyle(obj, attr) {
+                                return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+                        }
+
+                        function doMove(obj, attr, dir, target, endfn) {
+                                dir = parseInt(getStyle(obj, attr)) < target ? dir : -dir;
+                                clearInterval(obj.timer);
+                                obj.timer = setInterval(function() {
+                                        var speed = parseInt(getStyle(obj, attr)) + dir;
+                                        if (speed > target && dir > 0 || speed < target && dir < 0) {
+                                                speed = target;
+                                        }
+                                        obj.style[attr] = speed + "px";
+                                        if (speed == target) {
+                                                clearInterval(obj.timer);
+                                                endfn && endfn();
+                                        }
+                                }, 30);
+                        }
+
+                        function doShake(obj, attr, endfn) {
+                                var num = 0;
+                                var arr = [];
+                                var speed = parseInt(getStyle(obj, attr));
+                                for (var i = 20; i >= 0; i -= 2) {
+                                        arr.push(i, -i);
+                                }
+                                clearInterval(obj.shake);
+                                obj.shake = setInterval(function() {
+                                        obj.style[attr] = speed + arr[num] + "px";
+                                        num++;
+                                        if (num == arr.length) {
+                                            num = 0;
+                                            clearInterval(obj.shake);
+                                            endfn && endfn();
+                                        }
+                                }, 30);
+                        }
+                        window.onload = function() {
+                                var oStart = document.getElementById("btn");
+                                var oBigbox = document.getElementById("bigbox");
+                                var aDivs = oBigbox.getElementsByTagName("div");
+                                var oRight = getClass(aDivs, "right")[0];
+                                var aImg = oRight.getElementsByTagName("img")[0];
+                                var oScore = document.getElementById("score");
+                                var oLost = document.getElementById("lost");
+                                var num = 0;
+                                var n = 0;
+                                //初始化方法；
+                                function init() {
+                                        var num = Math.ceil(Math.random() * 5);
+                                        var left = Math.round(Math.random() * 600);
+                                        aImg.src = "img/"+num+".png" //初始化开始；
+                                        aImg.style.left = left + "px";
+                                }
+                                //开始游戏按钮的方法
+                                oStart.onclick = function() {
+                                        if (oStart.onOff) {
+                                                return
+                                        };
+                                        oStart.onOff = true;
+                                        oStart.value = "游戏进行中......"; //点击后变成游戏状态;
+                                        init();
+                                        aImg.onOff = true;
+                                        demo(aImg);
+                                }
+
+                                function demo(obj) {
+                                        obj.onOff = true;
+                                        obj.onclick = function() { //点击方法；
+                                                num++;
+                                                oScore.innerHTML = num + "分"; //得分计数；
+                                                var that = this;
+                                                this.src ="img/6.png" 
+                                                clearInterval(obj.timer); //关闭定时器。
+                                                doShake(this, "left", function() {
+                                                        that.style.display = "none";
+                                                        that.style.top = 430 + "px";
+                                                        obj.onOff = false;
+                                                        start(obj); //重新开启定时器；
+                                                });
+                                        }
+                                        start(obj); //未点中的方法；
+                                }
+
+                                function start(obj) {
+                                        if (obj.onOff) {
+                                                doMove(obj, "top", 2, 430, function() {
+                                                        n++;
+                                                        oLost.innerHTML = n + "分"; //失分计数
+                                                        obj.style.top = 0;
+                                                        init();
+                                                        doShake(oRight, "top");
+                                                        demo(obj);
+                                                });
+                                        } else {
+                                                doMove(obj, "top", 2, 430, function() {
+                                                        obj.style.display = "block";
+                                                        obj.style.top = 0;
+                                                        init();
+                                                        demo(obj);
+                                                });
+                                        }
+                                }
+                        }
+                </script>
+        </head>
+
+        <body>
+                <div id="bigbox">
+                        <div class="top">
+                                <h2>你的鼠标有多快？</h2>
+                                <p>游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去!!</p>
+                                <input type="button" value="开始游戏" style="cursor: pointer;" id="btn">
+                        </div>
+                        <div class="content">
+                                <div class="left">
+                                        <p>得分:<span id="score">0分</span></p>
+                                        <p>失分:<span id="lost">0分</span></p>
+                                </div>
+                                <div class="right">
+                                        <img src="" />
+                                </div>
+                        </div>
+
+                </div>
+        </body>
+
