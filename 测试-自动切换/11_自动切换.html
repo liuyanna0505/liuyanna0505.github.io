@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>无标题文档</title>
+    <style>
+    body,
+    ul,
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    
+    img {
+        display: none;
+        float: left;
+    }
+    
+    #box {
+        width: 314px;
+        height: 148px;
+        margin: 30px auto;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    #list2 {
+        display: none;
+    }
+    
+    #box div {
+        width: 292px;
+        height: 104px;
+        border: 1px solid #c6c6c6;
+        padding: 10px 0 0 10px;
+    }
+    
+    #top {
+        height: 30px;
+    }
+    
+    span {
+        display: block;
+        width: 80px;
+        height: 30px;
+        border: 1px solid #c6c6c6;
+        float: left;
+        font-size: 14px;
+        line-height: 30px;
+        text-align: center;
+        color: #737373;
+        border-bottom: none;
+    }
+    
+    .show {
+        width: 80px;
+        height: 30px;
+        border: 1px solid #c6c6c6;
+        border-bottom: none;
+        color: #000;
+        background: #ccc;
+    }
+    
+    ul {
+        float: left;
+        width: 170px;
+        height: 96px;
+    }
+    
+    li {
+        width: 170px;
+        height: 31px;
+        font-size: 12px;
+        line-height: 30px;
+        margin: 0 0 1px 1px;
+        background: #dee7e7;
+        list-style: none;
+    }
+    
+    li a {
+        text-decoration: none;
+        color: #8c9191;
+        padding-left: 7px;
+    }
+    
+    .active {
+        background: #636363;
+        display: block;
+    }
+    
+    .active a {
+        color: #fff;
+    }
+    
+    .show1 {
+        display: block;
+    }
+    
+    .hide {
+        display: none;
+    }
+    </style>
+    <script src='./tools.js'></script>
+</head>
+
+<body>
+    <div id="box">
+        <p id="top">
+            <span class="show">专题</span>
+            <span>视频</span>
+            <span>视频1</span>
+        </p>
+        <div class="show1 oDiv" id="bottom">
+            <img class="active" src="image_two/list1.jpg" alt="" />
+            <img src="image_two/list2.jpg" alt="" />
+            <img src="image_two/list1.jpg" alt="" />
+            <ul>
+                <li class="active"><a href="#">奇虎360纽交所上市11</a></li>
+                <li><a href="#">2011年IT领袖峰会</a></li>
+                <li><a href="#">CCBN召开 助三网融合</a></li>
+            </ul>
+        </div>
+        <div class="hide oDiv" id="bottom1">
+            <img src="image_two/list2.jpg" alt="" class="active" />
+            <img src="image_two/list1.jpg" alt="" />
+            <img src="image_two/list2.jpg" alt="" />
+            <ul>
+                <li class="active"><a href="#">奇虎360纽交所上市22</a></li>
+                <li><a href="#">2011年IT领袖峰会</a></li>
+                <li><a href="#">CCBN召开 助三网融合</a></li>
+            </ul>
+        </div>
+        
+	<div class="hide oDiv" id="">
+		<img src="image_two/list2.jpg" alt="" class="active" />
+		<img src="image_two/list1.jpg" alt="" />
+		<img src="image_two/list2.jpg" alt="" />
+		<img src="image_two/list2.jpg" alt="" />
+		<img src="image_two/list2.jpg" alt="" />
+		<ul>
+			<li class="active" ><a href="#">奇虎360纽交所上市33</a></li>
+			<li><a href="#">2011年IT领袖峰会</a></li>
+			<li><a href="#">CCBN召开 助三网融合</a></li>
+			<li><a href="#">CCBN召开 1</a></li>
+			<li><a href="#">CCBN召开 2</a></li>
+		</ul>
+	</div>
+    </div>
+    <script>
+    	/*
+			需求：
+				1. 自动切换每个栏目中的额项，和切换栏目
+				2. 鼠标移入停止切换，鼠标移开继续切换
+				3. 切换栏目标题停止切换，并切换换栏目
+
+			步骤：
+				1. 自动切换每个栏目的每一项
+
+					开定时器
+
+				2. 切换到下一个栏目
+					什么时候怎么切换到下一个栏目上？？？
+						当前这个栏目切换完成，切换到下一个
+							怎么判断出当前这这个栏目切换完了？？？
+								通过下标
+								if(下标>length-1){
+									切换下一个
+								}
+
+				2. 鼠标移入到某一项 
+					停止切换，当前这个元素加上class
+						怎么停止切换？
+							停止自动播放的定时器
+    	*/
+
+    	var box = $("#box");
+
+    	var oDiv = $(".oDiv",box);  //下面两个栏目
+
+    	//获取第一个栏目中的li
+    	var first_li = $("li",oDiv[0]);
+    	var two_li = $("li",oDiv[1]);
+
+    	//上面所有的span
+    	var spanBtns = $("span",$("#top"));
+
+
+    	
+    	var timer = null;
+
+    	var n = 0;  //切换到下一个li的
+
+    	/*
+			fn这个函数要接收一个参数，参数为栏目的div
+    	*/
+
+    	//怎么知道该进行下一个栏目的切换
+    	var statuss = 0;  //默认是第一个
+
+    	/*
+			status是一个关键字
+				http://www.w3school.com.cn/jsref/prop_win_status.asp
+    	*/
+
+    	var prevLiIndex = 0; //上一个li的值
+    	var prevDivIndex = 0; //上一个div
+
+
+    	function fn(d){
+    		//通过传进来的父级的div，找到这个div下所有的li
+    		var currentLi = $("li",d);
+
+    		//把全部的li的class干掉，让第一个li的class为active
+    		for( var i = 0; i < currentLi.length; i++ ){
+    			currentLi[i].className = ""
+    		}
+    		currentLi[n].className = "active";
+
+    		timer = setInterval(function (){
+
+	    		if( n >= currentLi.length-1 ){
+	    			clearInterval(timer);
+
+	    			statuss++;  //决定切换到一个div的
+
+	    			oDiv[prevDivIndex].style.display = "none";
+	    			spanBtns[prevDivIndex].className = "";
+
+	    			/*
+						statuss 0 1 0 1 0 1 0 1 0
+
+	    			*/
+
+	    			oDiv[statuss%oDiv.length].style.display = "block";
+	    			spanBtns[statuss%oDiv.length].className = "show";
+
+	    			n = 0;
+	    			prevLiIndex = 0;
+
+	    			//调用函数的时候，其实就开走下一个div中li了
+
+	    			fn(oDiv[statuss%oDiv.length]);
+
+	    			prevDivIndex = statuss%oDiv.length;
+
+
+	    		}else{
+
+		    		n++;
+		    		currentLi[prevLiIndex].className = "";
+		    		currentLi[n].className = "active";
+
+		    		prevLiIndex = n;
+
+
+	    		}
+	    	},500);	
+    	}
+
+    	fn(oDiv[0]);
+
+
+    	//给li添加事件处理程序
+
+    	//找到每一个div下所有的li
+    	for( var i = 0; i < oDiv.length; i++ ){
+    		var allLi = $("li",oDiv[i]);
+    		liHnadle(allLi,i)
+    	}
+
+    	function liHnadle(allLi,i){
+    		for( var j = 0; j < allLi.length; j++ ){
+    			allLi[j].index = j;
+    			allLi[j].onmouseover = function (){
+    				clearInterval(timer);
+
+    				//清空其他全部li的class
+    				//找到当前鼠标移入到li所在的div下所有的li
+
+    				allLi[prevLiIndex].className = "";
+
+    				this.className = "active";
+
+    				//记录n的值
+    				n = this.index;
+
+    				prevLiIndex = this.index;
+    			};
+
+    			allLi[j].onmouseout = function (){
+    				fn(oDiv[i]);	
+    			};
+    		}
+    	}
+
+    	//上面的栏目的按钮鼠标移入要切换
+
+    	for( var i = 0; i < spanBtns.length; i++ ){
+    		spanBtns[i].index = i;
+    		spanBtns[i].onmouseover = function (){
+    			clearInterval(timer);
+    			oDiv[prevDivIndex].style.display = "none";
+    			spanBtns[prevDivIndex].className = "";
+
+    			oDiv[this.index].style.display = "block";
+    			this.className = "show";
+
+    			prevDivIndex = this.index;
+
+    			//要让当前这个按钮对应的div下的li，第一个li有一个class为actvie
+
+    			if( this.index !== statuss%oDiv.length ){
+
+	    			var currentDivLi = $("li",oDiv[this.index]);
+	    			
+	    			for( var i = 0; i < currentDivLi.length; i++ ){
+	    				currentDivLi[i].className = "";
+	    			}
+	    			currentDivLi[0].className = "active";
+
+	    			statuss = this.index;  //更新一下statuss，目的是当鼠标移开的时候，从这个div继续往下一个div上切换
+
+	    			n = 0;
+    			}
+
+
+    			//怎么判断出来，鼠标移动到的是当前正在播放的div
+
+    		};
+    		spanBtns[i].onmouseout = function (){
+    			fn( oDiv[this.index] );	
+    		};
+    	}
+
+
+
+    </script>
+</body>
+
+</html>

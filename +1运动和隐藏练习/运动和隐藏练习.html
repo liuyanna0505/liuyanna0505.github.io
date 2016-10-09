@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				margin:0;
+			} 
+			p{
+				margin:0;
+			}
+			section{
+				position:relative;
+				margin:200px 0 10px 10px; 
+				height: 60px;
+				width:600px;
+				border:1px solid #000;
+			}
+			#box{	
+				position:absolute;
+				top:0;
+				left:0;							
+				background:deepskyblue;
+				height: 60px;
+				width:0;
+			}
+			div{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width:60px;
+				height:60px;
+				text-align: center;
+				color:#000;
+				font:16px/50px '微软雅黑';				
+				opacity:1;				
+			}
+		</style>
+		<script src="MTween3.js"></script>
+		<script src="tools.js"></script>
+		<script>
+			window.onload =function(){
+				var section= $("section")[0];			
+				var len = 10;
+				var boxInner = '<p id="box"></p>';
+				//生成div
+				for(var i=0;i<len;i++){
+					boxInner += '<div style="left:'+ (i*60) +'px;">+1</div>';
+				}
+			    section.innerHTML = boxInner; 
+			    var box = $("#box");
+				var allDiv = $('div');
+				/*
+				 	步骤：
+				 		1，点击box
+				 			box的背景从左向右逐渐颜色变为蓝色 之后消失
+				 			box中的每个div
+				 				小div从左到右向上运动并且逐渐消失 然后恢复到原来的样式
+				 
+				 */
+				var timer1 = null;
+				var timer = null;
+				var n= 0;  				
+				section.onclick = function(){	
+					if (timer) { //false的时候 
+ 						return;
+ 					};  					
+					timer = setInterval(function(){ 						
+						//颜色的运动  走完一次总共需要1000hs 
+						MTween(box,{width:600},500,'linear',function(){
+							 MTween(box,{opacity:0},500,'linear',function(){
+							  	box.style.width = 0;
+							  	box.style.opacity = 1;
+							 })
+						});						
+						MTween(allDiv[n],{top:-50,opacity:0},500,'linear',function(){
+							clearTimeout(timer1);//每次都清除下延时器  n每次都加 要不就开启了多个 需要在外面声明 否则会出错 
+							console.log(timer1);
+						    timer1 =setTimeout(function(){//小块的再次恢复初始的样式 需要延时
+								for(var i =0; i < len;i++){
+									allDiv[i].style.top = '0px';
+									allDiv[i].style.opacity = 1;
+								}
+								if(n>len-1){								
+									timer = null;//运动完所有的小块 将所有的timer设为null 再次点击 再次赋值
+									n=0;
+								}	
+							},500);	 //1000ms这样颜色刚好消失	
+						});
+						n++; 
+						if(n>len-1){	//停止计时器						
+							clearInterval(timer);
+						} 
+					},100); 
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<section>
+			<p id = 'box'></p>				<!--<div>+1</div>
+				<div>+1</div>
+				<div>+1</div>
+				<div>+1</div>
+				<div>+1</div>-->
+			
+		</section>
+	</body>
+</html>
