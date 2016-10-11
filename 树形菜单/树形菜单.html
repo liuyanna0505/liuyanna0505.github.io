@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    #oUl li ul {
+        display: block;
+    }
+    
+    #oUl li ul.show {
+        display: block;
+    }
+    
+    #oUl li ul.hide {
+        display: none;
+    }
+    
+    #oUl li h3 span {
+        padding: 0px 10px;
+    }
+    
+    #oUl li h3.padL {
+        padding-left: 30px;
+    }
+    
+    li {
+        list-style: none;
+    }
+    </style>
+    <script>     
+    //通过数据结构，来生成html结构，当数据发生改变的时候，不用修改html，web界面就可以改动了 
+    //每一层都有一个标题
+        var arr = [
+            {
+                title:"第一级",
+                child:[
+                    {
+                        title:"第二级",
+                        child:[
+                            {
+                                title:"第三级"
+                            },
+                            {
+                                title:"第三级",
+                                child:[
+                                	{
+                                		title:"第四级"
+                                	}                                	
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title:"第二级"
+                    }
+                ]
+            },
+            {
+                title:"第一级"
+            },
+            {
+                title:"第一级",
+                child:[
+                    {
+                        title:"第二级"
+                    },
+                    {
+                        title:"第二级"
+                    }
+                ]
+            }
+        ]
+	window.onload = function(){
+		var str = '';
+		str += "<ul>"
+		for(var i = 0; i < arr.length;i++){//第一层
+			str +="<li><h2>"+arr[i].title+'</h2>';//第一层标题
+		    	if(arr[i].child){//类型是 对象不为空 则为true  布尔值：0 ，空字符串 “” ， null， undefined ，NaN都是false
+		    		str += '<ul>';//第一层每个对象里存在child的时候 生成结构
+		    		for(var j = 0; j <arr[i].child.length;j++){	//第一层child 数组 for循环里面的对象
+		    			str +="<li><h2>"+arr[i].child[j].title+'</h2>';//第一层每个child里标题
+	    					if(arr[i].child[j].child){//第二层判断是否有child
+	    						 str +='<ul>';
+		    						for(var m = 0; m < arr[i].child[j].child.length;m++){
+		    							str +="<li><h2>"+arr[i].child[j].child[m].title+'</h2>';
+		    								if(arr[i].child[j].child[m].child){
+		    									str +='<ul>';
+		    									for(var n = 0; n < arr[i].child[j].child[m].child.length;n++){
+		    										str +="<li><h2>"+arr[i].child[j].child[m].child[n].title+'</h2>';
+		    										str +='</li>'; 
+		    									}
+		    									 str +='</ul>';
+		    								}
+		    							str +='</li>'; 
+		    						}
+								str +='</ul>';
+	    					}		    				
+		    			str +='</li>'; 
+		    		}	
+		    		str  += '</ul>'	
+		    	} 
+			str +='</li>'; 
+		}
+		str +="</ul>";
+		document.body.innerHTML = str;
+		
+ /*		function listMeu(arr){	
+			var str = '<ul>';	
+ 			for(var i = 0;i<arr.length;i++){
+ 				str += '<li><h2>'+arr[i].title+'</h2>';
+ 				if(arr[i].child){
+ 					listMeu(arr[i].child);
+ 				}
+ 				str += '</li>';
+ 			}
+ 			str+='<ul>';	 
+ 			return str;
+  		}
+ 		*/
+		 
+	}
+        
+
+    </script>
+</head>
+
+<body>
+   <!--  <ul>  
+       <li>
+           <h2>第一级</h2>
+           <ul>
+               <li>
+                   <h2>第二级</h2>
+                   <ul>
+                       <li>
+                           <h2>第三级</h2>
+                           <ul>
+                           		<h2>第四级</h2>
+                           </ul>
+                       </li>
+                   </ul>
+               </li>
+               <li>
+                   <h2>第二级</h2>
+               </li>
+           </ul>
+       </li>
+       <li>
+           <h2>第一级</h2>
+       </li>
+       <li>
+           <h2>第一级</h2>
+           <ul>
+               <li>
+                   <h2>第二级</h2>
+               </li>
+               <li>
+                   <h2>第二级</h2>
+               </li>
+               <li>
+                   <h2>第二级</h2>
+               </li>
+           </ul>
+       </li>
+   </ul> -->
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+<style type="text/css">
+li{
+	list-style: none;
+}	
+#list li ul{
+	display: none;
+}
+#list li ul.show{
+	display: block;
+}
+#list li ul.hide{
+	display: none;
+}
+</style>	
+</head>
+<script>
+window.onload = function (){
+	 var arr = [
+            {
+                title:"第一级",
+                child:[
+                    {
+                        title:"第二级",
+                        child:[
+                            {
+                                title:"第三级"
+                            },
+                            {
+                                title:"第三级",
+                                child:[
+                                	{
+                                		title:"第四级"
+                                	}                                	
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title:"第二级"
+                    }
+                ]
+            },
+            {
+                title:"第一级"
+            },
+            {
+                title:"第一级",
+                child:[
+                    {
+                        title:"第二级"
+                    },
+                    {
+                        title:"第二级"
+                    }
+                ]
+            }
+        ]	
+	// 自动生成页面结构 
+	var list = document.getElementById("list");//获取第一层的ul
+    function fn(list, arr) { 
+        for (var i = 0; i < arr.length; i++) {
+            var oLi = document.createElement("li");  //创建元素对象 li
+            var oH2 = document.createElement("h2");  //元素对象  h2
+            var newSpan = document.createElement("span");//创建元素对象 span
+            newSpan.innerHTML ='+';// 在新生成的span标签里添加
+            oH2.innerHTML = arr[i].title;//h2标题里添加上对应的文字标题 
+            oLi.appendChild(oH2);//把生成的都追加到LI的尾部
+            if (arr[i].child) { //如果结构里h2有兄弟
+                oH2.innerHTML = "<span>+</span>" + oH2.innerHTML; //h2前面加上展开的+和里面的标题内容
+                var newlist = document.createElement("ul");  //创建下层的ul元素对象 存放之后的li
+                fn(newlist, arr[i].child);	//自己调用自己，newlist是新建的ul  用来存放下层的li
+                oLi.appendChild(newlist);     //追加li下的ul，进行添加新的节点
+            }  
+            list.appendChild(oLi)  //将追加之后的li放到ul里
+        }
+    }
+    //函数里有两个参数 第一个参数是当容器 存储生成的li 第二参数是对象里的循环数组用来找里面的内容决定生成什么样的结构
+    fn(list, arr);	//调用函数	 
+	//操作交互性
+	/* 	点击的都是h2  收缩的是h2并列ul下的内容   即ul的展开 收缩 	，在此之前需要先判断ul是否存在	*/
+	var h2= list.getElementsByTagName("h2");//获取页面所有的h2标签
+    for( var i = 0; i < h2.length; i++ ){
+        h2[i].onclick = function (){
+           var nextSibling = this.nextElementSibling;
+           var firstChild = this.firstElementChild; //span +号
+           //要找到当前这个h2的父级的父级下的所有的ul
+           var parentParent = this.parentNode.parentNode; //ul  h2的第一层父集是li 第二层父级是li父级ul
+           var allUl = parentParent.getElementsByTagName("ul"); //找到第一次ul下的li下的与h2并级所有的ul
+           var allSpan = parentParent.getElementsByTagName("span");//找到第一次ul下的li下的与h2下所有的span            
+           for( var i = 0; i < allUl.length; i++ ){//循环所有的ul
+              if( allUl[i] !== nextSibling ){//判断 当前的ul是不是与当期前h2并列的兄弟 不是的话其他的ul隐藏 
+                 allUl[i].style.display = "none"; 
+                 allSpan[i].innerHTML = "+";
+              }
+           }
+           if( nextSibling ){//当前的H2的兄弟ul存在的话 判断其显示隐藏  
+                if( nextSibling.style.display === "block" ){//如果当前的Ul显示 让其隐藏 前面+
+                    nextSibling.style.display = "none";
+                     firstChild.innerHTML = "+";
+                }else{
+                    nextSibling.style.display = "block"; //否则 当前的兄弟ul显示 前面——
+                    firstChild.innerHTML = "-";
+                }
+           }
+
+        };
+    }  
+}
+</script>	
+<body>
+	<ul id="list">
+		<!--<li>
+			<h2>第一级菜单</h2>
+			<ul>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul>
+						<li>
+							<h2>第三级菜单</h2>
+							<ul>
+								<li>
+									<h2>第四级菜单</h2>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<h2>第一级菜单</h2>
+			<ul>
+				<li>
+					<h2>第二级菜单</h2>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<h2>第一级菜单</h2>
+			<ul>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+					<ul>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+						<li>
+							<h2>第三级菜单</h2>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h2>第二级菜单</h2>
+				</li>
+			</ul>
+		</li>-->
+	</ul>
+</body>
+</html>

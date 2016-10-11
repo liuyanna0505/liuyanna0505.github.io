@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    #oUl li ul {
+        display: block;
+    }
+    
+    #oUl li ul.show {
+        display: block;
+    }
+    
+    #oUl li ul.hide {
+        display: none;
+    }
+    
+    #oUl li h3 span {
+        padding: 0px 10px;
+    }
+    
+    #oUl li h3.padL {
+        padding-left: 30px;
+    }
+    
+    li {
+        list-style: none;
+    }
+    </style>
+    <script>     
+    //通过数据结构，来生成html结构，当数据发生改变的时候，不用修改html，web界面就可以改动了 
+    //每一层都有一个标题
+        var arr = [
+            {
+                title:"第一级",
+                child:[
+                    {
+                        title:"第二级",
+                        child:[
+                            {
+                                title:"第三级"
+                            },
+                            {
+                                title:"第三级",
+                                child:[
+                                	{
+                                		title:"第四级"
+                                	}                                	
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title:"第二级"
+                    }
+                ]
+            },
+            {
+                title:"第一级"
+            },
+            {
+                title:"第一级",
+                child:[
+                    {
+                        title:"第二级"
+                    },
+                    {
+                        title:"第二级"
+                    }
+                ]
+            }
+        ]
+    
+	window.onload = function(){		
+//		 function fn(shuzu){
+//        var str = "";
+//          for( var i = 0; i < shuzu.length; i++ ){
+//            str += "<li><h2>"+shuzu[i].title+"</h2>";
+//            str += "</li>";
+//          }//单独生成一些li
+//          return str;
+//      }
+  		function listMeu(arr){	
+			var str = '<ul>';	
+ 			for(var i = 0;i<arr.length;i++){
+ 				str += '<li><h2>'+arr[i].title+'</h2>';
+ 				if(arr[i].child){
+ 					str += listMeu(arr[i].child);//回调函数  生成一些li
+ 				};
+ 				str += '</li>';
+ 			}
+ 			str += '</ul>';	 
+ 			return str;
+  		};
+  		document.body.innerHTML = listMeu(arr); 		 
+	}
+        
+
+    </script>
+</head>
+
+<body>
+   <!--  <ul>  
+       <li>
+           <h2>第一级</h2>
+           <ul>
+               <li>
+                   <h2>第二级</h2>
+                   <ul>
+                       <li>
+                           <h2>第三级</h2>
+                           <ul>
+                           		<h2>第四级</h2>
+                           </ul>
+                       </li>
+                   </ul>
+               </li>
+               <li>
+                   <h2>第二级</h2>
+               </li>
+           </ul>
+       </li>
+       <li>
+           <h2>第一级</h2>
+       </li>
+       <li>
+           <h2>第一级</h2>
+           <ul>
+               <li>
+                   <h2>第二级</h2>
+               </li>
+               <li>
+                   <h2>第二级</h2>
+               </li>
+               <li>
+                   <h2>第二级</h2>
+               </li>
+           </ul>
+       </li>
+   </ul> -->
+</body>
+
+</html>

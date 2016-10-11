@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#oUl li ul{
+				display: none;
+			}
+			#oUl li ul.show{
+				display: block;
+			}
+			#oUl li ul.hide{
+				display: none;
+			}
+			#oUl li h3 span{
+				padding: 0px 10px;
+			}
+			#oUl li h3.padL{
+				padding-left: 30px;
+			}
+			li{
+				list-style: none;
+			}
+		</style>
+		<script>
+
+var arr = [
+    {
+        title : "第一级菜单",
+        child : [
+        	{title:"第二集菜单"},
+            {title:"第二集菜单",
+            child:[
+            		{title:"第三集菜单"},
+            		{title:"第三集菜单",
+            		child:[
+            			{title:"第四集菜单"},
+            			{title:"第四集菜单"},
+            			{title:"第四集菜单"}
+            		]
+            		},
+            		{title:"第三集菜单"}
+            	]
+        	},
+            {
+            	title:"第二集菜单",
+            	child:[
+            		{title:"第三集菜单"},
+            		{title:"第三集菜单"}
+            	]
+            }
+        ]
+    },
+    {
+        title : "第一级菜单",
+        child : [
+        	{title:"第二集菜单"},
+            {title:"第二集菜单",
+            child:[
+            		{title:"第三集菜单"},
+            		{title:"第三集菜单",
+            		child:[
+            			{title:"第四集菜单"},
+            			{title:"第四集菜单"},
+            			{title:"第四集菜单"}
+            		]
+            		},
+            		{title:"第三集菜单"}
+            	]
+        	},
+            {
+            	title:"第二集菜单",
+            	child:[
+            		{title:"第三集菜单"},
+            		{title:"第三集菜单"}
+            	]
+            }
+        ]
+    },
+    {
+    	title:"第一集菜单"
+         
+    }
+];
+
+//先渲染第一层
+
+
+
+    window.onload = function(){
+        var oUl = document.getElementById("oUl");
+
+        fn(arr,oUl);
+        /*
+            arr:循环的数据 类型：Array
+            parent:循环数组，每次生成的li要放入的容器
+        */
+        function fn(arr,parent){
+                
+            for( var i = 0; i < arr.length; i++ ){
+                var newLi = document.createElement("li");
+                var newH2 = document.createElement("h2");
+                var newSpan = document.createElement("span");
+                newSpan.innerHTML = "+";
+                
+
+                newLi.appendChild(newH2);
+
+                if( arr[i].child ){
+                    var newUl = document.createElement("ul");
+
+                    fn(arr[i].child,newUl);// 调用这个函数之后，newUl中就有了通过数据生成的li
+                    newLi.appendChild(newUl);
+
+                    //newH2.appendChild(newSpan);  //<h2><span>+</span></h2>
+                }
+
+                if( arr[i].child ){
+                    newH2.appendChild(newSpan);  //<h2><span>+</span></h2>
+                }
+
+                newH2.innerHTML += arr[i].title;
+
+                //每一次生成li的时候，都需要添加到某个父级中
+
+                 parent.appendChild(newLi);
+
+            }
+
+        }
+
+
+        //交互行为
+
+        /*
+            点击h2，显示隐藏h2下一个兄弟节点ul
+        */
+
+        func(oUl);
+
+        //子元素li
+       function func(oUl){
+            var child_li = oUl.children;
+            for( var i = 0; i < child_li.length; i++ ){
+                var h2 = child_li[i].firstChild;
+                h2.onclick  =function (){
+                    var nextSibling = this.nextElementSibling;
+                    var firstChild = this.firstElementChild; //span
+
+                    //隐藏之前已经展开的ul  思维：要找到元素
+
+                    //要找到到当前这个h2的父级的父级下的所有的ul
+                    var parentParent = this.parentNode.parentNode; //ul
+                    var allUl = parentParent.getElementsByTagName("ul");
+                    var allSpan = parentParent.getElementsByTagName("span");
+
+                    for( var i = 0; i < allUl.length; i++ ){
+                        //要把当前ul排除掉
+                      if( allUl[i] !== nextSibling ){
+                         allUl[i].style.display = "none";
+                         allSpan[i].innerHTML = "+";
+                      }
+                    }
+
+                    if( nextSibling ){
+                        if( nextSibling.style.display === "block" ){
+                            nextSibling.style.display = "none";
+                             firstChild.innerHTML = "+";
+                        }else{
+                            nextSibling.style.display = "block";
+                            firstChild.innerHTML = "-";
+                            //当操作的ul显示的时候，  哪一个ul展开了，就给这个ul下的子元素li里面的第一个元素h2添加点击处理
+
+                            func(nextSibling);
+                        }
+                    }   
+                };
+            }
+       }
+
+        /*
+            哪一个ul展开了，就给这个ul下的子元素li里面的第一个元素h2添加点击处理
+
+            ul
+                li
+                    h2
+
+            没有展开的不添加点击处理
+        */
+
+
+
+        /*for( var i = 0; i < allH2.length; i++ ){
+            allH2[i].onclick = function (){
+               var nextSibling = this.nextElementSibling;
+               var firstChild = this.firstElementChild; //span
+
+               //隐藏之前已经展开的ul  思维：要找到元素
+
+               //要找到到当前这个h2的父级的父级下的所有的ul
+               var parentParent = this.parentNode.parentNode; //ul
+               var allUl = parentParent.getElementsByTagName("ul");
+               var allSpan = parentParent.getElementsByTagName("span");
+                
+               for( var i = 0; i < allUl.length; i++ ){
+                    //要把当前ul排除掉
+                  if( allUl[i] !== nextSibling ){
+                     allUl[i].style.display = "none";
+                     allSpan[i].innerHTML = "+";
+                  }
+               }
+
+               if( nextSibling ){
+                    if( nextSibling.style.display === "block" ){
+                        nextSibling.style.display = "none";
+                         firstChild.innerHTML = "+";
+                    }else{
+                        nextSibling.style.display = "block";
+                        firstChild.innerHTML = "-";
+                    }
+               }
+
+            };
+        } */  
+
+
+
+    };
+
+
+		</script>
+	</head>
+
+	<body>
+		<ul id="oUl">
+           <!--  <li>
+                <h2><span>+</span>标题</h2>
+                <ul>
+                    <li><h2></h2></li>
+                </ul>
+            </li> -->
+        </ul>
+	</body>
+</html>
