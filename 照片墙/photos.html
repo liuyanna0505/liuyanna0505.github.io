@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>照片墙</title>
+<link rel="stylesheet" type="text/css" href="css/photos.css"/>
+<script src="js/MTween2.js"></script>
+<script>
+	//碰撞检测
+	function getRect(obj){
+		return obj.getBoundingClientRect();
+	}
+	//碰撞函数
+	function duang(obj1,obj2){
+		var obj1Info = getRect(obj1);
+		var obj2Info = getRect(obj2);
+		//obj1 
+		var obj1L = obj1Info.left;
+		var obj1R = obj1Info.right;
+		var obj1T = obj1Info.top;
+		var obj1B = obj1Info.bottom;
+		//obj2 
+		var obj2L = obj2Info.left;
+		var obj2R = obj2Info.right;
+		var obj2T = obj2Info.top;
+		var obj2B = obj2Info.bottom;
+		//条件是碰撞上的 需要四个方向都满足 
+		if(obj1R >= obj2L && obj1L <= obj2R && obj1B >= obj2T && obj1T <= obj2B){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	window.onload = function(){
+		var btn = document.getElementById('btns');
+		var oUl = document.getElementsByTagName("Ul")[0];
+		var allLi = oUl.getElementsByTagName('li'); //动态获取		 
+		var pos = [];//存放的是位置  数组对象
+		var minZindex = 2;//定位的层级 
+		for( var i = 0; i < allLi.length; i++ ){  
+			var l = allLi[i].offsetLeft;//每个li距离ul的left值
+			var t = allLi[i].offsetTop; //每个li距离ul的top值			 
+			pos.push({left:l,top:t})//存放的是每个li的位置 
+		}			 
+		// 	每个li的位置 相对于ul定位		 
+		for(var i=0;i<allLi.length;i++){//给每一个li定位	 
+			allLi[i].index = i; //下标值 
+			allLi[i].style.left = pos[i].left+'px';
+			allLi[i].style.top = pos[i].top+'px';
+			allLi[i].style.position = 'absolute'; 			 
+		}	
+		/*----------------随机打乱图片--------------*/
+		btn.onmousedown =function(ev){
+			ev.stopPropagation();//阻止事件冒泡
+		}
+		btn.onmouseup =function(ev){
+			ev.stopPropagation();//阻止事件冒泡
+		}		 
+		btn.onclick = function(){
+			
+			pos.sort(function (){    //随机数组  打乱的是位置
+				return 0.5-Math.random();	
+			}); 			
+			for( var i = 0; i < allLi.length; i++ ){ //运动的时候 每个li的位置应该和随机的保持一致 
+				//打乱   下标值 也要找到对应的    打乱之后运动到对应的位置 其索引值也跟着变了
+				//if(allLi[i].timer) return; 阻止狂点  mouve有问题 
+				MTween(allLi[i],pos[i],500,'linear');//运动的是数组里的每个li pos[i]是全局变量 				 
+			}  
+		}
+		//也可以打乱下标
+		
+		/*---------------------拖拽------------------------*/
+		//------找到最近的那个对象---------
+		function minDistance(obj){
+			var min = +Infinity;
+			var num = -1;
+			for(var i=0;i<allLi.length;i++){
+				if(obj !== allLi[i]){//碰撞的不是自己本身
+					if(duang(obj,allLi[i])){//	碰撞到了li 找距离最近的
+						var a = obj.offsetLeft - allLi[i].offsetLeft;
+						var b = obj.offsetTop - allLi[i].offsetTop;
+						var dis = a*a+b*b;//计算距离
+						if(min > dis){
+							min = dis;//存的是最近距离的那个值
+							num = i;//存的是下标
+						}
+					}					
+				}
+			}
+			if(num == -1){
+				return false;//没有找到的时候 
+			}else{
+				return allLi[num];//返回的是距离最近的那个li
+			}
+		}
+		//-----------碰撞运动---------- 
+		for(var i=0;i<allLi.length;i++){
+			 drag(allLi[i]);//传参 拖拽的是每一个li
+		}
+		function drag(obj){	
+			obj.onmousedown = function(ev){ 
+				var disX = ev.clientX - obj.offsetLeft; 
+				var disY = ev.clientY - obj.offsetTop;
+				obj.style.zIndex = minZindex++;//每次按下的时候 都提升当前运动元素的层级
+				var near = null;
+				document.onmousemove = function(ev){
+					obj.style.left = ev.clientX - disX + 'px';//距离ul左侧的距离
+					obj.style.top = ev.clientY - disY + 'px';//距离ul上侧的距离
+					obj.style.zIndex = minZindex++;//提升当前按下的li的层级
+					for(var i=0;i<allLi.length;i++){//暴力清空所有li碰撞时候的边框效果
+						allLi[i].className = '';
+					}
+					near = minDistance(obj);//找到最近的那个元素
+					if(near){//如果最近的那个元素存在 给其加上边框效果
+						near.className = 'actives';
+					}
+				};				
+				document.onmouseup = function(){
+					if(!near){		//	如果没有找到碰撞到的最近的对象，就把照片恢复到原来的位置
+						MTween(obj,pos[obj.index],500,'linear');
+					}else{		//	如果找到了 就交换位置
+						//obj.style.zIndex = minZindex++;
+						//near.style.zIndex = minZindex++;
+						var changeIndex = near.index;	//交换她们的索引值 交换位置
+						near.index = obj.index;   //把移动的那个元素的索引给到碰撞到的最近的元素
+						obj.index = changeIndex;    //将碰到的最近的那个元素的索引值给到移动元素
+						MTween(obj,pos[obj.index],500,'linear'); //移动元素运动 到碰撞到最近的元素的位置
+						MTween(near,pos[near.index],500,'linear'); //最近的那个元素运动到移动元素的位置
+						near.className = '';//将移动碰撞到的边框效果去掉
+					}					
+					document.onmousemove = document.onmouseup = null;	//取消事件绑定			
+				};
+				clearInterval(obj.timer);//停止计时器
+				return false;//阻止默认行为
+			}			
+		}				
+	}
+</script>
+</head>
+<body>
+<div class="main" id="mians">
+		<div class="inputs">
+        	<input type="button" value="随机"  id="btns"/>
+        </div>
+		<div class="bj" id="photos">
+        	<ul>
+            	<li>
+                	<img src="./img/1.jpg" />
+                </li>
+                <li>
+                	<img src="./img/2.jpg" />
+                </li>
+                <li>
+                	<img src="./img/3.jpg" />
+                </li>
+                <li>
+                	<img src="./img/4.jpg" />
+                </li>
+                <li class="margin1">
+                	<img src="./img/5.jpg" />
+                </li>
+                <li class="margin1">
+                	<img src="./img/6.jpg" />
+                </li>
+                <li class="margin1">
+                	<img src="./img/7.jpg" />
+                </li>
+                <li class="margin1">
+                	<img src="./img/8.jpg" />
+                </li>
+                <li class="margin1">
+                	<img src="./img/9.jpg" />
+                </li>
+                <li class="margin1">
+                	<img src="./img/10.jpg" />
+                </li>
+                <li class="margin1">
+                	<img src="./img/11.jpg" />
+                </li>
+                <li class="margin1">
+                	<img src="./img/12.jpg" />
+                </li>
+            </ul>
+        </div>
+</div>
+</body>
+
+</html>
