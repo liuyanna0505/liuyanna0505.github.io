@@ -1,78 +1,11 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>历史上的星期几</title>
-<script>
-	//会返回一个html结构
-	//默认选中的
-	function createOptionsHtml(start,end,select){
-		var yearOption = '';
-		for( var i = start; i >= end; i-- ){
-			if( i === select ){  //当前被选中的
-				yearOption += '<option selected>'+i+'</option>';
-			}else{
-				yearOption += '<option>'+i+'</option>'
-			}
-		}
-		return yearOption; //返回的是一个HTML结构
-	}
-	//获取星期的方法 
-	function weekDay(w){  //获取星期几函数
-		return ["日","一","二","三","四","五","六"][w];	
-	}
-	window.onload = function(){
-		var year = document.getElementById("year");
-		var month = document.getElementById("month");
-		var date = document.getElementById("date");
-		var week = document.getElementById("week");
-		var d = new Date(); //获取当前时间
-		var Y = d.getFullYear();//获取当前年
-		var M = d.getMonth()+1;//当前月  d.getMonth()是从0开始的 
-		var Ds = d.getDate();//当前日
-		
-		year.innerHTML = createOptionsHtml(2020,1970,Y);
-		month.innerHTML = createOptionsHtml(12,1,M);//获取的是当前月 1到12月 （0-11）
-		date.innerHTML = createOptionsHtml(31,1,Ds);
-		week.innerHTML = "星期"+weekDay(d.getDay());//星期
-		//当value值发生改变的时候，触发的事件 onchange			
-		year.onchange = function (){
-			//console.log( this.value );
-			d.setFullYear(this.value); //改变年份 将年份变为选中的年份
-			week.innerHTML = "星期"+weekDay(d.getDay()); //当前的星期根据上面改变的时间相对来变???其他的不是 为啥
-		};
-		month.onchange = function (){
-			console.log( this.value-1 );
-			d.setMonth(this.value-1);  //月份是从0开始
-			week.innerHTML = "星期"+weekDay(d.getDay());
-		};
-		date.onchange = function (){
-			d.setDate(this.value);
-			week.innerHTML = "星期"+weekDay(d.getDay());	
-		}
-	};
-</script>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title></title> 
 	</head>
 
 	<body>
-		<select id="year">
-			<!-- <option>2030</option>
-			<option selected>2029</option>
-			<option>....</option>
-			<option>1970</option> -->
-		</select>
-		<select  id="month">
-			<!-- <option>12</option>
-			<option>11</option>
-			<option>....</option>
-			<option>1</option> -->
-		</select>
-		<select id="date">
-			<!-- <option>31</option>
-			<option>30</option>
-			<option>....</option>
-			<option>1</option> -->
-		</select>
-		<p id="week">星期几</p>
+		<a href = 'https://github.com/liuyanna0505/liuyanna0505.github.io/tree/master/%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%9010%E4%B8%AAdiv'></a>	 
 	</body>
 </html>
