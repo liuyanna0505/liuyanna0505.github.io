@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#content {
+				padding: 20px;
+			}
+			#content div{
+				width: 59px;
+				height: 51px;
+				padding: 20px;
+				margin-bottom: 10px;
+				background: url(img/folder.png) no-repeat center;
+				position: relative;
+			}
+			#content div.active{
+				background: url(img/folder.png) #e0f0f0 no-repeat center;
+			}
+			#content div input{
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+		</style>
+		<script>
+			window.onload = function(){
+				var creat = document.getElementById('creat');
+				var delet = document.getElementById('delet');
+				var content = document.getElementById('content');
+				var allDiv  = content.getElementsByTagName('div');	//获取所有的div
+				var allInput = content.getElementsByTagName('input');//获取所有的input
+				for(var i =0; i< allDiv.length;i++){
+					allDiv[i].index = i;//保存下标值
+					allDiv[i].onmouseover = function(){		 
+						for(var i =0; i< allDiv.length;i++){
+							if(!allInput[i].checked){
+								allDiv[i].className = '';								
+								allInput[i].style.display = 'none';
+							}								
+						}//这一步可以不写 在移出的时候判断
+						this.className = 'active';
+						allInput[this.index].style.display = 'block';		 						
+					}						
+					allDiv[i].onmouseout = function(){ //移出的时候判断input框是否被点击了
+						if(allInput[this.index].checked){
+							this.className = 'active';
+							allInput[this.index].style.display = 'block';	
+						}else{
+							this.className = '';
+							allInput[this.index].style.display = 'none';
+						}
+					}
+				}
+				creat.onclick = function(){
+					var newDiv = document.createElement('div');	//创建div				
+					var inputs =  document.createElement('input');//创建input按钮									
+					inputs.type = 'checkbox';	//input的类型是选框
+					content.appendChild(newDiv);
+					newDiv.appendChild(inputs);	
+					newDiv.onmouseover = function(){//移入的时候 div背景颜色改变 input显示		 
+   						this.className = 'active';
+						inputs.style.display = 'block';		 						
+					}						
+					newDiv.onmouseout = function(){ //移出的时候判断input框是否被点击了
+						if(inputs.checked){ //如果选框被选中了 移出的时候 保持移入的效果
+							this.className = 'active';''
+							inputs.style.display = 'block';	
+						}else{
+							this.className = '';   //否则移出的时候 背景没有 选框隐藏
+							inputs.style.display = 'none';
+						}
+					}		
+				}				 
+				//删除文件夹  删除选中的文件夹 
+				delet.onclick = function(){  
+					for(var i =0; i< allInput.length;i++){
+						//选中几个删除几个
+						if(allInput[i].checked){ 
+							var parent  = allInput[i].parentNode; //找到input的父节点
+							content.removeChild(parent);  
+							i--;
+						}
+					}
+					 
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" id="creat" value="新建文件夹" />
+		<input type="button" id="delet" value="删除选中文件夹" />
+		<div id="content">
+			<div><input type="checkbox" style="display: none;"></div> 						 
+		</div>
+	</body>
+</html>

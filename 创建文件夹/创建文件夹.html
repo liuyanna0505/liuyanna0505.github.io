@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#content {
+				padding: 20px;
+			}
+			#content div{
+				width: 59px;
+				height: 51px;
+				padding: 20px;
+				margin-bottom: 10px;
+				background: url(img/folder.png) no-repeat center;
+				position: relative;
+			}
+			#content div.active{
+				background: url(img/folder.png) #e0f0f0 no-repeat center;
+			}
+			#content div input{
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+		</style>
+		<script>
+			eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('x.n=5(){3 a=7.g("c");3 6=7.r("p");a[0].j=5(){3 2=7.b(\'2\');3 4=7.b("c");4.q(\'o\',\'m\');2.f(4);6.f(2);2.l=5(){d.9=\'s\';4.k.e=\'y\'};2.z=5(){h(4.A){B}d.9=\'\';4.k.e=\'u\'}};a[1].j=5(){3 8=6.g(\'2\');t(3 i=0;i<8.w;i++){h(8[i].9){6.v(8[i])}}}};',38,38,'||div|var|check|function|con|document|divs|className|inputs|createElement|input|this|display|appendChild|querySelectorAll|if||onclick|style|onmouseover|checkbox|onload|type|content|setAttribute|getElementById|active|for|none|removeChild|length|window|block|onmouseout|checked|return'.split('|'),0,{}))
+
+		</script>
+	</head>
+	<body>
+		<input type="button" id="" value="新建文件夹" />
+		<input type="button" id="" value="删除选中文件夹" />
+		<div id="content">
+		</div>
+	</body>
+</html>

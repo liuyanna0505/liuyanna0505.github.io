@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0
+        }
+
+        
+
+        #small {
+        	width: 400px;
+        	height: 255px;
+            position: relative;
+            z-index: 1;
+            border:20px solid #000;
+            left:30px;
+            top:30px;
+        }
+
+        #float {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            background: red;
+            border: 1px solid #ccc;
+           	opacity: 0.5;
+        }
+
+        #big {
+            position: absolute;
+            top: 0;
+            left: 460px;
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            z-index: 1;;
+        }
+
+        #big img {
+            position: absolute;
+            z-index: 5
+        }
+    </style>
+    <script>
+    	/*
+			clientLeft 
+                https://developer.mozilla.org/zh-CN/docs/Web/API/Element/clientLeft
+
+            遇到一个新的方法或属性
+                1. 先查一下这个语言的规范是否有这个方法或属性的说明
+                2. 运行语言的环境是否支持
+                3. 支持的稳定性如何
+    	*/
+        window.onload = function(){
+            var float = document.getElementById("float"); //左侧遮罩层
+            var smallimg = document.getElementById("smallimg"); //左边的小图
+            var big = document.getElementById("big"); //右侧可视区域
+            var bigImg = big.getElementsByTagName("img")[0]; //左侧遮罩层
+
+            var small = document.getElementById("small");// 左侧的容器
+
+            //获取左边的边框
+
+            var smallborderL = parseInt(getComputedStyle(small)['border-left-width']);
+            var smallborderT = parseInt(getComputedStyle(small)['border-top-width']);
+
+            //遮罩层的宽高应该是多少？
+
+            //得到右侧可视区的宽高
+            var bigW = big.clientWidth;
+            var bigH = big.clientHeight;
+            //右侧大图的宽高
+            var bigImgW = bigImg.offsetWidth;
+            var bigImgH = bigImg.offsetHeight;
+            //左侧的小图的宽高
+            var smallImgW = smallimg.offsetWidth;
+            var smallImgH = smallimg.offsetHeight;
+
+            //左侧这招的宽高
+            float.style.width =  bigW/bigImgW * smallImgW + "px";
+            float.style.height = bigH/bigImgH * smallImgH + "px";
+
+            //遮罩层运动的最大距离
+            var float_maxJL_l = small.clientWidth - float.offsetWidth;
+             var float_maxJL_t = small.clientHeight - float.offsetHeight;
+
+            //右侧图片运动的最大距离
+
+            var bigImg_maxJL_l = bigImg.clientWidth - big.offsetWidth;
+             var bigImg_maxJL_t = bigImg.clientHeight - big.offsetHeight;
+
+
+
+            small.onmousemove = function (ev){
+                var l = ev.clientX - smallborderL - small.offsetLeft - float.offsetWidth/2;
+                var t = ev.clientY - smallborderT - small.offsetTop - float.offsetHeight/2
+
+                if( l < 0 ) l = 0;
+                if( t < 0 ) t = 0;
+
+                if( l > float_maxJL_l ) l = float_maxJL_l;
+                if( t > float_maxJL_t ) t = float_maxJL_t;
+
+                //求出来一个比例
+                var scaleL = l/float_maxJL_l;
+                var scaleT = t/float_maxJL_t;
+
+               float.style.left = l + "px";     
+               float.style.top = t  + "px"; 
+
+               bigImg.style.left = -scaleL * bigImg_maxJL_l + "px";
+               bigImg.style.top = -scaleT * bigImg_maxJL_t + "px";
+
+
+            };
+
+
+
+        };
+    </script>
+</head>
+<body>
+    <div id="small">
+        <div id="float"></div>
+        <img src="macbook-small.jpg" id="smallimg"/>
+    </div>
+    <div id="big">
+        <img src="macbook-big.jpg"/>
+    </div>
+</body>
+</html>

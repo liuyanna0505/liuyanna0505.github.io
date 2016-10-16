@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+ul li {
+    list-style: none;
+}
+.sl-wrap {
+    position: relative;
+    _zoom: 1;
+    line-height: 34px;
+    border-bottom: 1px solid #DDD;
+}
+
+.sl-key {
+    float: left;
+    width: 100px;
+    padding-left: 10px;
+}
+
+.sl-value {
+    margin-left: 110px;
+    padding-right: 130px;
+    padding-left: 10px;
+    overflow: hidden;
+    zoom: 1;
+}
+
+.sl-v-list {
+    overflow: hidden;
+    zoom: 1;
+    padding-top: 4px;
+}
+
+img {
+    border: none;
+}
+
+.sl-v-list ul {
+    float: left;
+    overflow: hidden;
+    zoom: 1;
+    position: relative;
+    height: 30px;
+}
+
+.sl-v-list li {
+    float: left;
+    _display: inline;
+    margin-right: 16px;
+    margin-bottom: 4px;
+    height: 26px;
+    line-height: 26px;
+}
+
+.sl-v-list li a {
+    float: left;
+    white-space: nowrap;
+    zoom: 1;
+    color: #005aa0;
+    text-decoration: none;
+}
+
+.crumbs-nav-item {
+    float: left;
+    margin-right: 8px;
+    margin-top: 5px;
+}
+
+.crumbs-nav-item .selector-set {
+    float: left;
+    margin-right: 5px;
+}
+
+.selector-set .ss-item {
+    position: relative;
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    border: 1px solid #DDD;
+    font-size: 12px;
+    vertical-align: top;
+    margin: 0 5px 5px 0;
+    padding: 0 26px 0 4px;
+    cursor: pointer;
+}
+
+.selector-set .ss-item b {
+    font-weight: 400;
+}
+
+.selector-set .ss-item em {
+    color: #e4393c;
+}
+
+.selector-set .ss-item i {
+    display: block;
+    position: absolute;
+    width: 25px;
+    height: 22px;
+    right: 0;
+    top: 0;
+    -background: url(http://misc.360buyimg.com/product/list/1.0.2/css/i/search.ele.png) no-repeat 7px -140px;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none
+}
+</style>
+<script>
+    /*
+     	步骤： 点击每个ul里的li时  点击当前的li隐藏  再次点击当前ul 里的其他li时 隐藏的li显示 当前点击的隐藏
+     		  box 里是点击的每层ul里的对应的li的内容     		 
+     
+     */
+	window.onload = function(){
+		var J_valueList = document.getElementsByClassName('J_valueList');//获取所有的ul
+		var sl_key = document.getElementsByClassName('sl-key');//获取类别名
+		var box = document.getElementById('box');
+		var box_div = box.children;//获取box下第一层的div
+		var is = box.getElementsByTagName('i');//获取每层div里的所有的em  X号
+		var sl_key = document.getElementsByClassName('sl-key');
+		console.log(box_div);
+		//获取每个ul下的li
+ 		for(var i =0;i<J_valueList.length;i++){//外层ul 
+ 			uls(J_valueList[i],i);//所有的ul 
+ 		}
+		 
+		function uls(ul,n){ //传参 ul和下标n
+			var li1 = ul.children;	//获取每层ul的li	
+			for(var i = 0;i< li1.length; i++){ 
+				li1[i].onclick = function(){
+					for(var j = 0;j< li1.length; j++){//暴力让所有其他的li显示
+						li1[j].style.display = 'block';
+					}
+					this.style.display = 'none';//让当前的li隐藏
+					box_div[n].innerHTML ='<div class="selector-set"><div class="ss-item"><b>'+sl_key[n].innerHTML+'</b><em>'+this.firstElementChild.innerHTML+'</em><i>x</i></div></div>'; 
+					//将选中的li的内容给到下面对应的div
+					var i1 = box_div[n].getElementsByTagName('i')[0];//获取对应的x号 开始是没有i 上面只是生成页面结构  需要在获取才可以操作 
+					i1.onclick = function(){ //点击X号的时候
+	 					box_div[n].innerHTML = '';	 //清空对应的div内容
+	 					for(var i = 0;i< li1.length; i++){
+	 						li1[i].style.display = 'block';
+	 					}
+	 				}
+				}
+			};	
+		};
+
+		//第一层Ul 		
+//		var li1 = J_valueList[0].children;		
+//		for(var i = 0;i< li1.length; i++){
+//			li1[i].onclick = function(){
+//				for(var j = 0;j< li1.length; j++){
+//					li1[j].style.display = 'block';
+//				}
+//				this.style.display = 'none';
+//				box_div[0].innerHTML ='<div class="selector-set"><div class="ss-item"><b>价格:</b><em>'+this.firstElementChild.innerHTML+'</em><i>x</i></div></div>'; 
+//				var i1 = box_div[0].getElementsByTagName('i')[0];
+//				i1.onclick = function(){
+// 					box_div[0].innerHTML = '';	 
+// 					for(var i = 0;i< li1.length; i++){
+// 						li1[i].style.display = 'block';
+// 					}
+// 				}
+//			}
+//		};	
+//		//第二层
+//		var li2 = J_valueList[1].children;
+//		var i2 = box_div[0].getElementsByTagName('em')[0];
+//		for(var i = 0;i< li2.length; i++){
+//			li2[i].onclick = function(){
+//				for(var j = 0;j< li2.length; j++){
+//					li2[j].style.display = 'block';
+//				}
+//				this.style.display = 'none';
+//				box_div[1].innerHTML ='<div class="selector-set"><div class="ss-item"><b>类别:</b><em>'+this.firstElementChild.innerHTML+'</em><i>x</i></div></div>'; 
+//				var i2 = box_div[1].getElementsByTagName('i')[0];
+//				i2.onclick = function(){
+// 					box_div[1].innerHTML = '';	 
+// 					for(var i = 0;i< li2.length; i++){
+// 						li2[i].style.display = 'block';
+// 					}
+// 				}
+//			}
+//		}
+//		//第三层
+//		var li3 = J_valueList[2].children;		 
+//		for(var i = 0;i< li3.length; i++){
+//			li3[i].onclick = function(){
+//				for(var j = 0;j< li3.length; j++){
+//					li3[j].style.display = 'block';
+//				}
+//				this.style.display = 'none';
+//				box_div[2].innerHTML = '<div class="selector-set"><div class="ss-item"><b>品牌:</b><em>'+this.firstElementChild.innerHTML+'</em><i>x</i></div></div>'; 
+//				var i2 = box_div[2].getElementsByTagName('i')[0];
+//				i2.onclick = function(){
+// 					box_div[2].innerHTML = '';	 
+// 					for(var i = 0;i< li3.length; i++){
+// 						li3[i].style.display = 'block';
+// 					}
+// 				}
+//			}
+//		}
+	}
+</script>
+<body>
+    <div class="sl-wrap">
+        <div class="sl-key">
+            <span>价格：</span>
+        </div>
+        <div class="sl-value">
+            <div class="sl-v-list">
+                <ul class="J_valueList" myName="价格:">
+                    <li><a href="javascript:;">0-299</a></li>
+                    <li><a href="javascript:;">300-699</a></li>
+                    <li><a href="javascript:;">700-1099</a></li>
+                    <li><a href="javascript:;">1100-1999</a></li>
+                    <li><a href="javascript:;">2000-3599</a></li>
+                    <li><a href="javascript:;">3600-4299</a></li>
+                    <li><a href="javascript:;">4300以上</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="sl-wrap">
+        <div class="sl-key">
+            <span>类别：</span>
+        </div>
+        <div class="sl-value">
+            <div class="sl-v-list">
+                <ul class="J_valueList" myName="类别:">
+                    <li><a href="javascript:;">文件夹</a></li>
+                    <li><a href="javascript:;">办公套装</a></li>
+                    <li><a href="javascript:;">文件筐</a></li>
+                    <li><a href="javascript:;">美工刀</a></li>
+                    <li><a href="javascript:;">三针一钉</a></li>
+                    <li><a href="javascript:;">风琴包</a></li>
+                    <li><a href="javascript:;">票夹</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="sl-wrap">
+        <div class="sl-key">
+            <span>品牌:</span>
+        </div>
+        <div class="sl-value">
+            <div class="sl-v-list">
+                <ul class="J_valueList" myName="品牌:">
+                    <li><a href="javascript:;">得力</a></li>
+                    <li><a href="javascript:;">齐心</a></li>
+                    <li><a href="javascript:;">优必利</a></li>
+                    <li><a href="javascript:;">三木</a></li>
+                    <li><a href="javascript:;">GBC</a></li>
+                    <li><a href="javascript:;">广博</a></li>
+                    <li><a href="javascript:;">利兰</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="box">
+        <div class="crumbs-nav-item">
+            <!--<div class="selector-set">
+                <div class="ss-item"><b>价格:</b><em>0-299</em><i>x</i></div>
+            </div>-->
+        </div>
+        <div class="crumbs-nav-item"></div>
+        <div class="crumbs-nav-item"></div>
+    </div>   
+</body>
+
+</html>
