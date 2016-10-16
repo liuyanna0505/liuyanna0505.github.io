@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>贪吃蛇</title>
+		<style>
+			body {
+				margin: 0;
+				background: #FFE1C9;
+			}
+			
+			.snakeWrap {
+				width: 600px;
+				border: 2px ridge #FFBA56;
+				margin: 0 auto;
+				padding-bottom: 10px;
+			}
+			#info {
+				height: 50px;
+				border-bottom: 2px solid slateblue;
+				text-align: center;
+				font: 20px/50px "微软雅黑";
+			}
+			#map {
+				border-bottom: 2px solid slateblue;
+			}
+			#map table {
+				margin: 0 auto;
+			}
+			#map table td {
+				width: 15px;
+				height: 15px;
+				border: 1px solid #8BFFFF;
+				background: #E4FFE9;
+			}
+			#map table td.snake{
+				background: deepskyblue;
+			}
+			#map table td.food{
+				background: skyblue;
+			}
+			#map table td.block{
+				background: #000000;
+			}
+			#map table td.skate{
+				background: greenyellow;
+			}
+			#map table td.brake{
+				background: darkred;
+			}
+			.help {
+				height: 50px;
+				border-bottom: 2px solid slateblue;
+				margin-bottom: 10px;
+			}
+			.help span {
+				float: left;
+				height: 20px;
+				margin: 13px 5px 0 5px;
+				line-height: 20px;
+			}
+			.box {
+				width: 20px;
+				border: 1px solid #ccc;
+			}
+			.help span:nth-of-type(even){
+				margin-right: 15px;
+			}
+			#btn {
+				width: 140px;
+				height: 40px;
+				border: 2px solid #FFBA56;
+				margin: 0 auto;
+				font: 20px/40px "微软雅黑";
+				text-align: center;
+				border-radius: 10px;
+				box-shadow: 0 0 5px #000;
+				color: red;
+				cursor: pointer;
+				-webkit-user-select: none;
+			}
+			
+			#btn.active {
+				color: #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="snakeWrap">
+			<div id="info">贪吃蛇</div>
+			<div id="map">
+			</div>
+			<div class="help">
+				<span class="box"></span><span>好吃的</span>
+				<span class="box"></span><span>地沟油</span>
+				<span class="box"></span><span>滑板</span>
+				<span class="box"></span><span>刹车</span>
+				<span>得分：<strong id='score'>0</strong></span>
+			</div>
+			<div id="btn">开始游戏</div>
+		</div>
+		<script>	
+			/*   (function (形参){})(实参)    */
+			(function (doc){
+				/*-----------给每个box添加背景颜色---------------*/
+				//Array.from()  是数组
+				var list = Array.from(doc.getElementsByClassName('box'));//获取到的是一个数组 不是类数组了
+				//console.log(list);
+				var colors = ['#57D7FF','#000','#6FFF67','#FF472D'];//四个颜色 给每个食物方块的
+				list.forEach(function(iterm,i){  //iterm 数组中的当前项  i 当前项对应的索引值
+					iterm.style.background = colors[i];//这个循环的是数组的所有项
+				});
+				/*----------------变量声明部分-------------------*/
+				var X = 20,Y=20;//游戏方格的横纵 个数
+				/* 二维数组
+				   [
+					[td,td,td,......],
+					[td,td,td,......],
+					........
+					[td,td,td,......],
+				]*/
+				var drawSanke = createArr(X,Y), //Y是  外层数组项  X是 内层的数组项  不放内容 里面的每项都是空数组
+					drawSys = createArr(X,Y);  //创建一个虚拟的二维数组用来做碰撞检测  
+				//声明蛇的变量并初始化
+				var snake = [],//蛇的位置
+					len = 3,
+					speed = 10;				
+				//声明定时器 用来管理蛇的运动
+				var snakeTimer = null;//存的是定时器
+				var blockTimer = [],  //!
+					skateTimer = [],  //存的是定时器
+					brakeTimer = [];  //存的是定时器		
+				//初始化控制方向的变量
+				var direction = 39,//向右
+					flag = true;  //防止迅速掉头导致检测认为是碰到自己				
+				//加分
+				var score = document.getElementById('score');
+				//开始按钮
+				var startBtn = document.getElementById('btn');				
+				//-----------------------------------------------------------
+				//函数初始化部分
+				createMap(); //生成游戏的方框区域
+				/*----------------点击开始游戏按钮----------------*/
+				startBtn.onclick = start;//点击函数				
+				function start() {
+					//alert(1)
+					this.className = 'active';
+					this.onclick = null;//点击之后 再次点击不了 再次点击需要是在游戏结束的时候
+					clear();//清空游戏方框
+				    addObj('food');  //先添加一个食物
+				    initSnake();//初始化蛇
+				    walk();//运动蛇
+				    addToy();//给蛇添加其他的食物的个数
+				}	
+				//-----------------------------------------------------------
+				//----------------------封装函数部分
+				//----------创建表格地图：二维数组 外层tr 内层td
+				function createMap() {
+				    var map_ = document.getElementById('map');
+				    var table = document.createElement('table'),
+				    	tbody = document.createElement('tbody');
+				    	table.cellPadding = table.cellSpacing = 0;//cellPadding 单元格间隙 cellSpacing 单元格填充
+			    	for(var i=0; i<Y; i++){   //外层循环
+			    		var tr = document.createElement('tr');//创建tr 每一行
+			    		for(var j=0; j<X; j++) {    //内层循环
+			    		    var td = document.createElement('td'); //每一个td 
+			    		    //drawSanke 是一个二维数组
+			    		    drawSanke[i][j] = tr.appendChild(td);  //tr.appendChild(td)返回值是td
+			    		//drawSanke[0][0],drawSanke[0][1]....drawSanke[0][19]
+			    		//drawSanke[1][0],drawSanke[1][1]........drawSanke[1][19]
+			    		}
+			    		tbody.appendChild(tr);
+			    	}
+			    	table.appendChild(tbody);
+			    	map_.appendChild(table);
+				}
+				//-------------创建一个二维数组 createArr
+				function createArr(x,y) {//x是内层的  y是外层的
+				    var arr = new Array(y);//arr数组 y是数值的话 代表的是数组的长度 
+				    //var arr1 =[];  arr1.length=20; //跟上面是一样的效果				    
+				    for(var i=0; i<x; i++){     //内层数组
+				    	arr[i] = new Array(x);   //arr[0]，arr[1]...每一项的长度都是x
+				    }
+				    return arr;//返回的是二维数组
+				}
+				//----------随机添加物品
+				function rP(startX,startY,endX,endY) {//添加物品的开始和结束的位置 随机 
+				    startX = startX || 0;//形参 横轴的左边初始值 要么是随机的一个值 否则就是0 边界
+				    startY = startY || 0;//纵轴上边的初始值
+				    endX = endX || X - 1;//横轴的最终值
+				    endY = endY || Y - 1;//纵轴的最终值
+				    var p = [],
+				    	//取两个数之间的随机数，random *（最大值-最小值）+ 最小值  随机数也会取到两个边界值
+				    	x = Math.floor(Math.random() * (endX - startX)) + startX,//取的是横轴的随机的一个数 X坐标轴
+				    	y = Math.floor(Math.random() * (endY - startY)) + startY;//取的是纵轴的随机的一个数 Y坐标轴
+				    	//随机的点不能生成在蛇的身上？？？
+				    	if(drawSys[y][x]){//虚拟的方格
+				    		return rP(startX,startY,endX,endY);//？？
+				    	}
+				    	p.push(x,y);//存放的是坐标点  随机添加物品的坐标位置  p[x,y] 每次追加俩。每次调用的时候 都会先清空 在放入
+				    	return p;
+				}
+				//需求4：随机添加不同的物品 根据物品的名称来定
+				function addObj(name) {
+				    var p = rP();//随机物品的位置 是数组 p[x,y] x是  代表的是  td  y是 平行于x轴的   代表的是  tr
+					drawSanke[p[1]][p[0]].className = name;  //p[1]是每行 p[0]代表的是列
+					drawSys[p[1]][p[0]] = name;//虚拟数组的对应位置上的物品与实际的一一对应 为啥不加className???
+				}
+				//需求5:初始化蛇
+				function initSnake() {
+				    //假设咱们的这个蛇是从地图左半部分出来的
+				    //蛇头的坐标最小不能小于len - 1 最大 X - 2
+				    //假设蛇出来的时候是从左向右运动的，出来的范围呢
+				    //是不超过地图的一半 也就是X/2
+				    var p = rP(len-1,len-1,X/2);//蛇随机出来的位置   Y上可以为0 因为是从左向右的方向出来的
+				    for(var i=0; i<len; i++) {//len是蛇的初始长度 
+				        var x = p[0] - i,  // i：2 1 0   代表的是td 每列对应的出来的位置
+				        	y = p[1];//代表的是随机出来的行数
+				        	snake.push([x,y]);//全局变量 代表 的是蛇的出来的位置   snake是二维数组 [[x,y],[x,y],[x,y]]
+				        	drawSanke[y][x].className = 'snake'; //在蛇长度上的所有的小方框的颜色都变色 
+				        	drawSys[y][x] = 'snake';//.虚拟的方框上也添加上相应的 样式
+				    }
+				}
+				//需求6：让蛇动起来
+				function walk() {
+				    clearInterval(snakeTimer);//每次运动之前都停止下计时器
+				    snakeTimer = setInterval(step,5000/speed);//speed是变量 可以随时改变  依次来改变运动间隔时间 从而改变速度
+				}
+				//蛇的运动函数
+				function step() {//运动函数
+				    var headX = snake[0][0],//蛇头的位置 外层数组代表的是行数 snake是二维数组
+			    	headY = snake[0][1];//行不变 变的是对应的列 即td
+			    	switch(direction){ //按方向键时  对应头部坐标的变化情况
+			    	    case 37:
+			    	    		headX -= 1;//左
+			    	        break;
+			    	    case 38:
+			    	    		headY -= 1;//上
+			    	        break;
+			    	    case 39:
+			    	    		headX += 1;//右
+			    	        break;
+			    	    case 40:
+			    	    		headY += 1;//下
+			    	        break;
+			    	}
+			    	if(headX < 0 || headX > X - 1 || headY < 0 || headY > Y - 1 || drawSys[headY][headX] == 'snake' || drawSys[headY][headX] == 'block'){
+			    		//判断游戏结束的条件 1，到达某个边界 2，碰到了自身 即拐弯的时候 3，吃到了黑色方块
+			    		alert('游戏结束');
+			    		startBtn.onclick = start;//游戏开始按钮再次恢复开始的状态
+			    		startBtn.className = '';//按钮的颜色变回最初的颜色
+			    		clearInterval(snakeTimer);//停止计时器
+			    		skateTimer.forEach(function (item){
+			    			clearInterval(item);
+			    		});
+			    		brakeTimer.forEach(function (item){
+			    			clearInterval(item);
+			    		});
+			    		return;
+			    	}
+			    	if(len%8 == 0 && len<=40 && drawSys[headY][headX] == 'food'){
+			    		addObj('block');	//添加黑色方块			    	
+			    	}				    	
+			    	if(drawSys[headY][headX] == 'skate'){
+			    		speed += 20;//碰到加速的
+			    		walk();
+			    	}				    	
+			    	if(drawSys[headY][headX] == 'brake'){
+			    		speed = 10;//恢复原来的速度
+			    		walk();
+			    	}				    	
+			    	if(len%4 == 0 && speed<60 && drawSys[headY][headX] == 'food'){
+			    		speed += 5;//加速 每次吃一个食物
+			    		walk();
+			    	}	
+				    	//？？？ 每次运动 都取消下最后一个块 
+				    if(drawSys[headY][headX] !== 'food'){//吃到的不是食物的时候 即空白的块 每次将最后一个从数组里去掉
+				    		var lastX = snake[snake.length - 1][0],//最后一个
+					    		lastY = snake[snake.length - 1][1];
+					    	snake.pop();
+					    	drawSanke[lastY][lastX].className = '';
+					    	drawSys[lastY][lastX] = false;
+				    }else{
+				    		drawSys[headY][headX] = false; //吃到食物 就把食物加上
+				    		addObj('food');
+				    }				    	
+				    	snake.unshift([headX,headY]);//每次运动 都在头部加上一个颜色块
+				    	drawSanke[headY][headX].className = 'snake';
+				    	drawSys[headY][headX] = 'snake';
+				    	score.innerHTML = (len - 3)*10;//分数
+				    	len = snake.length;
+				    	flag = true;
+				}
+				//需求7：控制方向
+				document.onkeydown = function (e){
+					var e = e || window.event;//兼容性  火狐
+					if(!flag){// flag防止迅速掉头导致检测认为是碰到自己	
+						return;
+					}
+					//判断按得是方向键并且 按得不是相反的方向键
+					if(e.keyCode > 36 && e.keyCode < 41 && Math.abs(e.keyCode - direction) !== 2){
+						direction = e.keyCode;//按的是方向键并且不是反向的键
+					}
+					flag = false;
+					return false;
+				}
+				//需求8：得到一个随机数
+				function randomNum(start,end) {
+				    return Math.floor(Math.random() * (end - start)) + start;
+				}
+				//需求9：添加随机数量的玩具
+				function addToy() {
+				    var block = randomNum(5,10),//黑色方块的个数
+			    		skate = randomNum(2,7),//滑板 加速块的个数
+			    		brake = randomNum(2,5);//减速 方块的个数
+				    		//console.log(block);
+				    /*	for(var i=0; i<block; i++) {
+				    	    blockTimer.push(setTimeout(function (){
+				    	    		addObj('block')
+				    	    },randomNum(5000,100000)))
+				    	}*/
+			    	for(var i=0; i<skate; i++) {
+			    	    skateTimer.push(setTimeout(function (){
+			    	    		addObj('skate')
+			    	    },randomNum(5000,80000)))//存放定时器
+			    	}
+			    	for(var i=0; i<brake; i++) {
+			    	    brakeTimer.push(setTimeout(function (){
+			    	    		addObj('brake')
+			    	    },randomNum(6000,100000)))//存放定时器
+			    	}
+				}
+				//需求10：清除画布
+				function clear() {
+					//console.log(drawSanke);
+				    drawSanke.forEach(function (item){//二维数组 循环的话 需要循环外层之后 再循环内层
+			    		item.forEach(function (item){
+			    			item.className = '';//所有的项恢复到原来的样式
+			    		})
+				    });
+				    drawSys = createArr(X,Y);//回到初始的样式
+					len = 3;
+					speed = 10;
+					direction = 39;
+					flag = true;
+					snake = [];
+				}
+			})(document)
+		</script>
+	</body>
+</html>
