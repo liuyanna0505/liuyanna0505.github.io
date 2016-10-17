@@ -1,0 +1,1809 @@
+@charset "utf-8";
+/* reset.css */
+body {
+	margin: 0;
+	min-width:980px;
+	font-family: "微软雅黑";
+	background:#e4e4e4;
+	min-width:980px;
+}
+h2 ,
+h3 ,
+h4 ,
+h5,
+h6 ,
+p ,
+dl ,
+dd {
+	margin: 0;
+}
+ul ,
+ol {
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+a {
+	text-decoration:none;
+}
+img {
+	border:none;
+	vertical-align: top;
+}
+strong {
+	font-weight:normal;
+}
+form{
+      border:none;
+	   margin:0px;
+}
+input {
+	 padding:0;
+     outline:none;
+	 border:none;
+}
+textarea {
+ 	 padding:0;
+	 margin:0;
+	 resize:none;
+     overflow:auto;
+     outline:none;
+}
+em {
+	font-style:normal;
+}
+.clearFix{
+	zoom:1;
+}
+.clearFix:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+/* end reset.css */
+
+/* public */
+a:hover {
+	text-decoration:underline;
+}
+.wrap {
+	width:980px;
+	margin: 0 auto;
+}
+.header {
+	height:48px;
+ }
+#header a:hover {
+	text-decoration:none;
+}
+#footer{
+	padding:20px 0;
+	background:#e4e4e4;
+}
+ #footer .footerCopyright {
+	 padding-bottom:20px;
+}
+/* end public */
+
+/* index */
+/*公共头部*/
+#header {
+	position:fixed;
+	height:48px;
+	width:100%;
+	left:0;
+	top:0;
+	background:url(../img/hengpu.png) repeat-x 0 -2px;
+	border-bottom:2px solid #1190da;
+	z-index:3;
+}
+.headerLogo {
+	float:left;
+	position:relative;
+	width:144px;
+	height: 0;
+	margin:10px 0 12px 5px;
+	padding-top:26px;
+	padding-right:86px;
+	overflow:hidden;
+	background:url(../img/pingpuico.png) no-repeat -75px -42px;
+}
+.loginIndex {
+	position:absolute;
+	display:none;
+	height:13px;
+	width:30px;
+	bottom: 2px;
+	left:153px;
+	background:url(../img/pingpuico.png) no-repeat -359px -64px;
+}
+.headerLogo:hover .loginIndex {
+	display:block;
+}
+.topNav {
+	float:left;
+}
+.topNav .topNavList {
+	position:relative;
+	float:left;
+	margin-right:1px;
+}
+.topNavList .topNavListName {
+	display:inline-block;
+	padding:0 18px;
+	font:16px/48px "微软雅黑";
+}
+.topNavList .topNavIco {
+	position:absolute;
+	height:4px;
+	width:7px;
+	top: 24px;
+	right:8px;
+	background:url(../img/pingpuico.png) no-repeat -341px -69px;
+}
+.topNav .topNavListName ,.topNavDownmeun li a {
+	color:#333;
+}
+.active ,.topNavList:hover{
+	background:#ddd;
+}
+.topNavDownmeun {
+	display:none;
+}
+.topNavDownmeun li {
+	font:16px/24px "微软雅黑";
+	height:24px;
+	padding:0 8px 0 9px;
+}
+.topNavList:hover .topNavDownmeun{
+	display:block;
+	position:absolute;
+	top:48px;
+	left:0;	
+	padding: 8px 0 6px;	
+	background:#ebebeb;
+}
+.topNavDownmeun li:hover{
+	background:#ddd;
+}
+.headerLogin {
+	float:right;
+	padding:0 18px;
+	margin-right:2px;
+	font:16px/48px "微软雅黑";
+	color:#333;
+}
+.headerLogin:hover {
+	background:#ddd;
+}
+/*end公共头部*/
+/*--------头部---------------------*/
+#banner {
+	margin-top:50px;
+ 	height:350px;
+	background: url(../img/hengpu.png) repeat-x 0 -54px;
+}
+.bannerLeft {
+	height:350px;
+	background:url(../img/hengpu.png) repeat-x 0 -407px;
+	width:50%;
+}
+.bannerImg {
+	display:block;
+ 	height:350px;
+	background:url(../img/banner.png) no-repeat center 0;
+	margin-top:-350px;
+}
+.roudPoint {
+	position:relative;
+	display:block;
+	width:980px;
+ 	height:350px;
+	margin:-350px auto 0;	
+}
+.roudPoint1 {
+	position:absolute;
+	height:11px;
+	width:11px;
+	left:464px;
+	bottom:26px;
+	background:url(../img/pingpuico.png) no-repeat -337px -43px;
+}
+.roudPoint2 {
+	position:absolute;
+	height:11px;
+	width:11px;
+	left:484px;
+	bottom:26px;
+	background:url(../img/pingpuico.png) no-repeat -337px -43px;
+}
+.roudPoint3 {
+	position:absolute;
+	height:11px;
+	width:11px;
+	left:504px;
+	bottom:26px;
+	background:url(../img/pingpuico.png) no-repeat -337px -43px;
+}
+.roudPoint a:hover {
+	background:url(../img/pingpuico.png) no-repeat -368px -42px;
+}
+#dateList {
+	height:200px;
+	background:url(../img/bg_route_display.png) center 0 #e9e9e9;
+	border-bottom:1px solid  #e9e9e9;
+}
+.dateUlList {
+	padding:18px 0 17px;
+}
+.dateUlListPic {
+	float:left;
+	width:235px;
+	border:1px solid #ccc;
+	margin-right:8px;
+}
+.dateUlListPic img {
+	display:block;
+	border:3px solid #fff;
+	height:158px;
+	width:229px;
+}
+.dateUlListPic img:hover {
+	border:3px solid #add5ed;
+}
+#main {
+	background:#f3f5f5;
+}
+#main a:hover{
+	text-decoration:underline;
+}
+.mainCon {
+	background:#fff;
+	margin-top:20px;
+	padding:0 48px;
+	width:882px;
+	border:1px solid #e9ebeb;
+}
+.notice {
+	height:100px;
+	padding:44px 0 25px;
+	background:url(../img/borderline.png) no-repeat 0 bottom;
+}
+.notice .noticeHeader {
+	height:40px;
+}
+.noticeTitle {
+	float:left;
+	position:relative;
+	padding-left:40px;
+	font:22px/40px "微软雅黑";
+	color:#333;
+}
+.noticeTitle:before{
+	content:"";
+	position:absolute;
+	height:30px;
+	width:33px;
+	left:1px;
+	top:4px;
+	background:url(../img/pingpuico.png) no-repeat -393px -38px;
+}
+.noticeMore {
+	float:right;
+	padding-bottom:16px;
+	font:12px/24px "微软雅黑";
+}
+.noticeMore a{
+	color:#3c8cc9;
+}
+.noticeListLi {
+	position:relative;
+	float:left;
+	width:353px;
+	height:30px;
+	padding-left:9px;
+	margin-right:79px;
+	font:14px/30px "微软雅黑";
+}
+.noticeListLi:before {
+	content:"";
+	position:absolute;
+	width:3px;
+	height:2px;
+	top:13px;
+	left:1px;
+	background:url(../img/pingpuico.png) -480px -28px;
+}
+.noticeListName {
+	float:left;
+	color:#333;
+}
+.noticeLineDate {
+	float:right;
+	color:#999;
+}
+.TextCon {
+	font:16px/30px "微软雅黑";
+	color:#999;
+}
+.TextHeader{
+	font:bold 32px/56px "微软雅黑";
+	color:#333;
+}
+.SDK {
+	 background:url(../img/borderline.png) no-repeat 0 bottom;
+}
+.SDKText {
+	position:relative;
+	float:left;
+	padding-top:60px;
+	width:356px;
+}
+.SDKseeRight {
+	position:absolute;
+	height:40px;
+	width:130px;
+	left: 0;
+	top: 247px;
+	background:url(../img/pingpuico.png)  no-repeat -439px -44px;
+}
+.SDKPic {
+	float:left;
+	padding:62px 0px 4px 0;
+	margin-left:110px;
+}
+.SDKPic img {
+	height:282px;
+	width:319px;
+}
+.API {
+	 background:url(../img/borderline.png) no-repeat 0 bottom;
+}
+.APIPic{
+	float:left;
+	padding-left:75px;
+	margin-right:188px;
+	padding-bottom:4px;
+}
+.APIPic img {
+	height:324px;
+	width:216px;
+}
+.APIText {
+	float:left;
+	position:relative;
+	width:356px;
+	padding-top:50px;
+}
+.APIseeRight  {
+	position:absolute;
+	top:237px;
+	left:0;
+	height:40px;
+	width:130px;
+	background:url(../img/pingpuico.png)  no-repeat -439px -44px;
+}
+.MblogComponent {
+	background:url(../img/borderline.png) no-repeat 0 bottom;
+}
+.MblogComponentText {
+	float:left;
+	padding-top:60px;
+	width:360px;
+	position:relative;
+}
+.MblogComponentText .seeRight {
+	position:absolute;
+	top:247px;
+	left:0;
+	height:40px;
+	width:130px;
+	background:url(../img/pingpuico.png)  no-repeat -439px -44px;
+}
+.MblogComponentPic {
+	float:right;
+	padding-right:141px;
+	padding-bottom:4px;
+}
+.MblogComponentPic img {
+	height:334px;
+	width:286px;
+}
+.excellentDeveloper {
+	padding-top:11px;
+}
+.DeveloperHeader {
+	position:relative;
+	font:22px/66px "微软雅黑";
+	padding-left:40px;
+}
+.DeveloperHeader:before {
+	content:"";
+	position:absolute;
+	width:35px;
+	height:30px;
+	left:1px;
+	top:17px;
+	background:url(../img/pingpuico.png) no-repeat -590px -46px;
+}
+.DeveloperPic {
+	margin:0 -15px 0 45px;
+	height:277px;
+}
+.DeveloperList {
+	float:left;
+	position:relative;
+	margin-right:60px;
+	width:82px;
+}
+.DeveloperList .DeveloperListPicBoxIco{
+	display:block;
+	height:82px;
+	width:82px;
+}
+.DeveloperListPicBox1 .DeveloperListPicBoxIco {
+	background:url(../img/pingpuico.png)  no-repeat -78px -350px;
+}
+.DeveloperListPicBox2 .DeveloperListPicBoxIco {
+	background:url(../img/pingpuico.png) no-repeat -180px -350px;
+}
+.DeveloperListPicBox3 .DeveloperListPicBoxIco {
+	background:url(../img/pingpuico.png) no-repeat -281px -350px;
+}
+.DeveloperListPicBox4 .DeveloperListPicBoxIco {
+	background:url(../img/pingpuico.png) no-repeat -379px -350px;
+}
+.DeveloperListPicBox5 .DeveloperListPicBoxIco {
+	background:url(../img/pingpuico.png) no-repeat -481px -350px;
+}
+.DeveloperListPicBox6 .DeveloperListPicBoxIco {
+	background:url(../img/pingpuico.png) no-repeat -580px -350px;
+}
+
+.DeveloperList .DeveloperListPicBoxIco:hover {
+	opacity:0.9;
+}
+.DeveloperList .DeveloperPicName {
+	text-align:center;
+	font:bold 14px/32px "微软雅黑";
+}
+.DeveloperPicName a {
+	color:#333;
+}
+.DeveloperList:hover:after{
+	content:"";
+	position:absolute;
+	width:18px;
+	height:10px;
+	left:29px;
+	top:112px;
+	background:url(../img/pingpuico.png)  -670px -53px;
+} 
+.DevelopCase {
+	display:none;
+}
+.DevelopCase {
+	position:absolute;
+	border:1px solid #e0e0e0;
+	width:790px;
+	top:121px;
+	left:0;
+	background:#f3f5f5;
+}
+.DevelopCase1 {
+	display:none;
+	position:absolute;
+	border:1px solid #e0e0e0;
+	width:790px;
+	top:121px;
+	left:-142px;
+	background:#f3f5f5;
+}
+.DevelopCase2 {
+	display:none;
+	position:absolute;
+	border:1px solid #e0e0e0;
+	width:790px;
+	top:121px;
+	left:-284px;
+	background:#f3f5f5;
+}
+.DevelopCase3{
+	display:none;
+	position:absolute;
+	border:1px solid #e0e0e0;
+	width:790px;
+	top:121px;
+	left:-426px;
+	background:#f3f5f5;
+}
+.DevelopCase4{
+	display:none;
+	position:absolute;
+	border:1px solid #e0e0e0;
+	width:790px;
+	top:121px;
+	left:-568px;
+	background:#f3f5f5;
+}
+.DevelopCase5 {
+	display:none;
+	position:absolute;
+	border:1px solid #e0e0e0;
+	width:790px;
+	top:121px;
+	left:-710px;
+	background:#f3f5f5;
+}
+.DevelopCaseDescripe {
+	padding:20px 27px 20px 19px;
+	font:14px/22px "微软雅黑";
+	color:#666;
+}
+.DeveloperList:hover .DevelopCase,
+.DeveloperList:hover .DevelopCase1,
+.DeveloperList:hover .DevelopCase2,
+.DeveloperList:hover .DevelopCase3,
+.DeveloperList:hover .DevelopCase4,
+.DeveloperList:hover .DevelopCase5 {
+	display:block;
+}
+/*相对于UL 定位??*/
+#ifooter {
+	padding:20px 0;
+	background:#f3f5f5;
+}
+.footerwrap {
+	width:980px;
+	margin:0 auto;
+	text-align:center;
+	border-top:1px solid #e8e8e8;
+}
+.footerNav{
+	 text-align:center;
+	 border-top:1px solid #f9fafa;
+	 padding-top:11px;
+	 font:12px/32px  "微软雅黑"; 
+}
+#footer{
+	padding:0;
+	background:#e4e4e4;
+}
+.footerwraps {
+	width:980px;
+	margin:0 auto;
+	text-align:center;
+}
+.footerNavs {
+	padding-top:9px;
+	font:12px/34px "微软雅黑"; 
+}
+.footerNavs span,.footerNav span {
+	margin:0 14px 0 17px;
+	color:#d8ccd9;
+}
+.footerwraps a,.footerNav a {
+	color:#3c7cb3;
+}
+.footerCopyright {
+	font:10px/14px Arial,"微软雅黑";
+	padding-left:40px;
+}
+.footerCopyright span{
+	margin-right:22px;
+	color:#999;
+}
+/* end index */
+
+ /* subpulic */
+.subwrap {
+	width:950px;
+	margin:0 auto;
+}
+/* Microlink 116px*/
+#submain {
+	margin-top:50px;
+	background:url(../img/hengpu.png) repeat-x 0 -761px #e4e4e4;
+	height:225px;
+}
+.submainLeftBl {
+	background:url(../img/hengpu.png) repeat-x 0 -989px ;
+	width:50%;
+	height:225px;
+}
+#submainother {
+	margin-top:50px;
+	background:url(../img/hengpu.png) repeat-x 0 -1217px #e4e4e4;
+	height:205px;
+}
+.submainLeftBlother {
+	background:url(../img/hengpu.png) repeat-x 0 -1425px ;
+	width:50%;
+	height:205px;
+} 
+.submainImg {
+	height:225px;
+	margin-top:-225px;
+	background:url(../img/225.png) no-repeat center 0 ;
+}
+.subConHeader ,
+.ServicesubConHeader {
+	height:40px;
+	padding-top:38px;
+	padding-left:17px;
+	margin-bottom:18px;
+}
+.ServicesubConHeader {
+	padding-left:18px;
+}
+.subConHeaderother {
+	height:40px;
+	padding-top:25px;
+	padding-left:15px;
+}
+.MicrolinkConHeaderPic {
+	display:block;
+	width:100px;
+	height:40px;
+	background:url(../img/pingpuico.png)  no-repeat -75px -84px;
+}
+.submainImgBl {
+	height:205px;
+	margin-top:-205px;
+	background:url(../img/205.png) no-repeat center 0 ;
+}
+#subConother {
+	margin-top:-141px;
+	border-radius:8px;
+}
+#subCon {
+	margin-top:-109px;
+}
+.subConDetail {
+	 border-radius:8px;
+	 background:#fff;
+	 padding-left:39px;
+}
+.subMicrolink {
+	position:relative;
+	background:url(../img/top_bg1.png) no-repeat center bottom;
+	/*background:#fafafa;背景图？？？*/
+}
+.subMicrolinkText {
+	padding-left:211px;
+	padding-top:117px;
+	padding-bottom:20px;
+	font:14px/26px "微软雅黑";
+	color:#999;
+	width:450px;
+}
+.subMicrolink:before {
+	content:"";
+	position:absolute;
+	width:190px;
+	height:70px;
+	left:341px;
+	top:36px;
+	background:url(../img/pingpuico.png) no-repeat -203px -84px;
+}
+.subMicrolinkIco{
+	position:absolute;
+	width:236px;
+	height:46px;
+	left:318px;
+	top: 188px;
+	background:url(../img/pingpuico.png) no-repeat -426px -101px;
+	opacity:.9;
+}
+.subMicrolinkIco:hover {
+	opacity:1;
+}
+.subMicrolinkList {
+	margin-top:96px;
+	padding-bottom:14px;
+   /* background:url(../img/bg_route_display1.png) no-repeat center 0;
+   背景图如何加*/
+}
+.subMicrolinkList li {
+	 float:left;
+	 position:relative;
+	 width:362px;
+	 padding-left:70px;
+	 padding-bottom:17px;
+	 text-indent:66px;
+}
+.subMicrolinkList li h5 {
+	font:bold 18px/20px "微软雅黑";
+	color:#333;
+}
+.subMicrolinkList li p{
+	 font:12px/34px "微软雅黑";
+	 color:#999;
+}
+.subMicrolinkList li:before{
+	content:"";
+	position:absolute;
+	height:46px;
+	width:46px;
+	left:70px;
+	top:0;	
+}
+.subMicrolinkTerm1:before {	
+	background:url(../img/pingpuico.png) no-repeat -79px -170px;
+}
+.subMicrolinkTerm2:before{
+	background:url(../img/pingpuico.png) no-repeat -231px -170px;
+}
+.subMicrolinkTerm3:before {	
+	background:url(../img/pingpuico.png) no-repeat -157px -170px;
+}
+.subMicrolinkTerm4:before {	
+	background:url(../img/pingpuico.png) no-repeat -299px -170px;
+}
+.microlinkProduce {
+	background:url(../img/borderline.png) no-repeat center bottom;	
+}
+.ProduceTitle {
+	padding-top:25px;
+	font:26px/60px "微软雅黑"; 
+	height:60px;
+}
+.ProduceList  {	
+	padding-bottom:39px;
+}
+.microlinkProduce li {
+	float:left; 
+	width:188px;
+	margin-right:32px;
+}
+.microlinkProduce li h4{
+	position:relative;
+	font:bold 18px/40px "微软雅黑";
+	padding-top:71px;
+}
+.ProduceListTitle1 {
+	color:#3388be;
+}
+.ProduceListTitle2 {
+	color:#eeaa00;
+}
+.ProduceListTitle3 {
+	color:#41af70;
+}
+.ProduceListTitle4 {
+	color:#dd5565;
+}
+.microlinkProduce h4:before{
+	content:"";
+	position:absolute;
+	height:60px;
+	width:60px;
+	left:1px;
+	top:0;
+}
+.ProduceListTitle1:before {
+	background:url(../img/pingpuico.png) no-repeat -409px -163px;
+}
+.ProduceListTitle2:before {
+	background:url(../img/pingpuico.png) no-repeat -493px -163px;
+}
+.ProduceListTitle3:before {
+	background:url(../img/pingpuico.png) no-repeat -571px -163px;
+}
+.ProduceListTitle4:before {
+	background:url(../img/pingpuico.png) no-repeat -654px -163px;
+}
+.ProduceListName p:nth-child(2){
+	color:#999;
+	font:12px/20px  "微软雅黑";
+}
+.ProduceListName p:nth-child(3){
+	font:12px/34px "微软雅黑";
+}
+.ProduceListName a {
+	color:#666;
+}
+.ProduceListName span {
+	margin:0 2px 0 5px;
+}
+.ProduceListName a:hover {
+	text-decoration:underline;
+}
+.technicalSupport {
+	background:url(../img/borderline.png) no-repeat center bottom;
+}
+.supportList {
+	padding-bottom:22px;
+}
+.supportTitle {
+	padding-top:20px;
+	font:26px/70px "微软雅黑";
+	color:#333;
+}
+.supportListItem {
+	float:left;
+	position:relative;
+	padding-left:75px;
+	padding-bottom:21px;
+	width:314px;
+	margin-right:20px;
+}
+.supportList li:before {
+	content:"";
+	position:absolute;
+	width:60px;
+	height: 60px;
+	left: 1px;
+	top: 0;
+}
+.supportList li:nth-child(1):before{
+	background:url(../img/pingpuico.png) no-repeat -410px -243px;
+}
+.supportList li:nth-child(2):before{
+	background:url(../img/pingpuico.png) no-repeat -496px -246px;
+}
+.supportList li:nth-child(3):before{
+	background:url(../img/pingpuico.png) no-repeat -585px -251px;
+}
+.supportList li:nth-child(4):before{
+	background:url(../img/pingpuico.png) no-repeat -662px -256px;
+}
+.supportListItem dt {
+	font:bold 18px/20px "微软雅黑";
+	color:#3388bc;
+}
+.supportListItem dd {
+	padding-top:7px;
+	font:12px/20px "微软雅黑";
+	color:#999;
+}
+.developerFund {
+	background:url(../img/borderline.png) no-repeat center bottom;
+}
+.developerFundTitle {
+	padding-top:40px;
+	font:26px/30px "微软雅黑";
+	color:#333;
+}
+.developerFundConText {
+	float:left;
+	width:566px;
+	padding-top:12px;
+	padding-bottom:62px;
+	font:12px/25px "微软雅黑";
+	color:#666;
+}
+.developerFundConPic {
+	float:left;
+	position:relative;
+	background:url(../img/pingpuico.png) no-repeat -75px -243px;
+	height:88px;
+	width:320px;
+	font-size:12px;
+}
+.developerFundConPic  p {
+	position:absolute;
+	left: 88px;
+	top:74px;
+	font-size:14px;
+}
+.developerFundConPic span {
+	margin:0 9px;
+	color:#99669a;
+}
+.developerFundConPic a{
+	color:#3c7cb3;
+}
+.developerFundConPic a:hover{
+	text-decoration:underline;
+}
+.successfulCaseTitle {
+	padding-top:13px;
+	font:26px/82px "微软雅黑";
+	color:#333;
+}
+.successfulCaseList{
+	padding-bottom:137px;
+}
+.successfulCaseList li{
+	position:relative;
+	width:82px;
+	text-align:center;
+}
+.successfulCaseList .successfulCaseListPic {
+	display: block;
+	width: 82px ;
+	height: 82px;
+	opacity:1;
+}
+.successfulCaseList .successfulCaseListPic:hover {
+	opacity:.9;
+}
+.successfulCaseList1 .successfulCaseListPic{
+	background:url(../img/pingpuico.png) no-repeat -765px -311px;
+}
+.successfulCaseList2 .successfulCaseListPic{
+	background:url(../img/pingpuico.png) no-repeat -748px -88px;
+}
+.successfulCaseList3 .successfulCaseListPic{
+	background:url(../img/pingpuico.png) no-repeat -748px -204px;
+}
+.successfulCaseList li:after {
+	display:none;
+	content:"";
+	position:absolute;
+	width:10px;
+	height:18px;
+	left:90px;
+	top:32px;
+	background:url(../img/pingpuico.png) no-repeat -739px -45px;
+}
+.successfulCaseList li:hover:after {
+	display:block;
+}
+.successfulCaseList li a:nth-child(2){
+	display:block;
+	font:12px/34px "微软雅黑";
+	padding-bottom:21px;
+	max-width:60px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space: nowrap;
+	color:#333;
+}
+.successfulCaseList li .CaseListFirst {
+	font:12px/32px "微软雅黑";
+}
+.successfulCaseList li span{
+	display:none;
+	position:absolute;
+	width:772px;
+	height:489px;
+	left:99px;
+	top:2px;
+}
+.successfulCaseList li .Caseactive ,
+.successfulCaseList li:hover span{
+	display:block;
+}
+.successfulCaseList2:hover span{
+	position:absolute;
+	width:772px;
+	height:489px;
+	left:99px;
+	top:-135px;
+}
+.successfulCaseList3:hover span{
+	position:absolute;
+	width:772px;
+	height:489px;
+	left:99px;
+	top:-272px;
+}
+/* end Microlink */
+
+/* Microservice 116px*/
+.ServicesubConHeaderPic{	
+	display:block;
+	width:160px;
+	height:40px;
+	background:url(../img/pingpuico.png) no-repeat -79px -448px;
+}
+.subMicroservice {
+	padding-top:60px;
+	position:relative;
+	/*background:url(../img/bg_route_display.png) no-repeat center bottom #fefefe;/*背景？？？*/
+	background:url(../img/top_bg1.png) no-repeat center bottom;
+}
+.subMicroservice:after {
+	/*content:"";
+	position:absolute;
+	height:4px;
+	width:100%;
+	background:url(../img/borderline.png) no-repeat center bottom;*/
+}
+.subMicroserviceLeft {
+	float:left;
+	position:relative;
+}
+.subMicroserviceLeft:before {
+	content:"";
+	position:absolute;
+	width:178px;
+	height:70px;
+	left: 1px;
+	top: 0px;
+	background:url(../img/pingpuico.png) no-repeat -253px -448px;
+}
+.subMicroserviceLeftText {
+	padding-top:80px;
+	padding-left:1px;
+	width:480px;
+	font:14px/30px "微软雅黑";
+	color:#999;
+	margin-right:50px;
+}
+.MicroserviceCreat {
+	position:relative;
+	padding-top:124px;
+	padding-left:149px;	
+}
+.MicroserviceCreatPic {
+	position:absolute;
+	width:242px;
+	height:46px;
+	left:130px;
+	top:70px;
+	background:url(../img/pingpuico.png) no-repeat -618px -909px;
+	opacity:.9;
+}
+.MicroserviceCreatPic:hover {
+	opacity:1;
+}
+.MicroserviceCreatText{
+	font:12px "微软雅黑";
+	color:#999;
+	padding-bottom:99px;
+}
+.subMicroserviceRight {
+	float:left;
+}
+.subMicroserviceRight li {	
+	position:relative;
+	padding-left:65px;
+}
+.subMicroserviceRight h5 {
+	font:bold 18px/24px "微软雅黑";
+	color:#333;
+}
+.subMicroserviceRight li:before{
+	content:"";
+	position:absolute;
+	height:52px;
+	width:52px;
+	left: 0 ;
+	top: 0;
+}
+.subMicroserviceItem1:before {
+	background:url(../img/pingpuico.png) no-repeat -481px -448px;
+}
+.subMicroserviceItem2:before {
+	background:url(../img/pingpuico.png) no-repeat -569px -444px;
+}
+.subMicroserviceItem3:before {
+	background:url(../img/pingpuico.png) no-repeat -572px -566px;
+}
+.subMicroserviceItem4:before {
+	background:url(../img/pingpuico.png) no-repeat -571px -500px;
+}
+.subMicroserviceRight p{
+	font:12px/30px "微软雅黑";
+	padding-bottom:21px;
+	color:#999;
+}
+.subMicroserviceProduce {
+	padding-top:8px;
+	padding-left:1px;
+	background:url(../img/borderline.png) no-repeat center bottom;
+}
+.subMicroserviceProduce .ProducTitle {
+	font:bold 26px/96px "微软雅黑";
+	color:#333;
+}
+.ProducList {
+	padding-bottom:23px;
+}
+.ProducList li{
+	float:left;
+	position:relative;
+	padding-left:92px;
+	padding-bottom:26px;
+	width:338px;
+}
+.ProducTitleIco {
+	position:absolute;
+	width:60px;
+	height:60px;
+	left:20px;
+	top: 0;
+	/*background:url(../img/seviceico.png) no-repeat;精灵*/
+}
+.ProducList li:nth-child(1) .ProducTitleIco{
+	background:url(../img/pingpuico.png) no-repeat -78px -544px;
+}
+.ProducList li:nth-child(2) .ProducTitleIco{
+	background:url(../img/pingpuico.png) no-repeat -374px -544px;
+}
+.ProducList li:nth-child(3) .ProducTitleIco{
+	background:url(../img/pingpuico.png) no-repeat -175px -544px;
+}
+.ProducList li:nth-child(4) .ProducTitleIco{
+	background:url(../img/pingpuico.png) no-repeat -469px -552px; 
+}
+.ProducList li:nth-child(5) .ProducTitleIco{
+	background:url(../img/pingpuico.png) no-repeat -272px -552px;
+}
+.ProducList li h5 {
+	font:bold 14px/16px "微软雅黑";
+}
+.ProducList  li:nth-child(3) h5,
+.ProducList  li:nth-child(4) h5{
+	line-height:18px;
+}
+.ProducList h5 a:nth-child(1){
+	color:#eb7350;
+}
+.ProducList li p:nth-of-type(1) {
+	padding-top:9px;
+	width:290px;
+	font:12px/20px "微软雅黑";
+	color:#999;
+}
+.ProducList li p:nth-of-type(2)
+{
+	font:12px/32px "微软雅黑";
+}
+.ProducProducListItem p:nth-of-type(2) span {
+	margin:0 6px 0 9px;
+	color:#666;
+}
+.ProducProducListItem p:nth-of-type(2) a {
+	color:#666;
+}
+.subMicroservicePartner {
+	background:url(../img/borderline.png) no-repeat center bottom;
+	padding-left:1px;
+}
+.MicroservicePartnerLeft {
+	float:left;
+	position:relative;
+	width:524px;
+}
+.PartnerTitle{ 
+	position:relative;
+	padding-top:22px;
+}
+.PartnerTitle h3:nth-of-type(1){
+	font:bold 26px/68px "微软雅黑";
+}
+.PartnerTitle .PartnerDirectory{
+	position:absolute;
+	font:14px/56px "微软雅黑";
+	top:34px;
+	left:378px;
+	color:#333;
+}
+.PartnerNotice {
+	width:494px;
+	font:14px/28px "微软雅黑";
+	color:#999;
+}
+.MicroservicePartnerLeft .PartnerNoticePic {
+	position:absolute;
+	width:260px; 
+	height:45px;
+	left:120px;
+	top:214px;
+	background:url(../img/pingpuico.png) no-repeat -72px -1014px;
+	opacity:.9;
+}
+.PartnerNoticePic:hover {
+	opacity:1;
+}
+.PartnerNotice::selection {
+	background:#ea734f;
+	/*选中字体的背景颜色*/
+}
+.MicroservicePartnerRight{
+	float:left;
+}
+.MicroservicePartnerRight ul {
+	padding: 0 0 40px 0;
+}
+.partnerRightTerm {
+	padding-top:51px;
+	font:bold 18px/56px "微软雅黑";
+}
+.partnerRightTermList li{
+	position:relative;
+	height:50px;
+	padding-left:38px;
+	font:14px/32px "微软雅黑";
+	color:#666;
+}
+.partnerRightTermList li:before {
+	content:"";
+	position:absolute;
+	width:29px;
+	height:29px;
+	left: 1px;
+	top: 0;
+	/*background:url(../img/right1.png) no-repeat;背景精灵*/
+}
+.partnerRightTermList li:nth-child(1):before{
+	background:url(../img/pingpuico.png) no-repeat -655px -509px;
+}
+.partnerRightTermList li:nth-child(2):before{
+	background:url(../img/pingpuico.png) no-repeat -715px -515px;
+}
+.partnerRightTermList li:nth-child(3):before{
+	background:url(../img/pingpuico.png) no-repeat -771px -512px;
+}
+.partnerRightTermList li:nth-child(4):before{
+	background:url(../img/pingpuico.png) no-repeat -825px -513px;
+}
+.MicroserviceCaseTitle {
+	padding-top:12px;
+	font:bold 26px/88px "微软雅黑";
+}
+.subMicroserviceCase .subMicroserviceCaseList{
+	padding-left:42px;
+	padding-bottom:194px;
+}
+.subMicroserviceCaseList .MicroserviceCaseIterm {
+	float:left;
+	width:82px;
+	position:relative;
+	margin-right:59px;
+	text-align:center;
+}
+.subMicroserviceCase .MicroserviceCaseIterm:after{
+	content:"";
+	display:none;
+	position:absolute;
+	width:20px;
+	height:10px;
+	left:30px;
+	top:115px;
+	background:url(../img/pingpuico.png) no-repeat -670px -52px;
+}
+.subMicroserviceCase .MicroserviceCaseIterm:hover:after{
+	display:block;
+}
+.subMicroserviceCase .MicroserviceCaseIterm a:nth-child(1){
+	position:absolute;
+	height:82px;
+	width:82px;
+	left: 0;
+	top :0;
+	background:url(../img/pingpuico.png) no-repeat -72px -639px;
+	opacity:0.8;
+}
+.subMicroserviceCase .MicroserviceCaseIterm a:nth-child(1):hover{
+	opacity:1;
+}
+.subMicroserviceCase .MicroserviceCaseIterm a:nth-child(2){
+	display:block;
+	font:bold 14px/38px "微软雅黑";
+	padding-top:82px;
+	color:#333;
+}
+.MicroserviceCaseIterm div {
+	display:none;
+	position:absolute;
+	padding-left:18px;
+	background:#f2f2f5;
+	top:125px;
+	height:111px;
+	text-align:left;
+	width:700px; 
+}
+.MicroserviceCaseDescripe1 {
+	left:0;
+}
+.MicroserviceCaseDescripe2 {
+	left:-141px;
+}
+.MicroserviceCaseDescripe3 {
+	left:-282px;
+}
+.MicroserviceCaseDescripe4 {
+	left:-423px;
+}
+.MicroserviceCaseDescripe5 {
+	left:-564px;
+}
+.MicroserviceCaseDescripe6 {
+	left:-650px;
+}
+.MicroserviceCaseDescripeList .DescripeListDetile {
+	float:left;	
+}
+.MicroserviceGood {
+	 font:12px/42px  "微软雅黑";
+	 padding-top:6px;
+	 color:#999;
+}
+.DescripeListDetile{
+	border-right:1px solid #ccc;
+	padding-right:22px;
+	text-align:left;
+}
+.MicroserviceCaseDescripeList li:nth-child(2),
+.MicroserviceCaseDescripeList li:nth-child(3),
+.MicroserviceCaseDescripeList li:nth-child(4) {
+	padding-left:20px;
+}
+.MicroserviceCaseDescripeList li:nth-child(4) {
+	border-right:none;
+}
+.DescripeListDetile h6 {
+	font:12px/14px "微软雅黑";
+	color:#333;
+}
+.DescripeListDetile p {
+	font:16px/1 "微软雅黑";
+	color:#eb7350;
+	padding-top:12px;
+}
+.MicroserviceCaseIterm:hover div {
+	display:block;
+}
+/* end Microservice */
+
+/* document */
+.documentHeaderPic {
+	margin-left:-7px;
+	display:block;
+	height:44px;
+	width:140px;
+	background:url(../img/pingpuico.png) no-repeat -81px -767px;
+}
+.documentsubConDetail {
+	border-radius:8px;
+	background:#fff;
+	border:1px solid #b6b6b6;
+	padding-top:;
+	overflow: hidden;
+}
+.documentConLeft {
+	float:left;
+	padding-top:36px;
+	border-radius:8px 0 0 8px;
+	margin-left:2px;
+	background-color:#f7f7f7;
+	width:197px;
+	padding-bottom: 10000px;
+	margin-bottom: -10000px;
+
+}
+form {
+	position:relative;
+	width:159px;
+	padding-left:18px;
+}
+input {
+	width:128px;
+	padding-top:1px;
+	font:12px/22px "微软雅黑";
+	border:1px solid #c2c0c0;
+	background:#fff;
+}
+.searchIco{
+	position:absolute;
+	width:30px;
+	height:25px;
+	top: 0;
+	left:147px;
+	background:url(../img/pingpuico.png) no-repeat -824px -38px;	
+}
+.documentConLeftList {
+	padding:2px 0 17px 0;
+	border-bottom:1px solid #c8c8c8;
+	margin:0 19px 215px 17px; 
+	/*核实尺寸*/
+}
+.documentConLeftList  a{
+	margin-top:18px;
+	display:block;
+	position:relative;
+	padding-left:24px;
+	font:14px/18px "微软雅黑";
+	color:#000;
+}
+.documentConLeftList li a:before {
+	content:"";
+	position:absolute;
+	width:19px;
+	height:17px;
+	left: 0;
+	top: 0;
+	background:url(../img/pingpuico.png) no-repeat  -504px -865px;
+}
+.documentConLeftList  li:nth-child(1) .documentConLeftListTitle:before ,
+.documentConLeftList  li:nth-child(2) .documentConLeftListTitle:before ,
+.documentConLeftList  li:nth-child(3) .documentConLeftListTitle:before ,
+.documentConLeftList  li:nth-child(5) .documentConLeftListTitle:before ,
+.documentConLeftList  li:nth-child(15) .documentConLeftListTitle:before 
+{
+	background:url(../img/pingpuico.png) no-repeat  -452px -864px;
+}
+.documentConLeftList  li:nth-child(14) .documentConLeftListTitle:before {
+	background:url(../img/pingpuico.png) no-repeat  -544px -864px;
+}
+.documentConLeftList a:after{
+	content:"";
+	position:absolute;
+	width:8px;
+	height:4px;
+	top:7px;
+	margin-left:7px;
+	background:url(../img/pingpuico.png)  no-repeat -617px -869px;
+}
+.documentConLeftList  li:nth-child(1) .documentConLeftListTitle:after, 
+.documentConLeftList  li:nth-child(2) .documentConLeftListTitle:after,
+.documentConLeftList  li:nth-child(15) .documentConLeftListTitle:after,
+.documentConLeftList  li:nth-child(16) .documentConLeftListTitle:after {
+	background:none;
+}
+.documentConLeftList a:hover:after{
+	background:url(../img/pingpuico.png) no-repeat -584px -869px;
+}
+.documentConLeftList  a:hover {
+	text-decoration:none;
+}
+.documentConLeftList span{
+	display:none;
+	position:relative;
+	margin-top:12px;
+	padding-bottom:12px;
+}
+.documentConLeftList span a {
+	color:#3c7cb3;
+	font:12px/25px "宋体";
+	letter-spacing:-1px;
+	padding-left:24px;
+	margin:0;
+}
+.documentConLeftList li span a:before ,
+.documentConLeftList li span a:after {
+	content:"";
+	position:absolute;
+	background:none;
+}
+.documentConLeftList li:active span{
+	 display:block;
+	 border-bottom:1px solid #eaebed;
+}
+.documentConRight {
+	float:right;
+	padding-bottom: 10000px;
+	margin-bottom: -10000px;
+
+}
+.documentConRightHeader {
+	border-top:1px solid #fcfcfc;
+	border-radius:0 8px 0 0;
+	background:url(../img/hengpu.png) repeat-x 0 -1635px #000;
+	height:31px; 
+	width:749px;	
+}
+.documentConRightHeader span {
+	float:right;
+	padding-top:5px;
+	margin-right:10px;
+	font:12px/26px Arial,"微软雅黑";
+	color:#999;
+}
+.documentConRightHeader em{
+	font-weight:bold;
+	color:#333;
+}
+.documentConRightHeader strong {
+	padding-left:3px;
+}
+.documentConRightHeader span a{
+	color:#3c7cb3;
+}
+.documentConRightTag {
+	margin:23px 21px 0 40px;
+	padding-bottom:24px;
+	background:url(../img/documentbottom.png) no-repeat center bottom;
+}
+.documentConRightTag li {
+	position:relative;
+	padding-left:86px;
+	padding-bottom:11px;
+}
+.documentConRightTag li:before {
+	content:"";
+	position:absolute;
+	width:85px;
+	height:78px;
+	left: 0;
+	top: 0;
+/*	background:url(../img/yidongyingyong.png) no-repeat;*/
+}
+.documentConRightTagList1:before {
+	background:url(../img/pingpuico.png) no-repeat -283px -767px;
+}
+.documentConRightTagList2:before {
+	background:url(../img/pingpuico.png) no-repeat -419px -767px;
+}
+.documentConRightTagList3:before {
+	background:url(../img/pingpuico.png) no-repeat -569px -767px;
+}
+.documentConRightTag h3 {
+	font:20px/32px "微软雅黑";	
+}
+.documentConRightTag h3 a{
+	color:#3c7cb3;
+}
+.documentConRightTag p {
+	width:570px;
+	padding-bottom:6px;
+	font:12px/20px arial, "微软雅黑";
+	color:#333;
+}
+.documentConRightDescripe {
+	width:749px;
+	padding-top:42px; 
+}
+.documentConRightDescripe li {
+	float:left;
+	padding-left:39px;
+	width:321px;
+}
+.documentConRightDescripe h4 {
+	position:relative;
+	padding:0 0 13px 30px;
+	font:bold 14px/16px "微软雅黑";
+}
+.documentConRightDescripe h4 a {
+	color:#3c7cb3;
+}
+.documentConRightDescripe h4:before {
+	content:"";
+	position:absolute;
+	width: 27px;
+	height: 19px;
+	left:1px;
+	top: 0;
+/*	background:url(../img/xinshou.png) no-repeat;	
+*/}
+.documentConRightDescripeList1 h4:before{
+	background:url(../img/pingpuico.png) no-repeat -79px -864px;
+}
+.documentConRightDescripeList2 h4:before{
+	background:url(../img/pingpuico.png) no-repeat -133px -864px;
+}
+.documentConRightDescripeList3 h4:before{
+	background:url(../img/pingpuico.png) no-repeat -192px -864px;
+}
+.documentConRightDescripeList4 h4:before{
+	background:url(../img/pingpuico.png) no-repeat -254px -864px;
+}
+.documentConRightDescripeList5 h4:before{
+	background:url(../img/pingpuico.png) no-repeat -321px -864px;
+}
+.documentConRightDescripeList6 h4:before{
+	background:url(../img/pingpuico.png) no-repeat -392px -864px;
+}
+.documentConRightDescripe p{
+	width:310px;
+	padding-bottom:30px;
+	font:12px/20px arial, arial,"微软雅黑";
+	color:#333;
+}
+.documentConRightDescripe p .interfaceText {
+	color:#3c7cb3;
+}
+/* end document */
+
+/* support */
+.supportConHeaderPic {
+	display:block;
+	height:44px;
+	width:170px;
+	background:url(../img/pingpuico.png) no-repeat -81px -902px;
+}
+.supportsubConDetail {
+	border-radius:8px;
+	background:#fff;
+	border:1px solid #b6b6b6;
+}
+.supportsubConDetailLeft {
+	float:left;
+	padding:0 28px;
+	width:632px;
+}
+.platformstate {
+	padding-top:38px;
+}
+.platformstate header,
+.FAQ .FAQHeader {
+	border:1px solid #f0f0f0;
+	text-indent:8px;
+	background:#f7f7f7;
+	font:16px/32px "微软雅黑";
+	color:#666;
+}
+.platformstateGraph {
+	padding-left:2px;
+	margin-right:-6px;	
+}
+.platformstateGraph div {
+	float:left;
+	margin-right:46px;
+}
+.platformstateGraph div h4{
+	font:12px/44px "微软雅黑";
+	color:#666;
+}
+.responseTimeGraph h4 {
+	text-indent:105px;
+}
+.successRateGraph h4 {
+	text-indent:99px;
+}
+.platformstateGraph img {
+	width:272px;
+	height:155px;
+}
+.FAQ {
+	padding-top:35px;
+}
+ .FAQList {
+	 padding-top:15px;
+}
+.FAQList li {
+	float:left;
+	width:143px;
+	padding-top:1px;
+	margin-left:10px;
+	border:1px solid #e2ebf1;
+	text-align:center;
+	background:#f1fafe;
+}
+.FAQList li a {
+	display:block;
+	font:16px/52px "微软雅黑";
+	color:#3c7cb3;
+}
+.systemList {
+	padding-top:30px;
+	margin-right:-8px;
+	margin-bottom:53px;
+}
+.systemList li {
+	float:left;
+	margin-right:10px;
+	width:310px;
+	margin-bottom:20px;
+}
+.systemList li  header {
+	border:1px solid #f0f0f0;
+	text-indent:8px;
+	background:#f7f7f7;
+	font:16px/32px "微软雅黑";
+	margin-bottom:20px;
+	color:#666;
+}
+.systemListCon {
+	padding-left:9px;
+	font-size:12px;
+}
+.systemListCon a {
+	color:#3c7cb3;
+}
+.descripeDetile {
+	width:290px;
+	font:12px/20px "微软雅黑";
+	color:#666;
+}
+.solveEntrance {
+	display:block;
+	line-height:40px;
+}
+.contactMethod {
+	font:12px/20px "微软雅黑";
+	color:#333;
+}
+.contactMethod1 {
+	padding-top:10px;
+}
+.systemListCon .microblog,
+.systemListCon .Email {
+	position:relative;
+	font:12px/30px arial, "微软雅黑";
+	padding: 0 0 10px 19px;
+}
+.systemListCon .microblog:before,
+.systemListCon .Email:before {
+	content:"";
+	position:absolute;
+	width:15px;
+	height:13px;
+	left: 1px;
+	top: 9px;
+	background:url(../img/pingpuico.png) no-repeat -81px -961px;;
+}
+.systemListCon .Email:before {
+	background:url(../img/pingpuico.png) no-repeat -139px -961px;
+}
+.supportsubConDetailRight {
+	float:left;
+	width:220px;
+	padding:0 18px 0 20px;
+	background:#f7f7f7;
+	border-right:2px solid #fff;
+	border-radius:0 8px 8px 0;
+}
+.DetailRightTitle {
+	padding-top:27px;
+	font:14px/36px arial,"微软雅黑";
+	border-bottom:1px dotted #bababa;
+}
+.microblogFocus {
+	padding-top:29px;
+	padding-left:15px;
+}
+.microblogFocusPic {
+	float:left;
+	width:50px;
+	height:51px;
+	margin:1px 10px 21px 0;
+	background:url(../img/pingpuico.png) no-repeat -493px -905px;
+}
+.openPlatform{
+	float:left;
+	position:relative;
+	padding-bottom:1px;
+	position:relative;
+	font:14px/1 "微软雅黑";
+}
+.openPlatform a {
+	color:#3c7cb3;
+}
+.openPlatform:after {
+	content:"";
+	position:absolute;
+	width:16px;
+	height:14px;
+	left:86px;
+	top: 1px;
+	background:url(../img/pingpuico.png) no-repeat -108px  -961px;
+}
+.FocusIco {
+	position:absolute;
+	height:24px;
+	width:63px;
+	left: 0;
+	top:28px;
+	background:url(../img/pingpuico.png) no-repeat -268px  -905px;
+}
+.FocusIco:hover {
+	background:url(../img/pingpuico.png) no-repeat -368px  -905px;
+}
+.microblogConList {
+	padding-left:10px;
+	border-top:1px solid #d2d2d2;
+	height:428px;
+	background:#fff;
+	overflow:auto;
+	margin-bottom:320px;
+}
+.microblogConList li {
+	padding-top:12px;
+	font:12px/20px "微软雅黑";
+	color:#666;
+	border-bottom:1px dotted #d2d2d2;
+}
+.microblogConList li:hover {
+	background:#eaeced;
+}
+.PublishedTime {
+	padding-bottom:5px;
+	font:12px/30px "微软雅黑";
+}
+.PublishedTime a {
+	color:#0082cb;
+}
+.PublishedDate {
+	margin-right:42px;
+}
+.PublishedTime em {
+	color:#0082cb;
+	margin:0 7px 0 8px;
+}
+/* end support */

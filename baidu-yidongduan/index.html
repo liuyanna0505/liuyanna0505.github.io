@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>百度移动端</title>
+<link href="css/baidu.css" rel="stylesheet"/>
+<script>
+var scale = 1;
+if(window.devicePixelRatio){
+	scale = scale / window.devicePixelRatio;
+}
+document.write('<meta name="viewport" content="initial-scale='+scale+',minimum-scale='+scale+',maximum-scale='+scale+',user-scalable=no" />');
+</script>
+<script>
+toSize ();
+function toSize () {
+	var html = document.getElementsByTagName("html")[0];
+	var screenW = html.getBoundingClientRect().width; 
+	html.style.fontSize = screenW/27 + "px";
+}
+window.addEventListener(
+	"orientationchange",
+	function(){
+		toSize ();
+	},
+	false
+);
+window.addEventListener(
+	"resize",
+	function(){
+		toSize ();
+	},
+	false
+);
+</script>
+</head>
+<body>
+<header id="header" class="wrap clearFix">
+	<div class="weather">  
+        <a href="#">
+<!--            <span class="weatherIco"></span>
+-->            <span class="temperature">27℃</span>
+            <span>
+                <strong class="area">北京</strong>
+                <em class="air">空气80</em>
+            </span>
+        </a>	
+    </div>   
+    <a href="#" class="login"></a>
+    <a href="#" class="skin"></a>
+</header>
+<section id="search">
+	<form action="#">
+        <input type="search"/><input type="button" value="百度一下"/>        
+    </form>
+    <ul class="subAppList clearFix">
+       <li><a href="#">新闻</a></li>
+       <li><a href="#">小说</a></li>
+       <li><a href="#">视频</a></li>
+       <li><a href="#">糯米</a></li>
+       <li><a href="#">地图</a></li>
+       <li class="moreIco"><a href="#">更多</a></li>
+       <li><a href="#">贴吧</a></li>
+       <li><a href="#">应用</a></li>
+       <li><a href="#">图片</a></li>
+       <li><a href="#">网址</a></li>
+       <li><a href="#">推广</a></li>
+    </ul>
+</section>
+<section id="main" class="wrap">
+	<div class="MyNav">
+    	<header class="Navheader">
+        	<h3>我的导航</h3>
+            <a href="#" class="downmenu"></a>
+        </header>
+    	<ul class="MyNavList clearFix">
+            <li><a href="#">资讯</a></li>
+            <li><a href="#">hao123</a></li>
+            <li><a href="#">图片</a></li>
+            <li><a href="#">爱奇艺</a></li>
+            <li><a href="#">美女</a></li>
+            <li><a href="#">音乐</a></li>
+            <li><a href="#">笑话</a></li>
+           <li><a href="#" class="addIco"></a></li>             
+        </ul>
+    </div>
+    <div class="hotspot">
+    	<header class="Navheader">
+        	<h3>实时热点</h3>
+            <a href="#" class="Change">换一批</a>
+            <a href="#" class="downmenu"></a>
+        </header>
+    	<ul class="hotspotList clearFix">
+            <li><a href="#">2016全国高考</a></li>
+            <li><a href="#">团伙抢劫打上民警</a></li>
+            <li><a href="#">丽江古城欠15亿</a></li>
+            <li><a href="#">高考教师天团进京</a></li>
+            <li><a href="#">保剑锋为子过生日</a></li>
+            <li><a href="#">家长旗袍助阵高考</a></li>          
+        </ul>
+        <div class="Baidubillboard">
+        	<p><a href="#">百度风云榜 <span>></span></a></p>
+        </div>
+    </div>
+    <div class="recommend">
+    	<header class="Navheader">
+        	<h3>百度推荐</h3>
+            <a href="#" class="Change">换一批</a>
+            <a href="#" class="downmenu"></a>
+        </header>
+        <ul class="recommendList">
+            <li>
+                <a href="#">
+                	<span>17名外轮船员在珠江口遇险17名外轮船员在珠江口遇险获救获救</span>
+                    <time>18:26</time>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span>中国维和牺牲士兵申亮亮灵柩从马里起飞回国</span> 
+                    <time>18:26<time>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span>北京检方约见"雷洋案"相关律师并听取意见建议</span>
+                    <time>18:26</time>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                	<span>屈原故里湖北秭归再现楚国端午祭</span>
+                    <time>18:26</time>
+                </a>
+            </li>          
+        </ul>
+        <div class="recommendMore">
+        	<p><a href="#">查看更多推荐 <span>></span></a></p>
+        </div>
+    </div>
+    <div class="servicelife">
+    	<header class="Navheader">
+        	<h3>生活服务</h3>
+           <a href="#" class="downmenu"></a>
+        </header>	
+        <div class="location">
+        	<span>点击定位，查看附近位置信息</span>
+            <a href="#" class="locationIco"></a>
+        </div>	
+        <ul class="servicelifeList clearFix">
+            <li><a href="#">电影</a></li>
+            <li><a href="#">团购</a></li>
+            <li><a href="#">外卖</a></li>
+            <li><a href="#">打车</a></li>
+            <li><a href="#">酒店</a></li>
+            <li><a href="#">美食</a></li>  
+            <li><a href="#">KTV</a></li>
+            <li><a href="#">充值</a></li>        
+        </ul>
+        <p class="allShow">展示全部</p>
+    </div>
+    <div class="shopping">
+    	<header class="Navheader">
+        	<h3>购物</h3>
+             <a href="#" class="downmenu"></a>
+        </header>	
+        <div class="shoppingPic">
+            <a href="#" class="clearFix">
+                <span class="eventMerchandise">
+                    <span class="shoppingTitle">牙刷8只家庭装到手9.9</span>
+                    <span class="discountPrice">¥9.9<em class="originaPrice">¥19.9</em> |</span>
+                </span>
+                <strong>京东</strong>
+            </a>
+        </div>
+        <ul class="shopAPP clearFix">
+            <li><a href="#">京东商城</a></li>
+            <li><a href="#">百度糯米</a></li>
+            <li><a href="#">1号店</a></li>
+            <li><a href="#">唯品会</a></li>
+            <li><a href="#">当当网</a></li>
+            <li><a href="#">蘑菇街</a></li>
+            <li><a href="#">淘宝特卖</a></li>
+            <li><a href="#">国美在线</a></li>
+        </ul>
+        <p class="shopAPPMore"><a href="#">查看更多 </a><span>></span></p> 
+    </div>
+    <div class="roadtraffic">
+    	<header class="Navheader">
+        	<h3>交通路况</h3>
+            <a href="#" class="downmenu"></a>
+        </header>
+        <p class="address"> <a href="#">设置家和公司地址</a></p>
+        <p class="roadcondition">随时随地，了解实时路况</p>
+    </div>
+    <div class="managecard">
+    	<a href="#">管理我的卡片</a>
+    </div>
+</section>
+<section id="adPromotion" class="wrap">
+	<ul class="adPromotionList">
+    	<li>
+        	<a href="#">百度浏览器，上网提速200%</a>
+        </li>
+        <li>
+        	<a href="#">手机百度，最省流量的急速搜索App</a>
+        </li>
+        <li>
+        	<a href="#">百度推广，让有需求的客户找到你</a>
+        </li>
+    </ul>
+    <div class="userFeedback">
+    	<h4><a href="#">用户反馈</a></h4>
+        <p>使用百度前必读 Baidu 京ICP证030173号</p>
+        <p><span>京公网安备11000002000001</span></p>
+    </div>
+</section>
+<footer id="footer">
+	<a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+</footer>
+</body>
+</html>
+

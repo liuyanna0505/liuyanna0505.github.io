@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* media */
+@media only all and (max-width: 1250px){
+	.selectNav {
+		display: block;
+	}
+	.headNav {
+		display: none;
+	}
+	.wrap {
+		width: 880px;
+	}
+	 .mainHead p {
+		display: none; 
+	}
+	.recommendBoxList{
+		display: none;
+	}
+	.recommendBoxCompany  .recommendBoxCompanyList li{
+		margin-right: 10px;
+	}
+}
+@media only all and (max-width:950px){
+	.wrap {
+		width: 580px;
+	}
+}

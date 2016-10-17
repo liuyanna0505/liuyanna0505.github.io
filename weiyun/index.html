@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>微云作品</title> 
+		<link href="css/index.css" rel="stylesheet"/>	
+		<link rel="stylesheet" href="src/dialog/css/demo.css" />
+	</head>
+	<body>
+		<!--自定义菜单-->		
+		<ul id='customList'>
+			<li class='customListCreat'>新建</li>
+			<li class='customListDel'>删除</li>
+			<li class='customListReName'>重命名</li>
+			<li class='customListMove'>移动到</li>
+		</ul>
+		<!--提示框-->
+		<div id = 'tips'></div>
+		<!--是否确定删除文件-->
+		<!--<div id = 'isDeleteFile'>
+			<p class ='deleteFile'>
+				删除文件
+				<span class = 'deleteX'></span>
+			</p>
+			<div class = 'deleteFileTips'>
+				<p>确定要删除这个文件夹么</p>
+				<p>已删除的文件可以在回收站找到</p>		 
+				<p>
+					<input type = 'button' class='sure' value='确定'/>
+					<input type = 'button' class='cancel' value='取消'>
+				</p>
+			</div>
+		</div>-->
+		<div id= 'mask'></div>
+		<!----------移动文件提示框------>
+		<!--<div id = 'isMoveFile'>
+			<p class ='moveFile'>
+				选择存储位置
+				<span class = 'moveDeleteX'></span>
+			</p>
+			<div class='moveFileTree'>
+				<p class='moveToStoreFile'>js</p>
+				<div class = 'moveToStoreFileTree'>
+					<p>移动到</p>
+					<p>文件</p>
+				</div>
+			</div>
+			<div class = 'isSureBtn'>
+				<input type = 'button' value = '确定' class = 'sureMove'/>
+				<input type = 'button' value = '取消' class='noMove'/>
+			</div>
+		</div>
+		<div id= 'maskMove'></div>-->
+		<!-----------头部----------->
+		<header id ='header'>
+			<div class='logo clearFix'>
+				<a href="index.html" class="headerLogo"></a>
+	        	<a href='#' class='promotion'>微云会员首次开通低值一元</a>
+        	</div>
+        	<div class='personalInformation clearFix'>
+				 <a href ='#' class = 'memberCenter fl'>会员中心</a>
+				 <a href ='#' class = 'download fl'>下载客户端</a>
+				 <div class = 'searchFile fl'>
+				 	<span class='searchFileIco'></span>
+				 	<input type = 'search' class = 'searchFileText' value ='搜索全部文件'/>
+				 </div>				
+				 <div class = 'personalImg fl'>
+					 <span class ='headImg '><img src="img/head.png"></span>
+					 <div class='headImgInformation'>
+					 	<div>
+					 		<p>娜写年华</p>
+							<p>已使用： 0B</p> 
+					 		<p>总容量： 1024G</p>
+					 	</div>
+					 	<ul>
+					 		<li><a>开通会员</a></li>
+					 		<li><a>独立密码（未开启）</a></li>
+					 		<li><a>反馈</a></li>
+					 		<li><a>退出</a></li>
+					 	</ul>
+					 </div>
+				 </div>
+        	</div>
+		</header>
+		<!-------------------------中间内容----------------------->
+		<section id ='main'>
+			<!------------左侧目录------->
+			<div class ='directory'>
+				<header class='uploadFile'>
+					<h3 class = 'upload'>上传</h3>
+				</header>
+				<ul class='masterDirectory'>
+					<li class='directoryList '><a href ='#'>目录</a></li>
+					<li class='directoryList'><a href ='#'>最近</a></li>	
+					<li class='directoryList lineList'></li>	
+					<li class='directoryList'><a href ='#'>文档</a></li>
+					<li class='directoryList'><a href ='#'>图片</a></li>
+					<li class='directoryList'><a href ='#'>音乐</a></li>
+					<li class='directoryList'><a href ='#'>视频</a></li>
+					<li class='directoryList'><a href ='#'>笔记</a></li>
+					<li class='directoryList lineList'></li>	
+					<li class='directoryList'><a href ='#'>剪切板</a></li>
+					<li class='directoryList  lineList'></li>	
+					<li class='directoryList'><a href ='#'>分享的链接</a></li>
+					<li class='directoryList'><a href ='#'>回收站</a></li>
+				</ul>
+				<footer class = 'directoryFooter clearFix'>
+					<span class='fl'>版权声明</span>
+					<strong class='fl'>|</strong>				
+					<span class='fl'>投诉指引</span>
+				</footer>
+			</div>
+			<!------------右侧文件------->
+			<div  class= 'mainFile'>			
+				<header class = 'functionHeader clearFix'>
+					<ul class='mainFunction clearFix fl'>
+						<li class = 'handleFile downloadFile'>下载</li>
+						<li class = 'handleFile moveFileTo'>移动到</li>
+						<li class = 'handleFile shareFile'>分享</li>
+						<li class = 'handleFile resetFileName'>重命名</li>
+						<li class = 'handleFile deleteFiles'>删除</li>
+						<li class = 'handleFile creatNewFile'>新建文件夹</li>
+						<li class = 'handleFile refreshFile'></li>
+					</ul>
+					<div class='functionRight fr clearFix'>
+						<p class='isListTreeShow'></p>
+						<p class='fileShowStyle'>							
+						</p>
+						<ul class='fileShowStyleList'>
+							<li>按时间排序</li>
+							<li>按字母排序</li>
+							<li>显示缩略图</li>
+						</ul>
+					</div>
+				</header>
+				<div class="mainCon clearFix">
+					<div class='listTree'>
+						
+					</div>
+					<div class='mainConRight'>
+						<div class = 'mainConFile clearFix'>
+							<p class = 'checkBox'>
+								<strong class ='checkAll'></strong>							
+							</p>
+							<p class='fileNav clearFix'>
+								<!--导航区域右侧的标题-->
+							</p>
+						</div>						
+						<ul id ='list' class = 'clearFix'>
+							<!--<li>
+								<p class = 'fileImg'>
+									<span></span> 
+									<strong class = 'img'></strong> 
+								</p>
+								<p class = 'fileName'>我的文档</p>
+								<input type = 'text' class = 'resetName'> 
+							</li> -->
+							<!--<div class='emptyBox'>
+								<div class='emptyImg'></div>
+								<p class='emptyTitle'>暂无文件</p>
+								<p class='emptyContent'>请点击左上角的“上传”按钮添加</p>
+						    </div>-->
+						</ul>
+					</div>					
+				</div>				
+			</div
+			
+		</section>
+		<script src='js/data.js'></script>
+		<script src='js/datahandle.js'></script>
+		<script src="src/dialog/js/dialog.js"></script>		
+		<script src='js/tools.js'></script>
+		<script src='js/index.js'></script>
+	</body>
+</html>

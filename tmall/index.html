@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link href="css/index.css" rel="stylesheet"/>
+<script>
+var scale = 1;
+if(window.devicePixelRatio){
+	scale = scale / window.devicePixelRatio;
+}
+document.write('<meta name="viewport" content="initial-scale='+scale+',minimum-scale='+scale+',maximum-scale='+scale+',user-scalable=no" />');
+</script>
+<script>
+toSize ();
+function toSize () {
+	var html = document.getElementsByTagName("html")[0];
+	var screenW = html.getBoundingClientRect().width; 
+	html.style.fontSize = screenW/27 + "px";
+}
+window.addEventListener(
+	"orientationchange",
+	function(){
+		toSize ();
+	},
+	false
+);
+window.addEventListener(
+	"resize",
+	function(){
+		toSize ();
+	},
+	false
+);
+</script>
+</head>
+
+<body>
+<header id="header">
+	<a href="#" class="classify"></a>
+    <form action="#">
+    	<input type="search" value="天猫精选"/>
+    </form>
+    <a href="#" class="login">登录</a>
+</header>
+<section id="wrap">
+    <section id="banner">
+        <div class="bannerImg">
+            <a href="#"><img src="img/banner.png"></a>
+            <a href="#" class="dot1 active"></a>
+            <a href="#" class="dot2"></a>
+            <a href="#" class="dot3"></a>
+            <a href="#" class="dot4"></a>
+            <a href="#" class="dot5"></a>
+        </div>
+    </section>
+    <ul id="shoppingNav" class="clearFix">
+        <li><a href="#">我的订单</a></li>
+        <li><a href="#">购物车</a></li>
+        <li><a href="#">天猫超市</a></li>
+        <li><a href="#">天猫国际</a></li>
+    </ul>
+    <section id="adpromotion" class="clearFix">
+        <div class="adpromotionLeft">
+            <a href="#">
+                <span>淘抢购</span>
+                <span>全场1折起，半价面单抢不停</span>
+                <img src="img/taoqiangg.png">
+            </a>
+        </div>
+        <ul class="adpromotionRight">
+            <li>
+                <a href="#">
+                    <span class="postage">省邮费</span>
+                    <span>9.9起统统都包邮</span>
+                    <img src="img/baoyou.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="performance">性价比</span>
+                    <span>最强特价好货</span>
+                    <img src="img/baoyou.png">
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section id="activePlate">
+        <div class="tmallhot"><span>[</span>天猫<em>热点</em><span>]</span></div>
+        <div class="wonderfulactives">
+            <h3><a href="#">精彩活动</a></h3>
+            <ul class="venueList clearFix">
+                 <li>
+                    <a href="#">
+                        <img src="img/venuepig.png">
+                        <span class="venueName">-618奶粉尿裤会场-</span>
+                        <span class="venueDis">最高立减50</span>
+                    </a>
+                 </li>
+                  <li>
+                    <a href="#">
+                        <img src="img/534.png">
+                        <span class="venueName">-洗护清洁会场-</span>
+                        <span class="venueDis">一元囤一年</span>
+                    </a>
+                 </li>
+            </ul>
+        </div>
+        <div class="selectedmarket">
+            <h3><a href="#">精选市场</a></h3>
+            <div class="selectedmarkePic clearFix">
+                <div class="selectedmarketLeft">
+                    <a href="#">
+                        <span>女装</span>
+                        <span>九点疯抢</span>
+                        <img src="img/tu.png">
+                    </a>
+                </div>
+                <ul class="selectedmarketRight">
+                    <li>
+                    <a href="#">
+                        <span>美妆馆</span>
+                        <span>官方直售</span>
+                        <img src="img/baoyou.png">
+                    </a>
+                    </li>
+                   <li>
+                    <a href="#">
+                        <span>美妆馆</span>
+                        <span>人气没装特惠</span>
+                         <img src="img/baoyou.png">
+                    </a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="goodsList clearFix">
+                <li><a href="#">t恤女</a><span>|</span></li>
+                <li><a href="#">连衣裙</a><span>|</span></li>
+                <li><a href="#">衬衫女</a><span>|</span></li>
+                <li><a href="#">时尚套装女</a></li>
+                <li><a href="#">牛仔裤女</a><span>|</span></li>
+                <li><a href="#">雪纺衫</a><span>|</span></li>
+                <li><a href="#">真丝连衣裙</a><span>|</span></li>
+                <li><a href="#">牛仔短裤女</a></li>
+            </ul>
+            <div class="adpromotion"><a href="#"><img src="img/qc.png"></a></div>
+        </div>
+        <div class="hotmarket">
+            <h3><a href="#">热门市场</a></h3>
+            <ul class="goodsClassfication clearFix">
+                <li>
+                     <a href="#"> 
+                        <span>男装大牌</span>
+                        <span>百搭衣橱</span>
+                        <img src="img/270254.png"/>
+                     </a>
+                </li>
+                <li>
+                     <a href="#"> 
+                        <span>男装大牌</span>
+                         <span>百搭衣橱</span>
+                        <img src="img/270254.png"/>
+                     </a>
+                </li>        	
+                <li>
+                     <a href="#"> 
+                        <span>男装大牌</span>
+                         <span>百搭衣橱</span>
+                        <img src="img/270254.png"/>
+                     </a>
+                </li>        	
+                <li>
+                     <a href="#"> 
+                        <span>男装大牌</span>
+                        <span>百搭衣橱</span>
+                        <img src="img/270254.png"/>
+                     </a>
+                </li>
+                <li>
+                     <a href="#"> 
+                        <span>男装大牌</span>
+                         <span>百搭衣橱</span>
+                        <img src="img/270254.png"/>
+                     </a>
+                </li>
+                <li>
+                     <a href="#"> 
+                        <span>男装大牌</span>
+                        <span>百搭衣橱</span>
+                        <img src="img/270254.png"/>
+                     </a>
+                </li>
+                <li>
+                     <a href="#"> 
+                        <span>男装大牌</span>
+                       <span>百搭衣橱</span>
+                        <img src="img/270254.png"/>
+                     </a>
+                </li>
+                <li>
+                     <a href="#"> 
+                        <span>男装大牌</span>
+                         <span>百搭衣橱</span>
+                        <img src="img/270254.png"/>
+                     </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div id="goodsListPic">
+        <h2>—猜你喜欢—</h2>
+        <ul class="activeGoods clearFix">
+            <li>
+            <a href="#">
+                <img src="img/goods.png">
+                <span>[热销]2016夏季新款女套装时尚名媛气质无袖立领</span>
+                <span>¥149.0</span>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+                <img src="img/goods.png">
+                <span>[热销]2016夏季新款女套装时尚名媛气质无袖立领</span>
+                <span>¥149.0</span>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+                <img src="img/goods.png">
+                <span>[热销]2016夏季新款女套装时尚名媛气质无袖立领</span>
+                <span>¥149.0</span>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+                <img src="img/goods.png">
+                <span>[热销]2016夏季新款女套装时尚名媛气质无袖立领</span>
+                <span>¥149.0</span>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+                <img src="img/goods.png">
+                <span>[热销]2016夏季新款女套装时尚名媛气质无袖立领</span>
+                <span>¥149.0</span>
+            </a>
+            </li>
+            <li>
+            <a href="#">
+                <img src="img/goods.png">
+                <span>[热销]2016夏季新款女套装时尚名媛气质无袖立领</span>
+                <span>¥149.0</span>
+            </a>
+            </li>
+        </ul>
+    </div>
+ </section>
+<footer id="footer">
+	<span class="footerIco"></span>
+</footer>
+</body>
+</html>

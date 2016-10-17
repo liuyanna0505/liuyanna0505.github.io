@@ -1,0 +1,955 @@
+	body {
+		margin: 0;
+		min-width:980px;
+		font-family: "微软雅黑"; 
+	}
+	h2 ,
+	h3 ,
+	h4 ,
+	h5,
+	h6 ,
+	p ,
+	dl ,
+	dd {
+		margin: 0;
+	}
+	ul ,
+	ol {
+		margin: 0;
+		padding: 0;
+		list-style:none;
+	}
+	a {
+		text-decoration:none;
+	}
+	img {
+		border:none;
+		vertical-align: top;
+	}
+	strong {
+		font-weight:normal;
+	}
+	form{
+	      border:none;
+		  margin:0px;
+	}
+	input {
+		 padding:0;
+	     outline:none;
+		 border:none;
+	}
+	textarea {
+	 	 padding:0;
+		 margin:0;
+		 resize:none;
+	     overflow:auto;
+	     outline:none;
+	}
+	em {
+		font-style:normal;
+	}
+	.clearFix{
+		zoom:1;
+	}
+	.clearFix:after{
+		content:"";
+		display:block;
+		clear:both;
+	}
+	.fl {
+		float:left;
+	}
+	.fr {
+		float:right;
+	}
+	/*end reset css*/
+	/*start private css*/
+	/*-------------头部-------------*/
+	#header{
+		height:50px;
+		border-bottom:1px solid #d8dce5;
+	}
+	.logo{
+		float:left;
+		height:50px;
+	}
+	.headerLogo{
+		float:left;
+		margin:12px 30px 10px 19px;
+		height:28px;
+		width:81px;
+		background:url(../img/logo1.png) no-repeat;
+	}	
+	.promotion{
+		padding-top:2px;
+		font:12px/48px '微软雅黑';
+		color:#3091f2;
+	}
+	.personalInformation{
+		float:right;
+		padding-top:10px;
+	}
+	.memberCenter{
+		position:relative;
+		padding-top:2px;
+		height:26px;
+		border:1px solid #147ade;
+		background:#3091f2;
+		color:#fff;
+		width:106px;
+		text-indent: 44px;
+		font:12px/26px '微软雅黑';
+		margin-right:13px;
+		opacity:0.8;
+	}
+	.memberCenter:before{
+		content:'';
+		position:absolute;
+		width:24px;
+		height:15px;
+		left:15px;
+		top:6px;
+		background:url(../img/icon-vip-white.png) no-repeat;
+	}
+	.download{
+		position:relative;
+		padding-top:2px;
+		height:26px;
+		width:123px;
+		border: 1px solid #3091f2;
+		text-indent: 40px;
+		font:12px/26px '微软雅黑';
+		color:#3091f2;
+		margin-right:13px;
+		opacity:0.8;
+	}
+	.download:before{
+		content:'';
+		position:absolute;
+		width:12px;
+		height:16px;
+		left:23px;
+		top:7px;
+		background:url(../img/icon-phone.png) no-repeat;
+	}
+	.memberCenter:hover,
+	.download:hover{
+		opacity:1;
+	}
+	.searchFile{
+		position:relative;
+		padding-top:2px;
+		height:26px;
+		width:160px;
+		border: 1px solid #c2c3ca;
+		text-indent: 30px;
+		font:12px/26px '微软雅黑';
+		color:#9b9b9b;		
+	}
+	.searchFileText{
+		height:24px;
+		width:130px;
+		color:#ccc;
+	}
+	 .searchFileIco{
+	 	position:absolute;
+	 	width:13px;
+	 	height:13px;
+	 	left:9px;
+	 	top:8px;
+	 	background:url(../img/lay-header.png) no-repeat 0 -168px;	 	
+	 }
+	.personalImg{
+		position:relative;
+		font:12px "微软雅黑";
+	}
+	.headImg{
+		position:relative;
+		margin-top:-8px;		
+		margin-left:5px;
+		padding:7px 30px 0 16px; 
+		border:1px  solid #fff;
+	}
+	.headImg:after{
+		content:'';
+		position:absolute;
+		width:7px;
+		height:4px;
+		right:13px;
+		top:22px;
+		background:url(../img/ico-message.png) no-repeat 0 -1134px;
+	}
+	.headImgInformation{
+		position:absolute;
+		width:168px;
+		right:0;
+		top:45px;
+		display:none;
+	}	
+	/*-----------------------------主区域----------------*/	
+	#main{
+		position:relative; 
+		overflow:hidden;		 
+	} 
+	/*-----------------------------主区域-左侧----------------*/	
+	.directory{
+		position:absolute;
+		height:100%;
+		width:159px;
+		border-right:1px solid #d8dce5;
+		background:#eaedf4;
+		font: 14px '微软雅黑';
+		z-index:3px;
+	}
+	.directory a{
+		color:#505254;
+	}	
+	.uploadFile {
+		padding:14px 14px 0 15px;
+		height:48px;
+		background:#eaedf4;
+	}
+	.upload {
+		position:relative;
+		width:130px;
+		height:36px;
+		background:#3091f2;
+		text-indent: 62px;
+		font:14px/36px "微软雅黑";
+		color:#fff;
+	}
+	.upload:before{
+		content:'';
+		position:absolute;
+		width:12px;
+		height:12px;
+		left:44px;
+		top:11px;
+		background:url(../img/add.png) no-repeat;
+	}
+	.masterDirectory .directoryList{
+		position:relative;
+		height:30px;
+		border-top:1px solid #eaedf4;
+		border-bottom:1px solid #eaedf4; 
+		line-height: 32px;
+		text-indent:50px;	
+	}
+	.masterDirectory .directoryList:before{ 
+		content:'';
+		position:absolute;
+		width:16px;
+		height:18px;
+		left:27px;
+		top:10px;
+	}
+	.masterDirectory li:hover{
+		background:#ced4e0;		
+		border-top:1px solid #ccc;
+		border-bottom:1px solid #ccc; 
+	}
+	.masterDirectory .lineList:hover{
+		background:#eaedf4;		
+	}
+	.masterDirectory li:nth-of-type(1):before{
+		background:url(../img/ico-message.png) no-repeat 0 -8px;
+	}
+	.masterDirectory li:nth-of-type(2):before{
+		background:url(../img/ico-message.png) no-repeat 0px -39px;
+	}
+	.masterDirectory li:nth-of-type(4):before{
+		background:url(../img/ico-message.png) no-repeat 0px -104px;
+	}
+	.masterDirectory li:nth-of-type(5):before{
+		background:url(../img/ico-message.png) no-repeat 0 -72px;
+	}
+	.masterDirectory li:nth-of-type(6):before{
+		background:url(../img/ico-message.png) no-repeat 0 -201px;
+	}
+	.masterDirectory li:nth-of-type(7):before{
+		background:url(../img/ico-message.png) no-repeat 0 -168px;
+	}
+	.masterDirectory li:nth-of-type(8):before{
+		background:url(../img/ico-message.png) no-repeat 0 -136px;
+	}
+	.masterDirectory li:nth-of-type(10):before{
+		background:url(../img/ico-message.png) no-repeat 0 -263px;
+	}
+	.masterDirectory li:nth-of-type(12):before{
+		background:url(../img/ico-message.png) no-repeat 0 -296px;
+	}
+	.masterDirectory li:nth-of-type(13):before{
+		background:url(../img/ico-message.png) no-repeat 0 -326px;
+	}
+	.masterDirectory .lineList{
+		border-top:1px solid #ccc;
+		margin-top:13px;
+		margin-bottom:13px;
+		height:0px;
+		line-height: 0px;
+		overflow: hidden;
+	}
+	.directoryFooter {/*样式还需完善*/
+		margin-top:80px;
+		font:14px/20px "微软雅黑";
+		color:gray;
+		padding-left:24px;
+		font-size:11px;
+	}
+	.directoryFooter span{
+	}
+	.directoryFooter strong{
+		font-weight:normal; 
+		margin:0 8px 0 9px;
+	}
+	/*----------main右侧---js文件夹部分-------------------*/	
+	.mainFile{   
+		height:100%;
+		margin-left:160px;		
+	}			 
+	.functionHeader{
+		width:100%;		
+		background:#f5f6f9;
+		border-bottom:1px solid #ccc;
+	}
+	.mainFunction{
+		padding:13px 0 13px 12px; 
+	}
+	.mainFunction li {				
+		position:relative;
+		float:left;
+		height:34px;
+		margin-right:5px;				
+		font:12px/34px '微软雅黑';				
+		font-weight:normal;						
+		border:1px solid #c7c9cf;
+		opacity: 0.8;
+		padding:0 17px 0 18px;
+		text-indent: 20px;
+		background:#fff;			
+		cursor: pointer;
+	}
+	.mainFunction li:hover{
+		opacity:1;		
+	} 
+	.mainFunction li:before{
+		content:''; 
+		position: absolute;
+		width:16px;
+		height:15px;
+		left: 18px;
+		top: 9px;
+	}
+	.downloadFile:before{
+		background:url('../img/ico-message.png') no-repeat  0 -359px;
+	}
+	.moveFileTo:before{
+		background:url('../img/ico-message.png') no-repeat  0 -393px;
+	} 
+	.shareFile:before{
+		background:url('../img/ico-message.png') no-repeat  0 -457px;
+	} 
+	.resetFileName:before{
+		background:url('../img/ico-message.png') no-repeat  0 -520px;
+	}
+	.deleteFiles:before{
+		background:url('../img/ico-message.png') no-repeat  0 -328px;
+	}
+	.creatNewFile:before{
+		background:url('../img/ico-message.png') no-repeat  0 -552px;
+	}
+	.mainFunction .refreshFile{ 
+		padding: 0;
+		text-indent: 0;
+		width:40px;  
+	}
+	.mainFunction .refreshFile:before{
+		width:13px;
+		height:16px;
+		left: 13px;
+	 	background:url('../img/ico-message.png') no-repeat  0 -712px;
+	}
+	.functionRight{
+		position: relative;
+	 	 margin: 13px 12px 0 0;
+	}
+	.functionRight .isListTreeShow ,
+	.functionRight .fileShowStyle {
+		position:relative;
+		float:left;
+		width:48px;
+		height:34px;
+		border:1px solid #c7c9cf;	
+		background:#fff;
+		opacity: .8;				
+		cursor: pointer;
+	}
+	.functionRight .isListTreeShow {
+		border-right:none;		
+	}
+	.functionRight .isListTreeShow:hover,
+	.functionRight .fileShowStyle:hover
+	{
+		opacity: 1;
+	}
+	.functionRight .isListTreeShow:before{
+		content:'';
+		position:absolute;
+		width: 15px;
+		height: 12px;
+		left: 18px;
+		top: 11px;
+		background:url('../img/ico-message.png') no-repeat -1px -1098px;
+	}
+	.functionRight .fileShowStyle:before{
+		content:'';
+		position:absolute;
+		width: 15px;
+		height: 12px;
+		left: 13px;
+		top: 12px;
+		background:url('../img/ico-message.png') no-repeat -1px -1001px;
+	}
+	.functionRight .fileShowStyleList{		
+		position:absolute;
+		right:0px;
+		top: 33px;
+		width:148px;
+		padding: 1px 1px 0 1px;
+		border:1px solid #c8ccd5;	
+		background: #fff;
+		z-index: 3;	
+		display: none;
+	}
+	.functionRight .fileShowStyleList li{
+		text-indent: 33px;
+		margin-bottom: 1px;
+		border-top: 1px solid #fff;
+		font:11px/27px "微软雅黑";
+	}
+	.functionRight .fileShowStyleList li:hover{
+		background: #f3f8ff;
+	}
+	.functionRight .fileShowStyleList li:nth-of-type(3){
+		background: #eaf5ff;/*默认的缩略颜色*/
+	}
+	/*文件主区域*/ 
+	.mainCon{
+		position:relative;
+		height:100%; 		 
+	}
+	.mainCon .mainConRight{
+		margin-left:185px;	
+		height:100%;	
+		border-left:1px solid #ccc;			
+	}	 
+	.mainConFile{
+		border-bottom:1px solid #ccc;	
+		height:30px;	 
+	}
+	.checkBox{
+		float:left;
+		position:relative;
+		width:32px;
+		height:30px;
+		border-right: 1px solid #ccc;
+	} 
+	.checkBox strong{ 
+		position : absolute;
+		height:14px;
+		width:14px;
+		left:10px;
+		top: 10px;			
+		cursor: pointer;
+	}
+	.checkAll{
+		background:url('../img/ico.png') no-repeat  0 -270px;
+	}
+	.checkedAll{ 
+		background:url('../img/ico.png') no-repeat  0 -320px;
+	}
+	/*-----导航-----*/
+	.fileNav{
+		float: left;
+	    height: 100%;
+	    overflow: hidden;
+	} 
+	.fileNav a {
+	 	cursor: pointer;
+	 }	
+	.fileNav a,.fileNav span{
+	    float: left;
+	    position: relative;
+	    margin-left: -19px;
+	    padding: 0 18px 0 25px;
+	    height: 100%;
+	    font-size:12px;
+	    line-height: 30px;
+	    z-index: 3;
+	    background: url(../img/main-path.png) no-repeat right -50px;
+	    color:#000;
+	}	
+	.fileNav .current-path {
+	    background-position: right -200px;
+	}	
+	.fileNav a span{
+	    display: inline-block;
+	}
+	/*-----左侧目录树-------*/
+	.mainCon .listTree{
+		position:absolute; 
+		top:0;
+		left:0;
+		width:170px; 		
+		float:left;	
+		padding-left:14px;		
+		height:100%;		 	
+	}
+	.treeTitle {
+	    border: 1px solid #fff;
+	    margin-top: 1px;
+	    cursor: pointer;	
+	}	
+	.treeTitle:hover{
+	    border: 1px solid #bfdaf4;
+	    background: #e7f2fe;
+	}	
+	.treeNav {
+	    background: #e7f2fe;
+	    border: 1px solid #bfdaf4;
+	    padding-left: 14px;
+	    margin-left: 0px;
+	}	
+	.listTree span{
+	    display: block;	
+	    font-size: 12px;
+	    position: relative;
+	}	
+	.treeTitle .ico {
+	    position: absolute;
+	    left: -13px;
+	    top: 0;
+	    width: 15px;
+	    height: 26px;
+	    background: url(../img/folder-tree.png) no-repeat 4px -43px;
+	    opacity: 0.8;
+	}
+	.treeContro .ico{
+	    background-position: 3px -92px;
+	}
+	.treeControNone .ico{
+	    background-position: -999px -99px;
+	}	
+	.listTree ul ul{
+	    -display: none;
+	}	
+	.listTree span strong{
+	    display: block;
+	    width: 82%;
+	    position: relative;
+	    line-height: 22px;
+	    padding: 2px 0;
+	    padding-left: 24px;
+	    color: #161719;
+	    background: url(../img/folder-tree.png) no-repeat 3px 6px;
+	}
+	.tree-menu-comm span strong{
+	    display: block;
+	    width: 82%;
+	    position: relative;
+	    line-height: 22px;
+	    padding: 2px 0;
+	    padding-left: 24px;
+	    color: #161719;
+	    background: url(../img/folder-tree.png) no-repeat 3px 6px;
+	}
+	.tree-menu-comm span{
+	    display: block;
+	
+	    font-size: 12px;
+	    position: relative;
+	}
+	/* 适用于弹出层的菜单 */		
+	/*右侧文件区域*/
+	#list{
+		padding-left:4px;
+		height:325px;
+		position:relative;
+	}
+	.emptyBox{
+		position:absolute;
+		width:500px;
+		left:50%;
+		top:50%;
+		margin-left:-250px;
+		font-family: "微软雅黑"; 		
+	}
+	/*空白区域提示*/
+	.emptyBox .emptyImg{		 
+		width:200px;
+		height:90px;
+		margin-left:200px;
+		-margin:0 auto;
+		background:url('../img/g-empty.png')  no-repeat  -41px -5px;		 
+	}	
+	.emptyBox .emptyTitle{
+		height: 30px;
+	    line-height: 30px;
+	    font-size: 22px;
+	    text-align: center;
+	    color: #AFB5BF;
+	}
+	.emptyBox .emptyContent{
+		height: 30px;
+	    line-height: 30px;
+	    font-size: 16px;
+	    text-align: center;
+	    color: #AFB5BF;
+	}
+	#list li{
+		float:left;				
+		margin-top:9px;
+		margin-right:8px;
+		position:relative;
+		width: 110px;
+		height: 106px;				
+		border:1px solid #fff;
+		-background:#f3f9fe;		
+		cursor: pointer;
+	}
+	.bg{ 
+		background:#f3f9fe;
+	}
+	.fileImg{
+		padding:13px 20px 9px 24px;
+		
+	}
+	.fileImg span{
+		position:absolute;
+		width:18px;
+		height:18px;
+		left:-1px;
+		top:-1px;
+	}
+	.checkBox1{ 
+		background:url('../img/ico.png') no-repeat  0 -370px;				 				
+	}
+	.checkBox2{ 
+		background:url('../img/ico.png') no-repeat  0 -421px;
+	}
+	.img{ 
+		display:block; 				
+		width: 64px;
+		height: 54px;				 
+		background:url(../img/file.png) no-repeat 0 -5px;
+	}
+	.fileName{ 
+		text-align: center;
+		font:12px/28px "微软雅黑";
+		-display:none;
+	} 
+	.resetName{
+		width:94px;
+		height:22px;
+		border:1px solid #3091f2; 
+		margin-left:6px;
+		text-align: center;
+		display: none;				
+	}
+	/*提示选框*/
+	.newdiv{
+		width:0px;
+		height:0px;
+		border: 1px dashed #000;
+		position: absolute;
+		left: 0 ;
+		top: 0;
+		background:deepskyblue;
+		opacity:.2;
+	}
+	/*--------提示弹框--------*/
+	#tips{
+		position: fixed;
+		width:200px;
+		height:40px; 
+		top:-40px;
+		left:50%;
+		transition:.3s; 
+		-background:url(img/unselect.png) no-repeat;
+	}
+	.samename{
+		background:url(../img/samename.png) no-repeat; 
+	}
+	.creatscu{
+		background:url(../img/creatscu.png) no-repeat ;
+	}
+	.unselect{
+		background:url(../img/unselect.png) no-repeat ;
+	}
+	.some{
+		background:url(../img/some.png) no-repeat ;
+	}
+	.onlyone{
+		background:url(../img/onlyone.png) no-repeat ;
+	}
+	.succ{
+		background:url(../img/succ.png) no-repeat ;
+	}	
+	/*-------删除文件提示框------*/
+	#mask{
+		width:100%;
+		height:100%;
+		-position:absolute; 
+		left:0;
+		top:0;
+		background:#ccc;
+		opacity:.2;
+		z-index: 10;
+		display: none;
+	}			
+	#isDeleteFile{
+		width: 400px;
+		height: 222px;
+		border: 1px solid #9198a6; 
+		box-shadow:0 0 5px #9198a6;
+		background:aliceblue;
+		position:fixed;
+		left: 50%;
+		top:50%;
+		margin:-111px 0 0 -200px;
+		z-index: 11;
+		display: none;
+	}
+	.deleteFile{
+		position:relative;
+		height:48px;
+		font:18px/48px '微软雅黑';
+		text-indent: 18px;
+		border-bottom:1px solid #d8dce5;
+	}
+	.deleteX{
+		position:absolute;
+		top:17px;
+		right:19px;
+		width:12px;
+		height:12px;
+		background:url(../img/lay-header.png) no-repeat 0 -268px;
+	}
+	.deleteFileTips{
+		padding-top:33px;
+	}
+	.deleteFileTips p:nth-of-type(1){
+		position:relative;
+		font:16px/34px "微软雅黑";
+		text-indent:78px;		
+	}
+	.deleteFileTips p:nth-of-type(1):before{
+		content:'';
+		position:absolute;
+		width:32px;
+		height:32px;
+		left:33px;
+		top:0;
+		background:url(../img/dele.png)
+	}
+	.deleteFileTips p:nth-of-type(2){
+		text-indent:78px;
+		font:12px/30px "微软雅黑";
+		color:#868686;
+	}
+	.deleteFileTips p:nth-of-type(3){
+		 padding-top:17px; 
+		 text-indent:239px;
+	}
+	.deleteFileTips p:nth-of-type(3) input{
+		height:34px;
+		width:62px;
+		font:12px/34px "微软雅黑";
+	}
+	.sure{
+		color:#fff;
+		background:#3091f2;
+		border:1px solid #3091f2;
+		cursor: pointer;
+	}
+	.cancel{
+		background:#fff;
+		border:1px solid #c7c9cf;
+		cursor: pointer;
+	}
+	/*------移动提示框---------*/
+	#maskMove{
+		width:100%;
+		height:100%;
+		position:absolute;
+		left:0;
+		top:0;
+		background:#ccc;
+		opacity:.2;
+		z-index: 10;
+		display: none;
+	}
+	#isMoveFile{
+		width: 450px;
+		height: 440px;
+		border: 1px solid #9198a6; 
+		box-shadow:0 0 5px #9198a6;
+		background:aliceblue;
+		position:fixed;
+		left: 50%;
+		top:50%;
+		margin:-225px 0 0 -220px;
+		z-index: 15;
+		display: none;
+	}
+	.moveFile{
+		position:relative;
+		height:48px;
+		font:18px/48px '微软雅黑';
+		text-indent: 18px;
+		border-bottom:1px solid #d8dce5;
+	}
+	.moveDeleteX{
+		position:absolute;
+		top:17px;
+		right:19px;
+		width:12px;
+		height:12px;
+		background:url(../img/lay-header.png) no-repeat 0 -268px;
+		cursor: pointer;
+	}
+	.moveFileTree{
+		padding:0 24px;
+	}
+	.moveToStoreFile{
+		height:70px;
+	}
+	.moveToStoreFileTree{
+		border:1px solid #dedede;
+		height:235px;
+	}
+	.isSureBtn{
+		padding-right:24px;
+		padding-top:24px;
+		text-align: right;		
+	}
+	.isSureBtn .sureMove,
+	.isSureBtn .noMove{
+		width:62px;
+		height:34px;
+		font:12px/34px '微软雅黑';
+	}
+	.isSureBtn .sureMove{
+		background:#94c7fa;
+		color:#fff;
+		border:1px solid #94c7fa;
+		cursor: pointer;
+	}
+	.isSureBtn .noMove{
+		background:#fff;
+		color:#505254;
+		border:1px solid #c7c9cf;
+		cursor: pointer;
+	}
+	/*剪影*/
+	.drag-helper{
+    width:50px;
+    height:50px;
+    z-index:12;
+    position:absolute;
+    display:block;
+    top:0px;
+    left:0px;
+    display: none;
+}
+.drag-helper img{border:1px solid #7c7c7c;}
+.drag-helper .icon{
+    position:absolute;
+    width:34px;
+    height:34px;
+    top:3px;
+}
+
+.drag-helper .sum{
+    position:absolute;
+    left:0px;
+    top:0px;
+    background:#57acff;
+    font-size:10px;
+    padding:2px 4px;
+    line-height:12px;
+    height:12px;
+    font-weight:600;
+    color:white;
+    z-index:16;
+    text-align:center;
+    min-width:8px;
+    border-radius:8px;
+    border: 1px #3091f2 solid;
+}
+.drag-helper .icon {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    top: 3px;
+}
+
+.drag-helper .icon0{left:3px;z-index:15;}
+.drag-helper .icon1{left:11px;top:6px;z-index:14;}
+.drag-helper .icon2{left:19px;top:9px;z-index:13;}
+.drag-helper .icon3{left:27px;top:12px;z-index:12;}
+
+.filetype, .file-ico {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/file-small.png);
+}
+.filetype {
+    background-image: url(../img/file-small.png);
+    background-position: -999px -999px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.icon-folder {
+    background-position: 1px 2px;
+}
+
+
+.drag-helper .sum {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: #57acff;
+    font-size: 10px;
+    padding: 2px 4px;
+    line-height: 12px;
+    height: 12px;
+    font-weight: 600;
+    color: white;
+    z-index: 16;
+    text-align: center;
+    min-width: 8px;
+    border-radius: 8px;
+    border: 1px #3091f2 solid;
+}
+/*自动以菜单*/
+#customList	{
+	width: 80px;
+	height: 100px;
+	border: 1px solid #C2C3CA;
+	padding-top:10px;
+	position: absolute;
+	left: 0;
+	top:0;
+	text-indent: 20px;
+	display:none;
+	z-index: 5;
+	background:#fff;
+}
+#customList li{
+	line-height: 20px;
+	width:100%;
+	font:12px/24px "微软雅黑";
+'}
