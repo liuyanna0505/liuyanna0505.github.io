@@ -1,0 +1,1138 @@
+@charset "utf-8";
+/* CSS Document */
+/*reset.css*/
+body {
+	margin: 0;
+	font: 12px Arial, "微软雅黑";
+	background:#f5f5f5;
+}
+h3 ,
+h4 ,
+dl ,
+dd ,
+p {
+	margin :0;
+}
+ul ,
+ol {
+	margin :0;
+	padding :0;
+}
+li {
+	list-style: none;
+}
+a {
+	text-decoration:none;
+}
+em {
+	font-style: normal;
+}
+img {
+	border: none;
+	vertical-align:top;
+}
+input {
+	padding:0;
+	outline: none;
+}
+.clearFix:after {
+	zoom:1;
+}
+.clearFix:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+/*end reset.css*/
+
+/*public.css*/
+.wrap {
+	width: 982px;
+	margin:0 auto;
+}
+a:hover {
+	text-decoration:underline;
+}
+/*end public.css*/
+#header {
+	border-top: 1px solid #030303;
+	border-bottom: 1px solid #030303;
+	height:69px;
+	background:url(../img/wangyipp.png) repeat-x 0 -424px;
+}
+.topnav{
+	height:69px;
+}
+.topnavLeft {
+	float:left;
+}
+.topnavLeft .logo {
+	float:left;
+	margin:22px 16px 18px 1px;
+	padding-top:29px;
+	height: 0;
+	width:157px;
+	overflow:hidden;
+	background:url(../img/wangyi.png) no-repeat -6px -6px;
+}
+.topnavLeft .navList{
+	float:left;
+}
+#header  .navList a {
+	float:left;
+	position:relative;
+	color:#ccc;	
+	background:url(../img/tuoduan.png) no-repeat right 31px;
+}
+.navList em {
+	float:left;
+	padding-right:2px;
+	margin:0 -1px;
+}
+.navList .navListName {
+	float:left;
+	padding: 5px 20px 0 20px;
+	font-size:14px;
+	line-height:64px;	
+}
+#header .navList a:hover {
+	text-decoration:none;
+	background:url(../img/top1.png) no-repeat  right 0;
+	position:relative;
+	z-index:2;
+}
+#header .navList a:hover .navListName {
+	background:url(../img/top.png) no-repeat right 0;
+
+}
+#header .navList .active {
+	foat:left;
+	background:url(../img/top.png) no-repeat ;
+}
+#header .navList .active em{
+	float:left;
+	background:url(../img/top.png) no-repeat;
+}
+/*头部的竖线????margin负值和滑动门*/
+
+#header .dowload {
+	position:relative;	
+	background:none;
+}
+.dowload .navListName {
+	padding-right:30px;
+
+}
+.dowload .hotIco{
+	position:absolute;
+	top:22px;
+	left:91px;
+	height: 17px;
+	width: 26px;
+	background:url(../img/wangyi.png) no-repeat -169px -6px;
+}
+.recommendIco {
+	position:absolute;
+	display:none;
+	width:14px;
+	height:7px;
+	left:40px;
+	top:63px;
+	background:url(../img/wangyi.png) no-repeat  -346px -74px;
+}
+a:active .recommendIco,.active .recommendIco{
+	display:block;
+}
+.topnavRight {
+	float:right;
+	padding:20px 0 18px 0;
+	height:31px;
+	width:272px;
+}
+.inputBox {
+	float:left;
+	height:31px;
+	width:210px;
+	position:relative;
+}
+.inputBox input {
+	float:left;
+	height:26px;
+	width:176px;
+	padding-top:3px;
+	border-top:1px solid #ababab;
+	border-bottom:1px solid #fff;
+	border-radius:14px;
+	padding-left:31px;
+	color:#9b9b9b;
+	font:11px/26px "宋体";
+	background:url(../img/wangyipp.png) repeat-x 0 -501px;
+	
+}
+.inputBox .inputIco {
+	position:absolute;
+	left:13px;
+	top:9px;
+	height:12px;
+	width:12px;
+	background:url(../img/wangyi.png) no-repeat -200px -6px; 
+}
+.topnavRight .loginMeun {
+	position:relative;
+	float:right;
+	padding-top:6px;
+	padding-left:14px;
+	margin-right: 1px;
+	width:47px; 
+}
+.loginMeun .login {
+	font:12px/24px "微软雅黑";
+	color:#787878;
+}
+.loginMeun .loginIco {
+	position:absolute;
+	width:12px;
+	height:7px;
+	top:14px;
+	left:49px;
+	background:url(../img/wangyi.png) no-repeat -352px -10px;
+}
+.login:hover {
+	text-decoration:underline;
+	color:#999;
+}
+.loginMeun:hover .loginIco {
+	background:url(../img/wangyi.png) no-repeat -330px -10px;
+}
+.loginIco:hover .login {
+	text-decoration:none;
+}
+.topnavRight ul {	
+	display:none;
+	padding-top:10px;
+}
+.menu {
+	position:absolute;
+	height:201px;
+	width:160px;
+	top:30px;
+	left:-85px;
+	background:url(../img/wangyi.png) no-repeat -14px -276px;
+}
+.menu  li {
+	position:relative;
+	font:12px/38px "微软雅黑";
+	padding-left:46px;
+	width:103px;/*???*/
+	height:38px;
+}
+.menu a {
+	color:#ccc;
+	text-decoration:none;
+}
+.menu li:hover {
+	background-color:#353535;
+	
+}
+.menu  .menuIco {
+	position:absolute;
+	left:19px;
+	top:11px;
+	width:17px;
+	height:17px;
+	background:url(../img/wangyi.png) no-repeat ;
+}
+ 
+.meulist1 .menuIco {
+	background-position:-222px -6px;
+}
+.meulist2 .menuIco {
+	background-position: -244px -6px;
+}
+.meulist3 .menuIco {
+	background-position: -266px -6px;
+}
+.meulist4 .menuIco {
+	background-position: -288px -6px;
+}
+.meulist5 .menuIco {
+	background-position: -309px -6px;
+}
+
+.loginMeun:hover ul{
+	display:block;
+	z-index:4;
+}
+
+#subNav {
+	height:33px;
+	border-bottom:1px solid #030303;
+	background:url(../img/wangyipp.png) repeat-x 0 -32px;
+}
+.recommend{
+	position:relative;
+}
+.recommendList { 
+	float:left;
+	padding:7px 0 6px 195px;
+	height:20px;
+}
+.recommendList a{
+	float:left;	
+	margin-right:36px;
+}
+.recommendList span {
+	float:left;
+	height:18px;
+	font:12px/18px "微软雅黑"; 
+	padding:2px 13px 0;
+	color:#fff;
+}
+.active {
+	 float:left;
+	 background:url(../img/wangyi.png) no-repeat -6px -235px;
+}
+#subNav .active span {
+	background:url(../img/wangyipp.png) no-repeat right -4px;
+}
+#subNav a:hover{
+	 text-decoration:none;
+	 background:url(../img/wangyi.png) no-repeat -6px -235px;
+}
+#subNav a:hover span{ 
+	background:url(../img/wangyipp.png) no-repeat right -4px;
+}
+#banner {
+	height:336px;
+	background:url(../img/wangyipp.png) repeat-x 0 -74px;
+}
+.bannerImg  {
+	position:relative;
+	height:336px;
+}
+.bannerLeftIco {
+	position:absolute;
+	height: 37px;
+	width: 19px;
+	bottom: 150px;
+	left: -51px;
+	background: url(../img/wangyi.png) no-repeat -371px -2px;
+}
+.bannerRightIco {
+	position:absolute;
+	height: 37px;
+	width: 19px;
+	bottom: 150px;
+	right: -51px;
+	background: url(../img/wangyi.png) no-repeat -410px -2px;
+}
+.bannerLeftimg {
+	position:absolute;
+	width:729px;
+	height:336px;
+	left:0; 
+	bottom:0;
+	background:url(../img/bannneric.png) no-repeat;
+}
+.bannerPic {
+	position:relative;
+	width:254px;
+	height:336px;
+}
+.bannerRighrimg{
+	position:absolute;
+	width:254px;
+	height:336px;
+	left:729px; 
+	bottom:0;
+	background:url(../img/bannnericR1.png) no-repeat;
+}
+.bannerPic .roudPoint1 {
+	position:absolute;
+	height:6px;
+	width:6px;
+	left:350px;
+	top:317px;
+	background:url(../img/wangyi.png) no-repeat -291px -43px;
+}
+.bannerPic .roudPoint2 {
+	position:absolute;
+	height:6px;
+	width:6px;
+	left:372px;
+	top:317px;
+	background:url(../img/wangyi.png) no-repeat -291px -43px;
+}
+.bannerPic .roudPoint3 {
+	position:absolute;
+	height:6px;
+	width:6px;
+	left:396px;
+	top:317px;
+	background:url(../img/wangyi.png) no-repeat -291px -43px;
+}
+.bannerPic .roudPoint4 {
+	position:absolute;
+	height:6px;
+	width:6px;
+	left:419px;
+	top:317px;
+	background:url(../img/wangyi.png) no-repeat -291px -43px;
+}
+.bannerPic .roudPoint5 {
+	position:absolute;
+	height:6px;
+	width:6px;
+	left:442px;
+	top:317px;
+	background:url(../img/wangyi.png) no-repeat -291px -43px;
+}
+.roudPoint a:hover {
+	background:url(../img/wangyi.png) no-repeat -309px -43px;
+}
+.bannerRighrimgDowl {
+	position:absolute;
+	width:215px;
+	height:56px;
+	left:19px;
+	top:213px;
+	background:url(../img/wangyi.png) no-repeat -4px -43px;
+}
+.bannerRighrimg p {
+	position:absolute;
+	font:12px;
+	color:#8d8d8d;
+	left:15px;
+	bottom:43px;
+}
+#main {
+	background:#f5f5f5;
+}
+.mainCon {
+	width:980px;
+	border-left:1px solid #d3d3d3;
+	border-right:1px solid #d3d3d3;
+	background:#fff;
+}
+.mainConLeft {
+	float:left;
+	width:689px;
+	padding:0 20px 0 20px;
+	border-right:1px solid #d4d4d4;
+}
+.hotRecommend nav{
+	border-bottom:2px solid #c10d0c;
+	margin-bottom:20px;
+	/*public*/
+}
+.hotRecommendNav {
+	margin-top:25px;
+	padding-bottom:9px;
+	height:19px;
+}
+.hotRecommend h3 {
+	float:left;
+	height:19px;
+	position:relative;
+	padding-left:34px;
+}
+.hotIco {
+	position:absolute;
+	height:14px;
+	width:14px;
+	top:3px;
+	left:10px;
+	background:url(../img/wangyi.png) no-repeat -234px -43px;
+}
+.hotRecommend h3 .hotTitle {
+	float:left;
+	padding-top:19px;
+	width:80px;
+	height:0;
+	overflow:hidden;
+	background:url(../img/wangyi.png) no-repeat -6px -145px;
+}
+.hotRecommendNav p{	
+	float:left;
+	padding-left:19px;
+	padding-top:3px;
+	font:12px/16px "微软雅黑";
+	color:#dcccdc;
+}
+#main .hotRecommendNav a {
+	margin:0;
+	background:none;	
+}
+.recommendLists span {
+	margin:0 9px 0 13px;
+}
+#main .recommendLists a {
+	color:#666;
+}
+#main .recommendList a:hover {
+	text-decoration:underline;
+}
+
+.hotRecommend .more {
+	float:right;
+	position:relative;
+	padding-right:27px;
+	height:19px;
+	/*public*/
+}
+.more a {
+	color:#666;
+}
+.moreIco {
+	position:absolute;
+	width:8px;
+	height:6px;
+	right:12px;
+	top:11px;
+	background:url(../img/wangyi.png) no-repeat -326px -26px;
+}
+.ulpic {
+	margin-right:-39px;
+}
+.ulpic li {
+	float:left;
+	width:140px;
+	height:234px;
+	margin-right:42px;
+	 
+}
+.ulpicbox {
+	position:relative;
+	width:14px;
+	height:140px;
+}
+.ulpicbox img {
+	width:140px;
+	height:140px;
+}
+.ulpicbox .mask {
+	position:absolute;
+	width:140px;
+	height:27px;
+	left:0;
+	bottom:0;
+	background:#000;
+	opacity:0.5;
+}
+.ulpicbox .ear {
+	position:absolute;
+	width:14px;
+	height:10px;
+	left:10px;
+	top:122px;
+	background:url(../img/wangyi.png) no-repeat -259px -43px;
+}
+.ulpic .ulpicbox .picNumber {
+	position:absolute;
+	font:12px/26px "宋体";
+	width:50px;
+	left:29px;
+	bottom:0;
+	color:#ccc;
+}
+.picIco {
+	position:absolute;
+	height:16px;
+	width:16px;
+	bottom:6px;
+	left:114px;
+	background:url(../img/wangyi.png) no-repeat -260px -61px;
+}
+.picIco:hover {
+	background:url(../img/wy.png) -543px -8px;
+}
+.ulpicDescribe {
+	position:relative;
+	padding-top:9px;
+	font:14px/19px "微软雅黑";
+}
+.ulpicDescribe .radio{
+	position:absolute;
+	width:35px;
+	height:15px;
+    left:0; 
+	top:10px;
+	background:url(../img/wangyi.png) no-repeat -346px -42px;
+}
+.radiotext {
+	padding-left:41px;
+}
+.ulpicDescribe a{
+	color:#000;
+}
+.advert {
+	padding-bottom:40px;
+}
+.advert img{
+	height:75px;
+	width:689px;
+}
+.discOnHeader {
+	border-bottom:2px solid #c10d0c;
+	margin-bottom:20px;
+	padding-bottom:9px;
+}
+.discOnHeader h3 {
+	float:left;
+	height:19px;
+	position:relative;
+	padding-left:34px;
+}
+.hotIco {
+	position:absolute;
+	height:14px;
+	width:14px;
+	top:3px;
+	left:10px;
+	background:url(../img/wangyi.png) no-repeat -234px -43px;
+}
+.discOnHeader  .hotTitle {
+	float:left;
+	padding-top:19px;
+	width:80px;
+	height:0;
+	overflow:hidden;
+	background:url(../img/wangyi.png) no-repeat -99px -145px;
+}
+.discOn .more {
+	float:right;
+	position:relative;
+	padding-right:27px;
+	padding-top:4px;
+	height:12px;
+	/*public*/
+}
+.more a {
+	color:#666;
+}
+.moreIco {
+	position:absolute;
+	width:8px;
+	height:6px;
+	right:12px;
+	top:11px;
+	background:url(../img/wangyi.png) no-repeat -326px -44px;
+}
+.discOnList {
+	position:relative;
+	width:687px;
+	border:1px solid #d3d3d3;
+	margin-bottom:43px;
+}
+.discOnList  .discOnLeftIco {
+	position:absolute;
+	height:13px;
+	width:7px;
+	left:9px;
+	top:73px;
+	background:url(../img/wangyi.png) no-repeat -480px -8px;
+}
+.discOnList  .discOnRightIco {
+	position:absolute;
+	height:13px;
+	width:7px;
+	left:668px;
+	top:73px;
+	background:url(../img/wangyi.png) no-repeat -507px -8px;
+}
+.discOnList ul {
+	padding-top:28px;
+	padding-left:27px;
+	background:#f5f5f5;
+	border:1px solid #fff;
+}
+.discOnListPic li {
+	position:relative;
+	float:left;
+	width:115px;
+	height:156px;
+	margin-right:14px;
+}
+.discOnListPic img {
+	position:relative;
+	width:115px;
+	height:100px;
+	diaplay:block;
+	box-shadow:0 5px 5px #191918;
+}
+
+.discOnListPic .discIco  {
+	display:none;	
+	position:absolute;
+	height:20px;
+	width:20px;
+	left:73px;
+	top:74px;
+	background:url(../img/wangyi.png) no-repeat -300px -167px;
+/*移入时播放变;;;;;;*/
+}
+.discOnListPic li:hover .discIco  {
+	display:block;
+}
+ .discIco:hover {
+	 background:url(../img/wangyi.png)  no-repeat -362px -167px;
+	}
+.discOnListPic span {
+	display:block;
+ 	width:90px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space: nowrap;
+	font:12px/18px "微软雅黑";
+}
+.discName {
+	padding-top:7px;
+	color:#000;
+}
+.discSinger {
+	color:#666;
+	padding-bottom:14px;
+}
+
+.songRankHeader {
+	border-bottom:2px solid #c10d0c;
+	padding-bottom:8px;
+}
+.songRankHeader h3 {
+	float:left;
+	height:19px;
+	position:relative;
+	padding-left:34px;
+}
+.songRankHeader h3 .hotTitle {
+	float:left;
+	padding-top:19px;
+	width:80px;
+	height:0;
+	overflow:hidden;
+	background:url(../img/wangyi.png) no-repeat -192px -145px;
+}
+.songRankHeader .more {
+	float:right;
+	position:relative;
+	padding-right:27px;
+	padding-top:4px;
+	height:12px;
+	/*public*/
+}
+.RankStyle {
+	margin-top:20px;
+	margin-bottom:40px;
+	border:1px solid #c7c7c7;
+	border-left: none;
+	width:688px;
+	background:#f4f4f4;
+}
+.RankStyle .RankStyleList {
+	float:left;
+	width:228px;
+	border-left:1px solid #c7c7c7;
+}
+.RankStyle .center {
+	width:229px;
+	border-left:1px solid #c7c7c7;
+}
+.StylePic {
+	position:relative;
+	padding:18px 0 20px 18px;
+	border:1px solid #fff;
+	border-bottom:none;
+	width:208px;
+}
+.RankStyle .center .StylePic {
+	width:209px;
+}
+.StylePic .StylePicImg {
+	float:left;
+	margin-right:10px;
+	width:80px;
+	height:80px;
+	box-shadow: 0 5px 5px #737474;
+}
+.StylePicImg  img {
+	width:80px;
+	height:80px;
+}
+.StylePic h4 {
+	float:left;
+	font:bold 14px/32px  "微软雅黑";	
+}
+.StylePic h4  a{
+	color:#333;
+}
+.StylePic .StylePicPlay {
+	position:absolute;
+	height:22px;
+	width:22px;
+	left:108px;
+	top:54px;
+	background:url(../img/wangyi.png) no-repeat -440px -36px;
+}
+.StylePicPlay:hover {
+	background:url(../img/wangyi.png) no-repeat -300px -200px;
+}
+.StylePic .StylePicStore {
+	position:absolute;
+	height:19px;
+	width:20px;
+	left:140px;
+	top:56px;
+	background:url(../img/wangyi.png) no-repeat -477px -36px;
+}
+.StylePicStore:hover {
+	background:url(../img/wangyi.png) no-repeat -359px -200px;
+}
+.songList li {
+	height:32px;
+	font:12px/32px "微软雅黑";
+	padding-left:17px;
+	position:relative;
+	
+}
+.songList .odd,.moretext{
+	border-left:1px solid #f1f1f1;
+	border-right:1px solid #f1f1f1;
+	background:#e8e8e8;
+}
+.songList .even {
+	border-left:1px solid #fff;
+	border-right:1px solid #fff;
+	background:#f4f4f4;
+}
+.songList li span {
+	float:left;
+	font:16px/32px Arial;
+	color:#666;
+	width:18px;
+    text-align:right;	 
+	margin-right:14px;
+}
+.songList li .songListTop {
+	color:#c10d34;	
+}
+.songList  .songListName{
+	float:left;
+	color:#000;	
+}
+.songListName:hover{
+	max-width:80px;
+	/*96px*/
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+}
+.songList li:hover .songListIco{
+	display:block;
+	opacity:1;
+}
+.songList .songListIco {
+	float:none;
+	display:none;
+	width:66px;	
+}
+.songListIco a:hover {
+	opacity:0.5;
+}
+.songListIco .songListIcoPlay{
+	position:absolute;
+	left:124px;
+	top:7px;
+	height:17px;
+	width:17px;
+	background:url(../img/wangyi.png) no-repeat -542px -36px;
+}
+.songListIco .songListIcoAdd{
+	position:absolute;
+	left:151px;
+	top:10px;
+	height:13px;
+	width:13px;
+	background:url(../img/wangyi.png) no-repeat -570px -39px;
+}
+.songListIco .songListIcoStore{
+	position:absolute;
+	left:174px;
+	top:9px;
+	height:14px;
+	width:16px;
+	background:url(../img/wangyi.png) no-repeat -514px -39px;
+}
+.moretext {
+	height:28px;
+	padding:2px 28px 0 0;
+	font:12px/28px "微软雅黑";
+	text-align:right;
+	border-bottom:1px solid #f0f0f0;
+}
+.moretext a {
+	color:#000;
+}
+/*中间左边部分*/
+.mainConRight {
+	float:left;
+	width:250px;
+}
+.userLogin {
+	border-bottom:1px solid #b1b1b1;
+}
+.userLogin .userLoginCon {
+	position:relative;
+	height:121px;
+	width:248px;
+	border:1px solid #fff;
+	background:url(../img/wangyipp.png) repeat-x 0 -546px;
+}
+.userLoginCon .userLoginTip {
+	width:210px;
+	padding-left:22px;
+	padding-top:14px;
+	font:12px/22px "微软雅黑";	
+}
+.userLoginCon .userLoginEntrance {
+	position:absolute;
+	width:100px;
+	height:30px;
+	top:75px;
+	left:74px;    
+	background:url(../img/wangyi.png) no-repeat -6px -173px;
+}
+.userLoginEntrance:hover {
+	background:url(../img/wangyi.png) no-repeat -125px -173px;
+}
+.singerAside {
+	border-top:1px solid #b1b1b1;
+}
+.enterSinger {
+	border-top:1px solid #f1f1f1;
+	padding:10px 20px 0 20px;
+	font:12px/28px "微软雅黑";
+	height:28px;
+}
+.enterSinger  .sinnerSingerTitle{
+	float:left;
+	font-weight:bold;
+	/*以图换字*/
+}
+.enterSinger .all {
+	float:right;
+	color:#666;
+}
+.enterSinnerList {
+	margin:0 20px;
+	padding-top:20px;
+	border-top:1px solid #ccc;
+}
+.enterSinnerList li {
+	width:210px;
+	height:62px;
+	margin-bottom:14px;
+}
+.enterSinnerList li img {
+	float:left;
+	width:62px;
+	height:62px;
+}
+.enterSinnerList li .singerMessage{
+	float:right;
+	position:relative;
+	height:60px;
+	width:133px;
+	padding-left:14px;
+	border:1px solid #e9e9e9;
+	border-left:none;
+	background:#fafafa;
+}
+.singerMessage .singerName {
+	position:absolute;
+	top:8px;
+	left:14px;
+	color:#333;
+	font-size:14px;
+}
+.singerMessage .singerDetail {
+	position:absolute;
+	top:40px;
+	left:14px;
+	width:90px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space: nowrap;
+	color:#666;
+}
+.enterSinnerList .singerMessage:hover{
+	background:#f4f4f4;
+}
+.musicianApply {
+	height:31px;
+	width:210px;
+	margin-left:20px;
+	margin-bottom:33px;
+}
+.musicianApply a {
+	display:block;
+	width:210px;
+	height:31px;
+	background:url(../img/wangyi.png) no-repeat -6px -108px;
+}
+.musicianApply a:hover {
+	background:url(../img/wangyi.png) no-repeat -248px -108px;
+}
+.hotDJ {
+	margin:0px 20px;
+}
+.DJheader {
+	padding-bottom:9px;
+	height:11px;
+	border-bottom:1px solid #ccc;
+	/*?????一图换字*/
+}
+.DJheader .DJheaderTitle {
+	padding-top:11px;
+	height:0px;
+	width:40px;
+	overflow:hidden;
+	font-weight:bold;
+background:url(../img/wangyi.png) no-repeat -532px -124px;
+}
+.hotDJ .hotDJNames {
+	margin-top:20px;
+}
+.hotDJNames  li {
+	padding-bottom:10px;
+}
+.hotDJNames .hotDJNamePic {
+	float:left;
+	width:40px;
+	height:40px;
+	margin-right:10px;
+}
+.hotDJNames img {
+	width:40px;
+	height:40px;
+}
+.hotDJNames .hotDJNameMessage {
+	float:left;
+	height:40px;
+} 
+.hotDJNameMessage .hotDJName{
+	font:bold 12px/22px "微软雅黑";
+	position:relative;
+}
+.hotDJName a {
+	color:#000;
+}
+.hotDJNameIco {
+	position:absolute;
+	top:5px;
+	letf:27px;
+	height:12px;
+	width:11px;
+	background:url(../img/wangyi.png) no-repeat -451px -11px;
+}
+.hotDJNameMessage .hotDJNamedescripe{
+	padding-top:2px;
+	font:12px/16px "微软雅黑";
+	color:#666;
+	width:148px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space: nowrap;
+}
+
+#footer {
+	border-top:1px solid #d5d5d5;
+	border-bottom:1px solid #000;
+	padding:29px 0 51px 0 ;
+	box-shadow:inset 0 -4px 4px #000,inset 1px 0 -1px #000;
+	background:#f9f9f9;
+}
+.recruit {
+	float:left;
+	margin-right:-6px;
+	 
+}
+.recruit li {
+	float:left;
+	position:relative;
+	padding-left:5px;
+	width:297px;
+	height:44px;
+	
+}
+.recruitPlan:hover,.recruitIntroduce:hover{
+	text-decoration:underline;
+}
+.recruitIco {
+	position:absolute;
+	width:37px;
+	height:37px;
+	left:5px;
+	top:4px;
+	background:url(../img/wangyi.png) no-repeat -465px -66px;
+}
+.ColumnnIco {
+	position:absolute;
+	width:34px;
+	height:37px;
+	left:5px;
+	top:3px;
+	background:url(../img/wangyi.png) no-repeat -410px -66px;
+}
+.recruitDetail {
+	padding-left:12px;
+	height:44px;
+}
+
+.recruitDetail .recruitPlan {
+	position:absolute;
+	font:12px/22px "微软雅黑";
+	left:52px;
+	top:0;
+	color:#666;
+}
+.recruitDetail .recruitIntroduce {
+	position:absolute;
+	font:12px/22px "微软雅黑";
+	left:52px;
+	bottom:0;
+	color:#999;
+	 
+}
+.copyRight {
+	float:right;
+    color:#9b9b9b;
+	line-height:22px;
+}
+.copyRight a {
+	  color:#9b9b9b;
+}
+
+.copyRight .copyRightLicense {
+	margin-right:56px;
+}
+.copyRight .advice {
+	padding-left:21px;
+	position:relative;
+}
+.copyRight .adviceIco {
+	position:absolute;
+	width:19px;
+	height:16px;
+	bottom:2px;
+	right:52px;
+	background:url(../img/wangyi.png) no-repeat -372px -73px;
+}
+.TopIco {
+	position:fixed;
+	height:42px;
+	width:47px;
+	right:9%;
+	top:50%;
+	background:url(../img/wangyi.png) no-repeat -527px -66px;
+}
