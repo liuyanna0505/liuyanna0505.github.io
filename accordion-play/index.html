@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+    <style>
+
+      li{
+        list-style: none;
+      }
+      ul,li {
+        padding: 0;
+        margin:0;
+        -transition: .5s;
+      }
+  .fold_wrap{width:1200px;overflow:hidden;margin:0 auto;}
+  .fold_wrap ul{width:1200px;height:260px;margin:0 auto;overflow:hidden;}
+  .fold_wrap  ul li{float:left;width:130px;height:260px;position:relative;overflow:hidden;cursor:pointer;}
+    </style>
+    <script src="jquery-2.2.2.min.js"></script>
+    <script>
+    window.onload = function(){
+      var sm = $("#sm");//获取ul
+      var lis = sm.find("li");//获取所有的li
+      //总宽度
+      var totalW = sm.width();//ul的宽度 1200
+      //一张图片的宽度
+      var imgW = 400;
+      //图片的个数
+      var len = lis.size();//li的个数 7
+      //其余图片要运动的width
+      var otherW = Math.floor((totalW - imgW)/(len-1));//一张宽是400 其余的6个平分剩下的宽度
+      console.log( otherW );
+      //评分总宽度
+      var shareW = Math.floor(totalW/len);//1200 7个平分
+      console.log( shareW );
+      //让第一个li的width到400
+      lis.width(otherW);// 6个运动到的宽度
+      lis.eq(0).animate({//第一个运动到400宽度
+        width:imgW
+      });
+      var timer1,timer2;
+      lis.on("mouseover",function (){//鼠标移入的某个li的时候
+          clearInterval(timer1);
+          clearInterval(timer2);          
+          timer1 = setInterval(()=>{//箭头函数  this指向定义函数的作用域 即li
+            //this指向的是鼠标移入的li
+            var currentW = $(this).width();//获取移入到的当前的li
+            if( currentW < 400 ){//移入到的li的宽度小于400  当前li做运动
+              var otherTotalW = 0;//定义一个变量 记录其他6个的宽度
+              lis.each((index,item)=>{//循环所有的li 
+                 if( item !== this ){      //排除移入到的当前的li           
+                    var ow = $(item).width();//获取其他6个每个li的宽度
+                    var speed = 0;
+                    //有一个图片大于了otherW，运动效果
+                    if( ow>otherW ){//其他6个li某个的宽度大于了1200-400平分6个宽度 即400 
+                       speed = Math.floor((ow - otherW)/6);//otherW 这个li要运动到的目标
+                       //不能让speed为0   (ow - otherW)/6速度摩擦
+                       speed = speed > 0 ? speed : 1;
+                       var otw = ow - speed; 
+                       //otherTotalW += otw;  //其余六个减小的总宽度
+                       $(item).width(otw);//400的那个li的宽度 定时器开启 这个li的宽度一直在变 知道达到目标值
+                     }
+                    //把其余六张图片的宽度相加
+                     otherTotalW += ow - speed;  //这个是在变化的值
+                  }
+              });
+              var w = totalW - otherTotalW;
+              if(w > imgW) w = imgW;//最终回到400的宽度
+              $(this).css({//移入到当前的图片的宽度
+                width:w
+              });
+            }else{
+              //如果移入的li的宽度大于等于400，就清除定时器不做运动
+              clearInterval(timer1);
+              clearInterval(timer2);
+            }                       
+          },30);
+      })
+      .on("mouseout",function (){//鼠标移出的时候
+          clearInterval(timer1);
+          clearInterval(timer2);
+          timer2 = setInterval(()=>{
+            var currentW = $(this).width();
+            if( currentW > shareW ){  //做运动 移出到的当前li的宽度大于了7个平均的宽度 即400的那个
+              var otherTotalW = 0;
+              lis.each((index,item)=>{//循环所有的li
+                if( item !== this ){//排除移出当前的li
+                  var ow = $(item).width();//获取非移出的li的宽度
+                  var speed = 0;
+                  if( ow < shareW){//非移出的元素的宽度 小于了平均1200的7个元素的宽度
+                    speed = Math.floor((shareW-ow)/6);//shareW 要运动到的目标
+                    speed = speed > 0 ? speed : 1;
+                    $(item).width(ow+speed);
+                  }
+                  otherTotalW += ow+speed; 
+                }
+              });
+              var w = totalW - otherTotalW;//这个一直开启着？？？？？ 
+              $(this).width(w);//移出的元素的宽度
+            }else{
+              clearInterval(timer1);
+              clearInterval(timer2);
+            }
+          },30)
+      })
+
+
+    };
+    </script>
+  </head>
+
+  <body>
+      <div class="fold_wrap">
+        <ul class="clearfix" id="sm">
+            <li>
+              <div style="height:100%;background: url(img/1.jpg) no-repeat center 0;"></div>
+            </li>
+            <li>
+
+              <div style="height:100%;background: url(img/2.jpg) no-repeat center 0;"></div>
+            </li>
+            <li>
+              <div style="height:100%;background: url(img/3.jpg) no-repeat center 0;"></div>
+            </li>
+            <li>
+              <div style="height:100%;background: url(img/4.jpg) no-repeat center 0;"></div>
+            </li>
+            <li>
+              <div style="height:100%;background: url(img/5.jpg) no-repeat center 0;"></div>
+            </li>
+            <li>
+              <div style="height:100%;background: url(img/6.jpg) no-repeat center 0;"></div>
+            </li>
+            <li>
+              <div style="height:100%;background: url(img/7.jpg) no-repeat center 0;"></div>
+            </li>
+        </ul>
+      </div>
+
+  </body>
+</html>
