@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>自由选区</title>
+		<style>
+			.newdiv{
+				width:0px;
+				height:0px;
+				border: 1px dashed #000;
+				position: absolute;
+				left: 0 ;
+				top: 0;
+				background:deepskyblue;
+				opacity:.2;
+			}
+			.box{
+				float:left;
+				width:100px;
+				height:100px;
+				background:red;
+				margin:10px;
+			}
+		</style>
+		<script>
+			function getRect(obj){
+				return obj.getBoundingClientRect();
+			}
+			function duang(obj1,obj2){
+				var obj1Info = getRect(obj1);	
+				var obj2Info = getRect(obj2);	
+				//obj1的上下左右
+				var obj1L = obj1Info.left;
+				var obj1R = obj1Info.right;
+				var obj1T = obj1Info.top;
+				var obj1B = obj1Info.bottom;
+				//obj2的上下左右
+				var obj2L = obj2Info.left;
+				var obj2R = obj2Info.right;
+				var obj2T = obj2Info.top;
+				var obj2B = obj2Info.bottom;  
+				if( obj1R < obj2L || obj1L > obj2R || obj1B < obj2T || obj1T > obj2B){
+					return false;
+				}else{
+					return true;
+				}
+			}
+			window.onload = function(){		
+				var boxs = document.querySelectorAll(".box");
+				document.onmousedown = function(ev){//鼠标按下的时候
+					var newDiv  = null;	//							
+					var disX = ev.clientX ; //mousedown的时候 鼠标距离浏览器左侧的距离
+					var disY = ev.clientY ; //mousedown的时候 鼠标距离浏览器上厕的距离					
+					document.onmousemove = function(ev){//鼠标移动的时候	 
+						if(Math.abs(ev.clientX-disX)>20||ev.clientY-disY>20){
+							if(!newDiv){//不存在选框的时候 生成选框
+								newDiv = document.createElement("div");
+								newDiv.className = 'newdiv';	//选框的名字	
+								newDiv.style.left = disX + 'px'; //鼠标按下的时候 生成的div的初始left值
+								newDiv.style.top = disY + 'px';//鼠标按下的时候 生成的div的初始top值
+								document.body.appendChild(newDiv);//生成的选框放到结构里
+							}
+							newDiv.style.width = Math.abs(ev.clientX-disX) + 'px';//新生成div的宽度 是正值
+							newDiv.style.height = Math.abs(ev.clientY-disY) + 'px';//新生成div的高度 是正值
+							
+							newDiv.style.left = Math.min(ev.clientX,disX)+1 + 'px';//新生成div的left的值取鼠标移动的位置和最初按下鼠标的位置中的最小值
+							newDiv.style.top =  Math.min(ev.clientY,disY)+ 1 + 'px';//新生成div的top的值取鼠标移动的位置和最初按下鼠标的位置中的最小值
+							for( var i = 0; i < boxs.length; i++ ){
+								if( duang(newDiv,boxs[i]) ){
+									boxs[i].style.background  ="blue";
+								}else{
+									boxs[i].style.background  ="";
+								}
+							}
+						}
+					}
+					document.onmouseup = function(){//鼠标抬起的时候
+						document.onmousemove = document.onmouseup= null;	//取消事件绑定 
+						console.log(newDiv);
+						if( newDiv){
+							document.body.removeChild(newDiv);
+						}						 
+					}	
+					ev.preventDefault();//阻止默认行为  框选行为
+				} 
+			}
+		</script>
+	</head>
+	<body> 
+		<div class ='box'></div>
+		<div class ='box'></div>
+		<div class ='box'></div>
+		<div class ='box'></div>
+	</body>
+</html>

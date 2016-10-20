@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    
+    .clearfix {
+        zoom: 1;
+    }
+    
+    #main {
+        width: 800px;
+        height: 800px;
+        border: 1px dashed #000;
+        margin: 0 auto;
+    }
+    
+    #pageBox span,
+    #pageBox a {
+        width: 50px;
+        height: 20px;
+        text-align: center;
+        background-color: #666;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+    
+    #pageBox span {
+        display: inline-block;
+    }
+    
+    #pageBox span.actColor {
+        background-color: red;
+    }
+    
+    #pageBox a {
+        float: left;
+        color: #fff;
+    }
+    
+    #pages {
+        float: left;
+    }
+    
+    #info .block span {
+        padding: 20px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+    #info .gays {
+        padding: 20px;
+        color: #666;
+    }
+    
+    #info .gays a {
+        font-size: 12px;
+        padding: 10px;
+        color: #328fbe;
+    }
+    
+    #leftBox {
+        width: 100px;
+        float: left;
+        text-align: center;
+    }
+    
+    #leftBox a {
+        display: block;
+        line-height: 50px;
+        background-color: #ccc;
+        margin-bottom: 10px;
+    }
+    
+    #leftBox a.red {
+        background-color: red;
+        color: #fff;
+    }
+    
+    #rightBox {
+        width: 700px;
+        float: right;
+    }
+    
+    #rightBox h3 {
+        line-height: 50px;
+        background-color: yellow;
+        width: 100px;
+        text-align: center;
+    }
+    </style>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="getTag.js"></script>
+    <script>
+		/*  {
+           num: 11,
+           job: "社会招聘",
+           pNum: 2,
+           ask: "岗位要求：1)helpdesk支持；2)熟悉计算机软、硬件及网络维护；3)有相关工作经验，态度端正；4)有一定的服务意识",
+           data: "2014-04-10"
+       }
+      */
+     	//函数封装 最好是纯函数
+     	
+    	window.onload = function(){
+    		var leftBox  = document.getElementById('leftBox');
+    		var allA = leftBox.getElementsByTagName('a');
+    		var rightBox = document.getElementById('rightBox');     		
+    		var h3s = rightBox.getElementsByTagName('h3')[0];
+    		
+    		var info = document.getElementById('info');
+    		var pages = document.getElementById('pages');
+    		/*-----------------------search hash的获取 --------------------*/
+    		var search = window.location.search;//获取到search
+    		if( !search ){
+				search = "world"; //search不存在的时候 默认是world
+			}else{
+				search = search.slice(1); //将问号截取
+			}; 
+			var hash = window.location.hash;//获取hash值 
+			//获取hash值 
+			if( !hash ){
+				hash = 1; //判断hash值是否存在 不存在的话 赋值为1 hash值初始时1
+			}else{
+				hash = hash.slice(1); //存在的话 将前面的#号截掉
+			} 
+			if(search=='world'){
+				allA[0].className = 'red';
+				h3s.innerHTML = '社会招聘';
+			}else if(search=='school'){
+				allA[1].className = 'red';
+				h3s.innerHTML = '校园招聘';
+			}
+			/*--------------------------页面结构渲染--------------------*/ 			 		
+			var rightList = data[search];//声明变量 存放的是数据中与search对应的 world 或者 school				
+			var n = Math.ceil(rightList.length/5);//记录页数
+			var m = (hash-1)*5+4;  //初始的hash值和m关联 这样每次刷新页面保存到当前的页面
+			//console.log(m);
+			function creat(){
+				if(rightList){
+	    			var  str = '';  
+					for(var i =m-4;i < m+1;i++){//  world 或者 school下对应的条数长度  
+						if( m > rightList.length-1){ //最后一页的时候 做个判断
+							m = rightList.length-1; //10 
+							for(var i =Math.floor(rightList.length/5)*5;i < m+1;i++){  
+								str +='<div><p class="block"><span>'+rightList[i].num+'</span><span>职位需求：'+rightList[i].job+'</span><span>需求人数：'+rightList[i].pNum+'名</span><span>'+rightList[i].data+'</span></p><p class="gays">'+rightList[i].ask+'<a href="javascript:void(0);">【查看详情】</a></p></div>';
+	    						
+							}						 	
+						}else{
+							str +='<div><p class="block"><span>'+rightList[i].num+'</span><span>职位需求：'+rightList[i].job+'</span><span>需求人数：'+rightList[i].pNum+'名</span><span>'+rightList[i].data+'</span></p><p class="gays">'+rightList[i].ask+'<a href="javascript:void(0);">【查看详情】</a></p></div>';
+	    					 
+						}
+	    			} 
+	    			info.innerHTML = str;   			
+	    		}else{
+					info.innerHTML = "<div>暂无数据</div>"; 
+				}  
+			}
+			creat();
+			//生成页数
+			for(var j= 0;j < n ; j++){
+				var allSpan = document.createElement('span');
+				allSpan.innerHTML= j+1; //记录页数 
+				pages.appendChild(allSpan); 
+			}  
+			/*-----------------------点击页数事件处理--------------------*/ 
+			var cur = hash-1;//记录点击span的下标值  与hash值关联
+			var spans = pages.getElementsByTagName('span');//获取所有的页数
+    		spans[hash-1].className ='actColor';//打开的时候 对应页面的span样式
+			for(var i = 0;i<spans.length;i++){
+				spans[i].index = i;
+				spans[i].onclick = function(){ 					
+					m = this.index*5+4;  // 4，9，14
+					creat();
+					for(var j= 0;j < spans.length ; j++){
+						spans[j].className = '';
+					};
+					this.className = 'actColor';
+					window.location.hash = this.index+1;//地址栏中的hash值 
+					cur = this.index;
+				}
+			}
+			/*-----------------------prev next的 翻页--------------------*/ 
+			var prev = document.getElementById('prev'); 
+			var next = document.getElementById('next');	 
+			//向后走n
+			next.onclick = function(){  
+				if(cur>n-2){//当下标值大于了页数的时候   比如cur  是 0 1 则cur++  是 1,2 
+					hash=n; // 走到头的时候 hash值等于页数值
+					return;
+				};
+				cur++;//记录点击span的下标值每次加  
+				hash++;//hash值每次也加加
+				m = cur*5+4;//记录当前的m值 对应数据里的数据
+				creat();				
+				for(var i = 0;i<spans.length;i++){
+					spans[i].className ='';
+				}
+				spans[cur].className ='actColor';
+				window.location.hash = cur+1; // 记录当前的hash值 
+			};
+			//向前走
+			prev.onclick = function(){ 
+				if(cur < 1){//当hash值小于页数为0的时候
+					hash =1;//hash值为1 最初始的值
+					return;
+				}; 
+				cur--; 
+				hash--;
+				m = cur*5+4;
+				creat();				
+				for(var i = 0;i<spans.length;i++){
+					spans[i].className ='';
+				}
+				spans[cur].className ='actColor';
+				window.location.hash = cur+1;  // 记录当前的hash值 	
+			}
+    	}
+    </script>
+</head>
+
+<body>
+    <div id="main">
+        <div id="leftBox">
+            <a href="?world">社会招聘</a>
+            <a href="?school">校园招聘</a>
+        </div>
+        <div id="rightBox">
+           <h3></h3>
+           <div id="info"></div>
+            <div id="pageBox" class="clearfix">
+                <a href="javascript:;" id="prev">prev</a>
+                <div id="pages"></div>
+                <a href="javascript:;" id="next">next</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

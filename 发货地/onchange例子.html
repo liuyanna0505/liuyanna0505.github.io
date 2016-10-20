@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>onchange例子</title>
+		<script src="citys.js"></script>
+		<script>
+			window.onload = function(){
+				var sel1 = document.getElementById('sel1');
+				var sel2 = document.getElementById('sel2');
+				var sel3 = document.getElementById('sel3');
+				//省份
+				var str = '';
+				for(var i = 0;i<data.length;i++){
+					str += '<option value = "'+data[i].name+'">'+data[i].name+'</option>';//加上value 因为onchange是改变value触发的					
+				}
+				sel1.innerHTML = str;
+				//省份下对应的市				
+				var city = null;//声明一个变量 存的是sub 即省份下对应的市 是一个数组 里面是对象
+				sel1.onchange = function(){//省份的value值改变的时候
+					var val  =this.value;
+					for(var i=0;i<data.length;i++){//遍历  找最外层的省份
+						if(data[i].name == val){//当省份的名字和当前点击下拉选框选的省份一致的时候
+							city = data[i].sub; // 存的是该省份下的所有城市 是数组
+							console.log(city);
+							break; //每个省份名一般不重名 只有一个 找到之后就不再往下继续找了
+						}
+					}					
+					if(city){//省份下对应的市存在的时候  一般存在 除非是空数组
+						var str = '';
+						for(var i = 0;i<city.length;i++){
+							str += '<option value = "'+city[i].name+'">'+city[i].name+'</option>';		
+						}
+						sel2.innerHTML = str;
+					}else{
+						sel2.innerHTML =  '<option>请选择</option>';
+					}
+					
+				}
+				sel2.onchange = function(){//当市的value值改变的时候
+					var val = this.value;
+					if(city){//当城市存在的时候 再找下一级
+						var county = null;
+						for(var i=0;i<city.length;i++){
+							if(city[i].name ==val){//找到市名和改变市时候的value值一样的时候
+								county = city[i].sub;//存的也是数组 里面的是对象 是县								
+								break;
+							}
+						}
+					}
+					if(county){//如果下面的县存在的话 
+						var str = '';
+						for(var i =0;i<county.length;i++){
+							str += '<option value = "'+county[i].name+'">'+county[i].name+'</option>';
+						}
+						sel3.innerHTML = str;
+					}else{
+						sel3.innerHTML = '<option>请选择</option>';//不存在 就是一项 请选择
+					}
+					
+					
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<p>请选择地址：</p>
+		<select id ='sel1'>
+			<option>请选择</option>
+		</select>
+		<select id ='sel2'>
+			<option>请选择</option>
+		</select>
+		<select id ='sel3'>
+		<option>请选择</option>
+		</select>
+	</body>
+</html>

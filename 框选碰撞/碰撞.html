@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box,#box1{
+				width:100px;
+				height:100px;
+				background:deepskyblue;
+				position:absolute;
+				left:0;
+				top:0;
+			}
+			#box1{
+				left:300px;
+				top:200px;
+				background:red;
+			}
+		</style>
+		<script>
+			//获取元素距离浏览器距离及元素自身的宽高
+			function getRect(obj){
+				return obj.getBoundingClientRect();
+			}
+			//碰撞函数
+			function duang(obj1,obj2){
+				var obj1Info = getRect(obj1);
+				var obj2Info = getRect(obj2);
+				//obj1 
+				var obj1L = obj1Info.left;
+				var obj1R = obj1Info.right;
+				var obj1T = obj1Info.top;
+				var obj1B = obj1Info.bottom;
+				//obj2 
+				var obj2L = obj2Info.left;
+				var obj2R = obj2Info.right;
+				var obj2T = obj2Info.top;
+				var obj2B = obj2Info.bottom;
+				//条件是没有碰上的  只要满足一个方向就可以
+//				if(obj1R<obj2L ||obj1L>obj2R||obj1B<obj2T||obj1T>obj2B){
+//					return false;
+//				}else{
+//					return true;
+//				} 
+				//条件是碰撞上的 需要四个方向都满足 
+				if(obj1R >= obj2L && obj1L <= obj2R && obj1B >= obj2T && obj1T <= obj2B){
+					return true;
+				}else{
+					return false;
+				}
+			}
+			window.onload = function(){
+				var box = document.getElementById('box'); 
+				var box1 = document.getElementById('box1');
+				box.onmousedown = function(ev){
+					var disX = ev.clientX - box.offsetLeft;
+					var disY = ev.clientY - box.offsetTop;
+					document.onmousemove = function(ev){
+						var l =ev.clientX - disX ;
+						var t =ev.clientY - disY ;
+						if(l<0){
+							l=0;
+						}
+						if(l>document.documentElement.clientWidth - box.offsetLeft){
+							l= document.documentElement.clientWidth - box.offsetLeft
+						}
+						if(t<0){
+							t=0;
+						}
+						if(t>document.documentElement.clientHeight-box.offsetHeight){
+							t=document.documentElement.clientHeight-box.offsetHeight
+						}
+						box.style.left = l +'px';
+						box.style.top = t +'px';
+						//判断碰撞
+						if(duang(box,box1)){ //true  碰撞上的时候
+							box1.style.background ='darkgreen';
+						}else{
+							box1.style.background = 'red';
+						}
+					}
+					document.onmouseup = function(){
+						document.onmousemove =null;
+						document.onmouseup =null;
+					}
+					return false;
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id ='box'></div>
+		<div id ='box1'></div>
+	</body>
+</html>
