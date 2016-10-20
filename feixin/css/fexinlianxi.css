@@ -1,0 +1,369 @@
+@charset "utf-8";
+/* reset.css */
+body {
+	margin: 0;
+	font: 12px "宋体";
+}
+p ,
+dl ,
+dd ,
+h2 ,
+h3 {
+	margin: 0;
+}
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+img {
+	border:none;
+	vertical-align: top;
+}
+strong {
+	font-weight: normal;
+}
+
+/* end reset.css */
+.clearFix {
+	zoom: 1;
+}
+.clearFix:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.wrap {
+	width: 930px;
+	margin: 0 auto;
+/*	_filter : progid:DXImageTransform.Microsoft.AlphaImageLoader(src="img/png.png", sizingMethod="crop");*/
+}
+a:hover {
+	text-decoration: underline;
+}
+.header {
+	background: url(../img/3.png) repeat-x;
+}
+.header .headerBL {
+    padding: 3px 0 8px 0;
+	height: 20px;
+	background: url(../img/3.png) repeat-x center 0;
+	overflow:hidden;
+}
+.headerH {
+	float: left;
+	display: inline;
+	margin: 0 10px 0px 12px;
+	padding-top: 20px;
+	width: 95px;
+	height: 0;
+	overflow: hidden;
+	background: url(../img/1.png) no-repeat;
+}
+.nav {
+	float: left;
+	padding-top: 6px;
+	line-height: 14px;
+	color: #c7ffc7;
+}
+.nav a{
+	color: #fff;
+}
+.nav span {
+	margin: 0 5px 0 8px;
+}
+.headerBL p {
+	float: right;
+	display:inline;
+	margin-right:6px;
+	padding-top: 8px;
+	background: url(../img/2.png) no-repeat 101px 6px;
+}
+.headerBL p a {
+	font-size: 12px;
+	color: #fff;
+	margin-right:11px;
+}
+.headerBL p strong {
+	margin-right: 3px;
+	font-family: Arial "宋体";
+}
+.headerBL p span {
+	margin-right: 14px;
+}
+.banner {
+	height: 372px;
+	background: url(../img/brr.png) repeat-x;
+}
+.bannerBL {
+	height: 372px;
+	width: 50%;
+	background: url(../img/baBl.png) repeat-x;
+}
+.bannerimg {
+	margin: 0 auto;
+	display: block;
+	margin-top: -372px;
+	height: 372px;
+	background: url(../img/bannerbl.png) no-repeat center 0;
+}
+.bannerwrap {
+	position: relative;
+	width: 930px;
+	margin: 0 auto;
+}
+.bannerwrap  .beta {
+	position: absolute;
+	top: 83px;
+	left: 850px;
+	width: 81px;
+	height: 81px;
+	background: url(../img/6.png) no-repeat;
+}
+.bannerwrap .bannerRT {
+	position: absolute;
+	top: 211px;
+	left: 386px;
+	width: 199px;
+	height: 57px;
+	background: url(../img/73.png) no-repeat;
+}
+.bannerwrap  .bannerCT {
+	position: absolute;
+	width: 280px;
+	heigt: 22px;
+	top: 215px;
+	left: 613px;
+	line-height: 22px;
+	color: #fff;
+}
+.bannerCT span {
+	 margin-right: 0;
+	 font-weight: bold;
+	 color: #fbba34;
+}
+
+.bannerwrap .bannerRF {
+	position: absolute;
+	top: 303px;
+	left: 390px;
+	height: 12px;
+	color: #fff; 
+}
+.bannerRF .bannerRFLeft {
+	margin-right: 8px;
+}
+.bannerB {
+	position: relative;
+	height: 64px;
+}
+.bannerB .BL {
+	position: absolute;
+	width: 50%;
+	top: 0;
+	left: 0;
+	height: 64px;
+	background: url(../img/btl.png) repeat-x;
+	z-index: 1;
+}
+.bannerB .BR {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 64px;
+	width: 50%;
+	background: url(../img/br.png) repeat-x;	
+	z-index: 1;
+}
+.bannerB .Bp {
+	position: relative;
+	height: 64px;
+	background: url(../img/yd.png) no-repeat center 0;
+	z-index: 2;
+ }
+.con {
+    margin-top: 38px;
+}
+.conleft {
+	float: left;
+	width: 674px;
+	height: 384px;
+	background: url(../img/con1.png) no-repeat;
+}
+.headerLeft {
+	position: relative;
+	height: 52px;
+}
+.headerLeft h2 {
+	padding-bottom: 1px;
+	padding-left: 89px;
+	font: bold 17px/49px "微软雅黑" ;
+	color: #352f2a;
+}
+.headerLeft .lab {
+	position: absolute;
+	left: 34px;
+	bottom: 2px;
+	width: 48px;
+	height: 64px;
+	background:url(../img/light.png) no-repeat;
+}
+.conleft img {
+	float: left;
+	dispaly: inline;
+	margin-left: 35px;
+	height: 320px;
+	width: 203px;
+}
+.conleft dl {
+	float: right;
+	dispaly: inline;
+	width: 376px;
+	padding-right: 34px;
+}
+.conleft dt {
+	padding: 0 0 2px 31px;
+	font: 18px/22px "黑体";
+	color: #352f2a;
+	background: url(../img/12.png) no-repeat 0 2px;
+}
+.conleft dd {
+	padding-bottom: 15px;
+	font: 12px/18px "宋体";
+	color: #666;
+}
+ .conleft .dllistt1 {
+	 padding-bottom: 23px;
+}
+ .conleft .dllistt2 {
+	 padding-bottom: 16px;
+}
+.conright {
+	float:right;
+}
+.conright .rightTop {
+	position: relative;
+	height: 40px;
+	width: 240px;
+	background: url(../img/tm2.png) no-repeat;
+}
+.conright .rightTop .tip {
+	position: absolute;
+	left: 157px;
+	bottom: 1px;
+	height: 57px;
+	width: 50px;
+	background: url(../img/tm3.png) no-repeat;
+}
+.rightTop h3 {
+	padding-left: 16px;
+	padding-top: 1px;
+	height: 40px;
+    font: bold 18px/39px "黑体";
+}
+.conright .rightCenter {
+	margin: 2px 0 11px 0;
+	height: 263px;
+	width: 240px;
+	background: url(../img/tm4.png) no-repeat;
+}
+.rightCenter ul {
+	padding-top: 11px;
+	padding-left: 18px;
+}
+.rightCenter li {
+	padding-top: 3px;
+	width: 206px;
+	border-bottom: 1px dashed #9d9d9d;
+	text-indent: 11px;
+	font: 12px/22px "宋体";
+	color: #666;
+	background: url(../img/13.png) no-repeat 0 12px;
+}
+.rightCenter li a {
+	color:#666;
+}
+.rightCenter .lilast {
+	border-bottom: none;
+	/*为什么不加父级 此条无效？？*/
+}
+.rightCenter p {
+	padding: 0 0 3px 18px;
+	font: bold 14px/42px "宋体";
+}
+.rightCenter p a {
+	color: #386584;
+}
+.conright .rightBottom {
+	height: 69px;
+	width: 240px;
+	background: url(../img/tm5.png) no-repeat;
+}
+/*.rightBottom  p {
+	padding: 15px 0 0 89px;
+	font: bold 20px/20px "微软雅黑";
+	color: #5e9400;
+}
+.rightBottom .question {
+	padding: 0 0 7px 99px;
+	font: 14px/26px "微软雅黑";
+}
+.question a {
+	color: #333;
+}*/
+.ullist {
+	position:relative;
+	margin-right:-22px;
+	padding-top: 33px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid #e6e6e6;
+}
+.ullist li {
+	float: left;
+	display: inline;
+	padding: 2px;
+	margin-right: 22px;
+	margin-bottom: 9px;
+	border: 1px solid #d6d5d4;
+}
+.ullist li img {
+	height: 98px;
+	width: 210px;
+}
+/*.ullist .last {
+	margin-right: 0px;
+}
+*/.footer {
+	border-top: 1px solid #f8f8f8;
+	height: 72px;
+}
+.footer .others {
+	padding-top: 30px;
+	font: bold 12px/24px "宋体";
+	letter-spacing:1px;
+	text-indent:237px;
+}
+.footer .others a {
+	color: #919191;
+	margin-right: 7px;
+}
+.footer p {
+	font: 12px/18px Arial ,"宋体";
+	color: #919191;
+	text-indent:287px;
+}
+.footer .pic {
+	position: relative;
+	height: 42px;
+	width: 930px;
+}
+.footer .pic img {
+	position: absolute;
+	height: 51px;
+	width: 136px;
+	top: -51px;
+	right: 0;
+}
