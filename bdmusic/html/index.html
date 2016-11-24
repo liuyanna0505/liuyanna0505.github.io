@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script>
+			var iScale = 1;
+			iScale = iScale / window.devicePixelRatio;
+			document.write('<meta name="viewport" content="width=device-width,initial-scale=' + iScale + ',minimum-scale=' + iScale + ',maximum-scale=' + iScale + '" />');
+		</script>
+		<title>百度音乐</title>
+		<script>
+			var oClientW = document.documentElement.clientWidth;
+			oClientW = oClientW > 640 ? 640 : oClientW;
+			console.log(oClientW)
+			document.getElementsByTagName("html")[0].style.fontSize = oClientW / 16 + "px";
+		</script>
+		<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="../js/index.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			document.body.style.height = document.documentElement.clientHeight + "px";
+		</script>
+		<section class="wrap">
+			<!--头部 -->
+			<header id="header">
+				<div id="logo_function">
+					<h1 class="fl" id="logo"></h1>
+					<div class="fr" id="function">
+						<a href="javascript:;" class="land fl"></a>
+						<a href="javascript:;" class="search fl"></a>
+						<a href="javascript:;" class="more fl"></a>
+						<span class="fl"></span>
+						<a href="javascript:;" class="client">客户端</a>
+					</div>
+				</div>
+				<nav id="nav" class="cleafix">
+					<a href="javascript:;" class="fl">首页</a>
+					<a href="diantai.html" class="fl">电台</a>
+					<a href="javascript:;" class="fl">歌手</a>
+					<a href="javascript:;" class="fl">分类</a>
+					<a href="javascript:;" class="fl">···</a>
+				</nav>
+			</header>
+			<!--头部 结束 -->
+			<!--乐播-->
+			<div id="our">
+				<section id="Carousel" class="cleafix">
+					<img src="../img/our-1.jpg" class="fl"/>
+					<img src="../img/our-2.jpg" class="fl"/>
+					<img src="../img/our-3.jpg" class="fl"/>
+					<img src="../img/our-4.jpg" class="fl"/>
+					<img src="../img/our-5.jpg" class="fl"/>
+					<img src="../img/our-1.jpg" class="fl"/>
+				</section>
+				<div class="cleafix">
+					<a href="javascript:;" class="present"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+				</div>
+			</div>
+			<!--乐播 结束-->
+			<!--新碟上架-->
+			<div id="shilves">
+				<h2>新碟上架</h2>
+				<ul class="cleafix">
+					<li class="fl">
+						<a href="javascript:;">
+							<img src="../img/shilves-1.jpg" />
+							<span class="song">巴黎假期</span>
+							<span class="songer">金志文,谭维维</span>
+						</a>
+					</li>
+					<li class="fl">
+						<a href="javascript:;">
+							<img src="../img/shilves-2.jpg" />
+							<span class="song">胆小鬼</span>
+							<span class="songer">曾轶可</span>
+						</a>
+					</li>
+					<li class="fl">
+						<a href="javascript:;">
+							<img src="../img/shilves-3.jpg" />
+							<span class="song">Reality(现实)</span>
+							<span class="songer">INFINITE</span>
+						</a>
+					</li>
+					<li class="fl">
+						<a href="javascript:;">
+							<img src="../img/shilves-4.jpg" />
+							<span class="song">新步步惊心</span>
+							<span class="songer">周笔畅</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--新碟上架 结束-->
+			<!--音乐榜单-->
+			<div id="musiclist">
+				<h2 class="cleafix">
+					<a href="javascript:;" class="fl">音乐榜单</a>
+					<a href="javascript:;" class="fr">更多></a>
+				</h2>
+				<dl>
+					<dt>
+						<a href="javascript:;">热歌榜<span></span></a>
+						<a href="javascript:;">新歌榜</a>
+						<a href="javascript:;">King榜</a>
+					</dt>
+					<dd class="cleafix">
+						<div class="fl img">
+							<img src="../img/musiclist-1.jpg" />
+						</div>
+						<div class="fl">
+						</div>
+						<div class="fl">
+							<a href="javascript:;" class="songer">小水果 </a>
+							<a href="jav ascript:;" class="song">筷子兄弟</a>
+						</div>
+						<div class="fr">
+						</div>
+					</dd>
+					<dd class="cleafix">
+						<div class="fl img">
+							<img src="../img/musiclist-2.jpg" />
+						</div>
+						<div class="fl">
+						</div>
+						<div class="fl">
+							<a href="javascript:;" class="songer">匆匆那年 </a>
+							<a href="jav ascript:;" class="song">王菲</a>
+						</div>
+						<div class="fr">
+						</div>
+					</dd>
+					<dd class="cleafix">
+						<div class="fl img">
+							<img src="../img/musiclist-3.jpg" />
+						</div>
+						<div class="fl">
+						</div>
+						<div class="fl">
+							<a href="javascript:;" class="songer">年轮 </a>
+							<a href="jav ascript:;" class="song">张碧晨</a>
+						</div>
+						<div class="fr">
+						</div>
+					</dd>
+					<dd class="cleafix">
+						<div class="fl img">
+							<img src="../img/musiclist-4.jpg" />
+						</div>
+						<div class="fl">
+						</div>
+						<div class="fl">
+							<a href="javascript:;" class="songer">喜欢你 </a>
+							<a href="jav ascript:;" class="song">G.E.M.邓紫棋</a>
+						</div>
+						<div class="fr">
+						</div>
+					</dd>
+					<dd class="cleafix">
+						<div class="fl img">
+							<img src="../img/musiclist-5.jpg" />
+						</div>
+						<div class="fl">
+						</div>
+						<div class="fl">
+							<a href="javascript:;" class="songer">小苹果 </a>
+							<a href="jav ascript:;" class="song">筷子兄弟</a>
+						</div>
+						<div class="fr">
+						</div>
+					</dd>
+				</dl>
+				<p>
+					<a href="javascript:;">查看该榜单>></a>
+				</p>
+			</div>
+			<!--音乐榜单 结束-->
+			<!--热门分类-->
+			<div id="hot">
+				<h2 class="cleafix">
+					<a href="javascript:;" class="fl">音乐榜单</a>
+					<a href="javascript:;" class="fr">更多></a>
+				</h2>
+				<div id="class" class="cleafix">
+					<a href="javascript:;">情歌</a>
+					<a href="javascript:;" class="middle">红歌</a>
+					<a href="javascript:;">劲爆</a>
+					<a href="javascript:;">天籁</a>
+					<a href="javascript:;" class="middle hot">经典老歌</a>
+					<a href="javascript:;">欧美</a>
+					<a href="javascript:;" class="hot">网络歌曲</a>
+					<a href="javascript:;" class="middle">民歌</a>
+					<a href="javascript:;">80后</a>
+					<a href="javascript:;">儿歌</a>
+					<a href="javascript:;" class="middle">伤感</a>
+					<a href="javascript:;">安静</a>
+					<a href="javascript:;">笑话段子</a>
+					<a href="javascript:;" class="middle">相声曲艺</a>
+					<a href="javascript:;">小说读物</a>
+					<a href="javascript:;">儿童故事</a>
+					<a href="javascript:;" class="middle">脱口秀</a>
+					<a href="javascript:;">广播剧</a>
+					<a href="javascript:;">治疗系</a>
+					<a href="javascript:;" class="middle">浪漫言情</a>
+					<a href="javascript:;">综艺娱乐</a>
+				</div>
+			</div>
+			<!--热门分类 结束-->
+			<!--热播节目-->
+			<div id="hit">
+				<h2 class="cleafix">
+					<a href="javascript:;" class="fl">热播节目</a>
+					<a href="javascript:;" class="fr">更多></a>
+				</h2>
+				<ul class="cleafix">
+					<li class="fl">
+						<img src="../img/hit-1.jpg" />
+						<a href="javascript:;">明星来啦</a>
+					</li>
+					<li class="fl">
+						<img src="../img/hit-2.jpg" />
+						<a href="javascript:;">明星来啦</a>
+					</li>
+					<li class="fl">
+						<img src="../img/hit-3.jpg" />
+						<a href="javascript:;">明星来啦</a>
+					</li>
+				</ul>
+			</div>
+			<!--热播节目 结束-->
+			<!--音乐歌单-->
+			<div id="playlist">
+				<h2 class="cleafix">
+					<a href="javascript:;" class="fl">音乐歌单</a>
+					<a href="javascript:;" class="fr">更多></a>
+				</h2>
+				<ul>
+					<li class="cleafix">
+						<div class="fl">
+							<img src="../img/playlist-1.jpg" />
+						</div>
+						<div class="fl">
+							<p>这些年珍藏的粤语歌</p>
+							<p class="type">
+								<span>粤语</span>
+								<span>流行</span>
+								<span>金典</span>
+								<span>398786</span>
+							</p>
+						</div>
+					</li>
+					<li class="cleafix">
+						<div class="fl">
+							<img src="../img/playlist-2.jpg" />
+						</div>
+						<div class="fl">
+							<p>莫放相思醒</p>
+							<p class="type">
+								<span>百度音乐人</span>
+								<span>古风</span>
+								<span>相思</span>
+								<span>309492</span>
+							</p>
+						</div>
+					</li>
+					<li class="cleafix">
+						<div class="fl">
+							<img src="../img/playlist-3.jpg" />
+						</div>
+						<div class="fl">
+							<p>恋人未满</p>
+							<p class="type">
+								<span>华语</span>
+								<span>流行</span>
+								<span>情歌</span>
+								<span>303588</span>
+							</p>
+						</div>
+					</li>
+					<li class="cleafix">
+						<div class="fl">
+							<img src="../img/playlist-4.jpg" />
+						</div>
+						<div class="fl">
+							<p>每日新歌推荐</p>
+							<p class="type">
+								<span>新歌</span>
+								<span>流行</span>
+								<span>华语</span>
+								<span>3057554</span>
+							</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--音乐歌单 结束-->
+			<!--下载-->
+			<div id="download">
+				<p>手机必备音乐播放器，免费下载！</p>
+				<p>有声小说，免费收听下载</p>
+			</div>
+			<!--下载 结束-->
+			<footer id="footer">
+				<a href="javascript:;">随心听</a>
+				<a href="javascript:;">下载客户端</a>
+				<a href="javascript:;">笑话APP</a>
+				<a href="javascript:;">建议反馈</a>
+			</footer>
+		</section>
+	</body>
+
+</html>

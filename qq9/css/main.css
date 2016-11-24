@@ -1,0 +1,482 @@
+html,body{
+	width: 100%;
+	height: 100%;
+}
+body{
+	position: relative;
+	font: 12px/150% 'Helvetica','微软雅黑';
+    overflow: hidden;
+    background: #fafafa;
+    background: linear-gradient(top,#fafafa,#fff);
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearFix:after{
+	display: block;
+	content: "";
+	clear: both;
+} 
+/*--------背景--------------*/
+#bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+	height: 100%;
+    perspective: 1000px;
+  	transform-style: preserve-3d;
+    overflow: hidden;
+}
+#bg div{
+	position: absolute;
+    border-radius: 50%;
+    background: -webkit-linear-gradient(top, #ffffff, #dedede);
+    background: linear-gradient(to bottom, #ffffff, #dedede);
+    animation: moveround 20s linear infinite;
+}
+@keyframes moveround{
+	0% {
+    	transform: translateX(0px) rotate(0deg);
+	}
+	25%{
+		transform: translateX(100px) rotate(90deg);
+	}
+	50% {
+	    transform: translateX(150px) rotate(180deg);
+	}
+	75% {
+	    transform: translateX(200px) rotate(180deg);
+	}
+	100% {
+	    transform: translateX(0px) rotate(360deg);
+	}
+}
+.ball_1 {
+    width: 60px;
+    height: 60px;
+    top: 0;
+    left: 0;
+}
+.ball_2 {
+    width: 380px;
+    height: 380px;
+    top: 100px;
+    left: 300px;
+}
+.ball_3 {
+    width: 240px;
+    height: 240px;
+    top: 150px;
+    left: 0px;
+}
+.ball_4 {
+    width: 200px;
+    height: 200px;
+    top: 100px;
+    left: 800px;
+}
+.ball_5 {
+    width: 280px;
+    height: 280px;
+    top: 160px;
+    left: 900px;
+}
+.ball_6 {
+    width: 120px;
+    height: 120px;
+    top: 460px;
+    left: 0px;
+}
+/*每页内容区域*/
+#content{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;	
+}
+#content div.page{
+	width: 100%;
+	height: 100%;
+	perspective: 1000px;
+	position: absolute; 
+    top: 0;
+    left:0;
+    display: none;
+    -transform-style:preserve-3d;
+}
+/*第1页*/
+/*#content #page1{
+	display: block;
+}*/
+#page1 .p1_header{
+	position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+}
+#page1 .p1_header h1{
+    position: absolute;
+	width: 313px;
+    height: 46px;
+    top: 10px;
+    left: 50%;
+    margin-left: -400px;
+    background:url(../img/p1_titile1.png)  no-repeat;
+    text-indent: -999em;
+	animation: pageonelogo 4s;
+}
+#page1 .p1_info{
+	position: absolute;
+    right: 50%;
+    margin-right: -400px;
+    text-align: right
+}
+#page1 .p1_info  a.beta{
+	margin-right: 20px;
+}
+#page1 .p1_info  p{
+	font-size: 14px;
+	text-align: right;
+	color: #888;
+	margin: 10px 25px 0 0;
+}
+#page1 .p1_con{
+	position: absolute;
+    width: 880px;
+    height: 320px;
+    top: 32%;
+    left: 50%;
+	margin-top: 20px;
+    text-align: center;
+    perspective: 1000px;
+	transform-style: preserve-3d;	
+    transform: translate(-50%);
+}
+#page1 .p1_con div{
+	position: absolute;
+    width: 880px;
+    height: 320px;
+	animation: pageonecont 1s alternate;
+}
+#page1 .p1_con_1{
+	background: url(../img/p1_con1.png) no-repeat;
+}
+#page1 .p1_con_2{
+	background: url(../img/p1_con2.gif) no-repeat;
+	
+}
+#page1 #btn{
+    position: absolute;
+    width: 128px;
+    height: 54px;
+    left: 50%;
+    bottom: 10px;
+    margin-left: -64px;
+    background: url(../img/scrolling.png);
+}
+
+/*第1页动画*/
+@keyframes pageonelogo{
+	0%{
+		opacity: 0;
+	}
+	50%{
+		opacity: 0.5;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+@keyframes pageonecont{
+	0%{
+		transform: translateX(200px);
+		transform: translateZ(2000px);
+	}
+	100%{
+		transform: translateX(0);
+		transform: translateZ(0);
+	}
+}
+
+/*第2页*/
+
+#page2 .p2_header,#page3 .p3_header,#page4 .p4_header{
+	position: absolute;
+    left: 10px;
+    top: 20px;
+}
+
+#page2 .p2_con{
+    width: 381px;
+    height: 381px;
+    position: absolute;
+    margin-top: -240px;
+    margin-left: -190px;
+    left: 50%;
+    top: 50%;
+	perspective: 100px;/*为了显示变大*/
+}
+#page2 .p2_con .fly,#page2 .p2_con .show{
+    position: absolute;
+	top: 0;
+	left: 0;
+    width: 381px;
+    height: 381px;
+}
+#page2 .p2_con .fly{
+	opacity: 0;
+	animation: moveFly 3s;
+}
+#page2 .p2_con .show{
+	animation: moveShow 2s;
+}
+#page2 .p2_con .shows3{
+	margin-top: 20px;
+	font:16px/1 '宋体';
+	color:dimgrey;
+}
+
+/*飞出部分的定位*/
+#page2 .p2_con .flies{
+    position: absolute;
+    top: 2px;
+    left: 0;
+}
+
+/*第2页动画*/
+@keyframes moveFly{
+	0%{
+	    bottom: -1000px;
+		left: -1000px;
+		opacity: 1;
+		transform: translateZ(-300px);
+		transform: rotateY(0);
+	}
+	30%{
+		bottom: -500px;
+		left: -500px;
+		transform: translateZ(-100px);
+		transform: rotateY(-30deg);
+	}
+	50%{
+		bottom: 0px;
+		left: 0px;
+		transform: translateZ(50px);
+		transform: rotateY(0deg);
+	}
+	100%{
+		bottom: 0px;
+		left: 0px;
+		opacity: 0;
+		transform: translateZ(3000px);
+	}
+}
+@keyframes moveShow{
+	0%{
+		opacity: 0;
+		transform: translateZ(-3000px);
+	}
+	100%{
+		opacity: 1;
+		transform: translateZ(0px);
+	}
+}
+
+/*第3页*/
+
+#page3 .p3_con{
+	position: absolute;
+    width: 1200px;
+    height: 700px;
+    background: #fff;
+    top: 10%;
+    left: 30%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+	perspective: 1000px;
+	transform-style: preserve-3d;
+	transform: translateZ(-50px) rotateX(30deg); 
+	animation: moveFar 1s alternate;
+}
+#page3 .p3_con div:nth-of-type(1){
+    position: absolute;
+    width: 435px;
+    height: 72px;
+    top: -10px;
+    left: 27px;
+	transform: translateZ(50px) rotateX(5deg);
+}
+#page3 .p3_con div:nth-of-type(2){
+	position: absolute;
+    width: 510px;
+    height: 178px;
+    top: 0;
+    left: 0;
+	transform: translateZ(60px) rotateX(5deg);
+}
+#page3 .p3_con div:nth-of-type(3){
+	width: 100%;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.05);
+    margin-top: 120px;
+}
+#page3 .p3_con div:nth-of-type(3) img{
+	margin: 30px 20px;
+}
+
+#page3 .p3_con div:nth-of-type(4){
+    position: absolute;
+    width: 465px;
+    height: 100px;
+    top: 38%;
+    left: -12%;    
+	animation: moveFar 2s alternate;
+}   
+#page3 .p3_con div:nth-of-type(5){
+    position: absolute;
+    width: 800px;
+    height: 91px;
+    top: 55%;
+    left: -25%;
+    text-align: center;
+    font-family: 微软雅黑;
+    font-size: 16px;
+}
+/*第3页动画*/
+@keyframes moveFar{
+	0% {
+	    transform: translateZ(1000px) rotateX(90deg);
+	}
+	100% {
+		
+	}
+}
+
+/*第4页*/
+#p4_con{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -100px;
+    animation: pagefour 1s alternate; 
+}
+#page4 div,#page4 p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+#p4_con .p4_con_1{
+    width: 172px;
+    height: 172px;
+    margin-left: -236px;
+    margin-top: -286px;
+    background: url(../img/p4_pop1.png);
+    animation: pagefour 1s alternate; 
+}
+#p4_con .p4_con_2{
+    width: 73px;
+    height: 73px;
+    margin-left: -226.5px;
+    margin-top: -56.5px;
+    background: url(../img/p4_pop2.png);
+    animation: pagefour 2s alternate; 
+}
+#p4_con .p4_con_3{
+    width: 337px;
+    height: 337px;
+    margin-left: -198.5px;
+    margin-top: -288.5px;
+    background: url(../img/p4_pop3.png);
+    animation: pagefour 1s alternate; 
+}
+#p4_con .p4_con_4{
+    width: 269px;
+    height: 269px;
+    margin-left: 75.5px;
+    margin-top: -254.5px;
+    background: url(../img/p4_pop4.png);
+    animation: pagefour 2s alternate; 
+}
+
+#page4 .p4_text1{
+    width: 390px;
+    height: 86px;
+    margin-left: -195px;
+    margin-top: 37px;
+    background: url(../img/p4_text.png);
+}
+#page4 .p4_text2{
+    width: 514px;
+    height: 136px;
+    margin-left: -257px;
+    margin-top: 92px;
+}
+#page4 .p4_text2 p {
+    font-family: 微软雅黑;
+    margin-left: -300px;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+}
+/*第四页动画*/
+@keyframes pagefour{
+	0% {
+	    transform: translate3d(-800px,-800px,1000px);
+	}
+	100% {
+	}
+}
+/*左边导航*/
+#right-side-bar{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -80px;
+}
+#right-side-bar a{
+	display: block;
+    width: 8px;
+    height: 8px;
+    background: url(../img/dot.png);
+    margin-bottom: 30px;
+}
+#right-side-bar .on{
+    background: url(../img/dot_on.png);
+}
+
+/*脚部*/
+#footer{
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	z-index: 30;
+	width: 100%;
+	height: 18px;
+}
+#footer div.f_wrap{
+	padding: 0 30px;
+}
+#footer div.links a,#footer div.links span{
+	float: left;
+}
+#footer div.links span{
+	opacity: 0.5;
+	margin:0 6px;
+}
+
+
+
+
+
+
+
+
+
